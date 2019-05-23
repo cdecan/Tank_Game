@@ -5,6 +5,8 @@
  **/
 
 //Graphics &GUI imports
+import javax.swing.*;
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
@@ -25,22 +27,22 @@ class GameFrame extends JFrame {
   static double x, y;
   static double dx, dy;
   
-  Square square;
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
   boolean moveDown;
   boolean moveUp2, moveDown2, moveLeft2, moveRight2;
-  
+  int timeLimit = 0;
   
   
   //Constructor - this runs first
   GameFrame() { 
     
     super("My Game");  
+     this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1366, 768);
+    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
     // this.setUndecorated(true);  //Set to true to remove title bar
     //frame.setResizable(false);
     
@@ -48,10 +50,15 @@ class GameFrame extends JFrame {
     moveRight = false;
     moveUp = false;
     moveDown = false;
-    
+    Bullet bullet = new Bullet();
+    //bullet.setPreferredSize(new Dimension(100, 100));
+    Tank tank = new Tank();
+    //tank.setPreferredSize(new Dimension(100, 100));
     //Set up the game panel (where we put our graphics)
-    square = new Square();
-    
+    Square square = new Square();
+    square.setLayout(new GridLayout(0,2));
+    square.add(tank);
+    square.add(bullet);
     //JPanel panel = new JPanel();
     this.add(square);
     
@@ -78,11 +85,20 @@ class GameFrame extends JFrame {
     this.y = (100);
     this.dx = (200);
     this.dy = (300);
+    // int timeLimit = 0;
     while(true){
-      
-      
+      //    timeLimit++;
+      //  JLabel label = new JLabel(Integer.toString(timeLimit));
+      //  square.add(label);
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
+      //  square.remove(label);
       this.repaint();
+      //square.repaint();
+      
+      
+      //    if(timeLimit == 10000){
+      //    dispose();
+      // }
       
     }    
   }
@@ -92,16 +108,49 @@ class GameFrame extends JFrame {
   // Inner class for the the game area - This is where all the drawing of the screen occurs
   
   private class Square extends JPanel{
-    //, Graphics g2\
-   //      g.fillRect((int)dx, (int)dy, 50, 50);
-    public void paintComponent(Graphics g) {   
-      super.paintComponent(g); //required
-      //super.paintComponent(g2);
-      setDoubleBuffered(true); 
-      g.setColor(Color.RED); //There are many graphics commands that Java can use
-      g.fillRect((int)x, (int)y, 60, 60); //notice the x,y variables that we control from our animate method
-      g.fillRect((int)x,(int)y+23, 100, 12);
-      if (moveLeft == true){
+    Square(){
+    }
+  }
+  
+  
+  
+  private class Bullet extends JComponent{
+    //double dx = 100, dy = 100;
+    Bullet(){
+    }
+    public void paintComponent(Graphics g){
+      super.paintComponent(g);
+      g.setColor(Color.BLACK);
+      g.fillOval((int)dx,(int)dy,50,50);
+      if (moveLeft2 == true){
+        dx--;
+      } else if (moveRight2 == true){
+        dx++;
+      }else if (moveUp2){
+        dy--;
+      }else if(moveDown2){
+        dy++;
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  private class Tank extends JComponent{
+    //double x,y;
+    // boolean moveLeft, moveRight,moveUp,moveDown;
+    Tank(){
+      //   x = 100;
+      //   y = 100;
+
+    }
+    public void paintComponent(Graphics g){
+      super.paintComponent(g);
+      g.setColor(Color.RED);
+      g.fillRect((int)x,(int)y,50,50);
+            if (moveLeft == true){
         x--;
       } else if (moveRight == true){
         x++;
@@ -110,27 +159,13 @@ class GameFrame extends JFrame {
       }else if(moveDown){
         y++;
       }
-   //   g2.setColor(Color.BLUE); //There are many graphics commands that Java can use
-     // g2.fillRect((int)dx, (int)dy, 50, 50); //notice the x,y variables that we control from our animate method      
       
-
     }
-    public void paint(Graphics g) {
-      super.paint(g);
-    g.setColor(Color.BLUE);
-    g.fillRect((int)dx,(int)dy,50,50);
-          if (moveLeft2 == true){
-        dx-=2;
-      } else if (moveRight2 == true){
-        dx+=2;
-      }else if (moveUp2){
-        dy-=2;
-      }else if(moveDown2){
-        dy+=2;
-      }
   }
-    
-  }
+  
+  
+  
+  
   
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
   private class MyKeyListener implements KeyListener {
@@ -209,5 +244,5 @@ class GameFrame extends JFrame {
     public void mouseExited(MouseEvent e) {
     }
   } //end of mouselistener
-  
 }
+
