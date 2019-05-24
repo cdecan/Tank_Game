@@ -1,10 +1,9 @@
 /**
- * This template can be used as reference or a starting point
- * for your final summative project
- * @author Mangat
+ * 
+ * @author C&J
  **/
 
-//Graphics &GUI imports
+//Graphics & GUI imports
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -33,13 +32,15 @@ class GameFrame extends JFrame {
   boolean moveDown;
   boolean moveUp2, moveDown2, moveLeft2, moveRight2;
   int timeLimit = 0;
-  
+  Square square = new Square();
+  Tank tank = new Tank();
+  Bullet bullet = new Bullet();
   
   //Constructor - this runs first
   GameFrame() { 
     
     super("My Game");  
-     this.setSize(1366, 768);
+     //this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -50,16 +51,15 @@ class GameFrame extends JFrame {
     moveRight = false;
     moveUp = false;
     moveDown = false;
-    Bullet bullet = new Bullet();
+    //Bullet bullet = new Bullet();
     //bullet.setPreferredSize(new Dimension(100, 100));
-    Tank tank = new Tank();
+    //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
     //Set up the game panel (where we put our graphics)
     Square square = new Square();
-    square.setLayout(new GridLayout(0,2));
+    square.setLayout(new BorderLayout());
     square.add(tank);
     square.add(bullet);
-    //JPanel panel = new JPanel();
     this.add(square);
     
     
@@ -108,7 +108,11 @@ class GameFrame extends JFrame {
   // Inner class for the the game area - This is where all the drawing of the screen occurs
   
   private class Square extends JPanel{
+    Tank tank = new Tank();
+    Bullet bullet = new Bullet();
     Square(){
+      add(bullet);
+      add(tank);
     }
   }
   
@@ -119,6 +123,7 @@ class GameFrame extends JFrame {
     Bullet(){
     }
     public void paintComponent(Graphics g){
+      setDoubleBuffered(true);
       super.paintComponent(g);
       g.setColor(Color.BLACK);
       g.fillOval((int)dx,(int)dy,50,50);
@@ -148,6 +153,7 @@ class GameFrame extends JFrame {
     }
     public void paintComponent(Graphics g){
       super.paintComponent(g);
+      setDoubleBuffered(true);
       g.setColor(Color.RED);
       g.fillRect((int)x,(int)y,50,50);
             if (moveLeft == true){
@@ -245,4 +251,5 @@ class GameFrame extends JFrame {
     }
   } //end of mouselistener
 }
+
 
