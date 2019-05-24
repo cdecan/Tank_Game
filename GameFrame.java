@@ -34,13 +34,14 @@ class GameFrame extends JFrame {
   int timeLimit = 0;
   Square square = new Square();
   Tank tank = new Tank();
-  Bullet bullet = new Bullet();
+  boolean ballExists = false;
+  
   
   //Constructor - this runs first
   GameFrame() { 
     
     super("My Game");  
-     //this.setSize(1366, 768);
+    this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -51,15 +52,15 @@ class GameFrame extends JFrame {
     moveRight = false;
     moveUp = false;
     moveDown = false;
-    //Bullet bullet = new Bullet();
-    //bullet.setPreferredSize(new Dimension(100, 100));
+    
+    
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
     //Set up the game panel (where we put our graphics)
     Square square = new Square();
     square.setLayout(new BorderLayout());
     square.add(tank);
-    square.add(bullet);
+    
     this.add(square);
     
     
@@ -83,13 +84,18 @@ class GameFrame extends JFrame {
   public void animate() { 
     this.x = (100);  //update coords
     this.y = (100);
-    this.dx = (200);
-    this.dy = (300);
+    this.dx = (x+15);
+    this.dy = (y);
     // int timeLimit = 0;
     while(true){
       //    timeLimit++;
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
       //  square.add(label);
+      if(ballExists = false){
+        dx = x+15;
+        dy = y;
+        
+      }
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
       //  square.remove(label);
       this.repaint();
@@ -109,33 +115,10 @@ class GameFrame extends JFrame {
   
   private class Square extends JPanel{
     Tank tank = new Tank();
-    Bullet bullet = new Bullet();
+    
     Square(){
-      add(bullet);
+      
       add(tank);
-    }
-  }
-  
-  
-  
-  private class Bullet extends JComponent{
-    //double dx = 100, dy = 100;
-    Bullet(){
-    }
-    public void paintComponent(Graphics g){
-      setDoubleBuffered(true);
-      super.paintComponent(g);
-      g.setColor(Color.BLACK);
-      g.fillOval((int)dx,(int)dy,50,50);
-      if (moveLeft2 == true){
-        dx--;
-      } else if (moveRight2 == true){
-        dx++;
-      }else if (moveUp2){
-        dy--;
-      }else if(moveDown2){
-        dy++;
-      }
     }
   }
   
@@ -149,14 +132,16 @@ class GameFrame extends JFrame {
     Tank(){
       //   x = 100;
       //   y = 100;
-
+      
     }
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
       g.setColor(Color.RED);
       g.fillRect((int)x,(int)y,50,50);
-            if (moveLeft == true){
+      
+      
+      if (moveLeft == true){
         x--;
       } else if (moveRight == true){
         x++;
@@ -164,6 +149,28 @@ class GameFrame extends JFrame {
         y--;
       }else if(moveDown){
         y++;
+      }
+      
+      if ((moveLeft2) ){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dx--;
+
+      } else if ((moveRight2 == true )){ //&& (ballExists = false)
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dx++;
+
+      }else if ((moveUp2)){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dy--;
+
+      }else if((moveDown2)){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dy++;
+
       }
       
     }
@@ -199,13 +206,18 @@ class GameFrame extends JFrame {
       }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("F")){
         // this.remove();
       }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+
         moveUp2 = true;
+        
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
         moveDown2 = true;
+
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
         moveLeft2 = true;
+
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
         moveRight2 = true;
+        
       }
     }   
     
@@ -219,13 +231,21 @@ class GameFrame extends JFrame {
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
         moveUp = false;
       }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        moveUp2 = false;
+        // moveUp2 = false;
+        // dy = (y);
+        // dx = x+15;
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        moveDown2 = false;
+        // moveDown2 = false;
+        // dy = y;
+        // dx = x+15;
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        moveLeft2 = false;
+        //moveLeft2 = false;
+        //dx = x+15;
+        //dy = y;
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        moveRight2 = false;
+        //moveRight2 = false;
+        //dx = x+15;
+        //dy = y;
       }
     }
   } //end of keyboard listener
@@ -251,5 +271,3 @@ class GameFrame extends JFrame {
     }
   } //end of mouselistener
 }
-
-
