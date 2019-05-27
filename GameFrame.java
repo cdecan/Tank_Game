@@ -1,10 +1,9 @@
 /**
- * This template can be used as reference or a starting point
- * for your final summative project
- * @author Mangat
+ * 
+ * @author C&J
  **/
 
-//Graphics &GUI imports
+//Graphics & GUI imports
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -31,15 +30,19 @@ class GameFrame extends JFrame {
   boolean moveRight;
   boolean moveUp;
   boolean moveDown;
+  boolean faceUp = true, faceDown = false, faceLeft = false, faceRight = false;
   boolean moveUp2, moveDown2, moveLeft2, moveRight2;
   int timeLimit = 0;
+  Square square = new Square();
+  Tank tank = new Tank();
+  boolean ballExists = false;
   
   
   //Constructor - this runs first
   GameFrame() { 
     
     super("My Game");  
-     this.setSize(1366, 768);
+    this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -50,16 +53,15 @@ class GameFrame extends JFrame {
     moveRight = false;
     moveUp = false;
     moveDown = false;
-    Bullet bullet = new Bullet();
-    //bullet.setPreferredSize(new Dimension(100, 100));
-    Tank tank = new Tank();
+    
+    
+    //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
     //Set up the game panel (where we put our graphics)
     Square square = new Square();
-    square.setLayout(new GridLayout(0,2));
+    square.setLayout(new BorderLayout());
     square.add(tank);
-    square.add(bullet);
-    //JPanel panel = new JPanel();
+    
     this.add(square);
     
     
@@ -83,13 +85,20 @@ class GameFrame extends JFrame {
   public void animate() { 
     this.x = (100);  //update coords
     this.y = (100);
-    this.dx = (200);
-    this.dy = (300);
+    this.dx = (x+15);
+    this.dy = (y);
+    ballExists = false;
+    faceUp = true;
     // int timeLimit = 0;
     while(true){
       //    timeLimit++;
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
       //  square.add(label);
+      while(ballExists = false){
+        dx = x+15;
+        dy = y;
+        
+      }
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
       //  square.remove(label);
       this.repaint();
@@ -108,29 +117,11 @@ class GameFrame extends JFrame {
   // Inner class for the the game area - This is where all the drawing of the screen occurs
   
   private class Square extends JPanel{
+    Tank tank = new Tank();
+    
     Square(){
-    }
-  }
-  
-  
-  
-  private class Bullet extends JComponent{
-    //double dx = 100, dy = 100;
-    Bullet(){
-    }
-    public void paintComponent(Graphics g){
-      super.paintComponent(g);
-      g.setColor(Color.BLACK);
-      g.fillOval((int)dx,(int)dy,50,50);
-      if (moveLeft2 == true){
-        dx--;
-      } else if (moveRight2 == true){
-        dx++;
-      }else if (moveUp2){
-        dy--;
-      }else if(moveDown2){
-        dy++;
-      }
+      
+      add(tank);
     }
   }
   
@@ -144,13 +135,26 @@ class GameFrame extends JFrame {
     Tank(){
       //   x = 100;
       //   y = 100;
-
+      
     }
     public void paintComponent(Graphics g){
       super.paintComponent(g);
-      g.setColor(Color.RED);
-      g.fillRect((int)x,(int)y,50,50);
-            if (moveLeft == true){
+      setDoubleBuffered(true);
+      if(faceUp || faceDown){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+      }else if(faceLeft || faceRight){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        
+      }
+      
+      
+      if (moveLeft == true){
         x--;
       } else if (moveRight == true){
         x++;
@@ -158,6 +162,28 @@ class GameFrame extends JFrame {
         y--;
       }else if(moveDown){
         y++;
+      }
+      
+      if ((moveLeft2) ){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dx--;
+        
+      } else if ((moveRight2)){ //&& (ballExists = false)
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dx++;
+        
+      }else if ((moveUp2)){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dy--;
+        
+      }else if((moveDown2)){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)dx,(int)dy,20,20);
+        dy++;
+        
       }
       
     }
@@ -178,48 +204,90 @@ class GameFrame extends JFrame {
       
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {  //If 'D' is pressed
         moveRight = true;
+        faceRight = true;
+        faceLeft= false;
+        faceUp = false;
+        faceDown = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
         moveDown = true;
+        faceDown = true;
+        faceLeft= false;
+        faceUp = false;
+        faceRight = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
         moveLeft = true;
+        faceLeft = true;
+        faceRight= false;
+        faceUp = false;
+        faceDown = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
-        for(int i = 100; i>1; i--){
-          moveUp = true;
-          
-        }
+        //for(int i = 100; i>1; i--){
+        moveUp = true;
+        faceRight = false;
+        faceLeft= false;
+        faceUp = true;
+        faceDown = false;
+        //}
       }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {  //If ESC is pressed
         //System.out.println("ESCAPE KEY!"); //close frame & quit
         System.exit(0);
       }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("F")){
         // this.remove();
       }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+        //    if(ballExists = false){
         moveUp2 = true;
+        ballExists = true;
+        //  }
+        
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        //   if(ballExists = false){
         moveDown2 = true;
+        ballExists = true;
+        //  }
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        //if(ballExists = false){
         moveLeft2 = true;
+        ballExists = true;
+        //}
+        
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        //  if(ballExists = false){
         moveRight2 = true;
+        ballExists = true;
+        //}
+        
       }
     }   
     
     public void keyReleased(KeyEvent e) {
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
         moveLeft = false;
+        // faceLeft = false;
       } else if (KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {
         moveRight = false;
+        // faceRight = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
         moveDown = false;
+        //  faceDown = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
         moveUp = false;
+        // faceUp = false;
       }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        moveUp2 = false;
+        // moveUp2 = false;
+        // dy = (y);
+        // dx = x+15;
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        moveDown2 = false;
+        // moveDown2 = false;
+        // dy = y;
+        // dx = x+15;
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        moveLeft2 = false;
+        //moveLeft2 = false;
+        //dx = x+15;
+        //dy = y;
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        moveRight2 = false;
+        //moveRight2 = false;
+        //dx = x+15;
+        //dy = y;
       }
     }
   } //end of keyboard listener
@@ -245,4 +313,3 @@ class GameFrame extends JFrame {
     }
   } //end of mouselistener
 }
-
