@@ -140,17 +140,36 @@ class GameFrame extends JFrame {
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
-      if(faceUp || faceDown){
+      if(faceUp){
         g.setColor(Color.BLACK);
         g.fillOval((int)x,(int)y,50,100);
         g.setColor(Color.RED);
         g.fillOval((int)x+5,(int)y+5,40,90);
-      }else if(faceLeft || faceRight){
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y-25,5,29);
+      }else if(faceDown){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y+100,5,29);        
+        
+      }else if(faceLeft){
         g.setColor(Color.BLACK);
         g.fillOval((int)x,(int)y,100,50);
         g.setColor(Color.RED);
         g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x-24,(int)y+20,29,5);
         
+      }else if(faceRight){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+100,(int)y+22,29,5);
       }
       
       
