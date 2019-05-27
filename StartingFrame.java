@@ -35,7 +35,7 @@ class StartingFrame extends JFrame {
     JPanel mainPanel = new JPanel();
     mainPanel.setBackground(Color.GREEN);
     
-    mainPanel.setLayout(new GridLayout(3,0));
+    mainPanel.setLayout(new GridLayout(4,0));
     
     //Create a JButton for the centerPanel
     JButton startButton = new JButton("START");
@@ -47,12 +47,18 @@ class StartingFrame extends JFrame {
     helpButton.addActionListener(new ButtonListener());
     helpButton.setBackground(Color.PINK);
     
+    //shop button
+    JButton shopButton = new JButton("SHOP");
+    shopButton.addActionListener(new ButtonListener());
+    shopButton.setBackground(Color.GREEN);
+    
     //Create a JButton for the centerPanel
     JLabel startLabel = new JLabel("Welome to Tanks!");
     startLabel.setHorizontalAlignment(JLabel.CENTER);
     
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(startLabel);
+    mainPanel.add(shopButton);
     mainPanel.add(startButton);
     mainPanel.add(helpButton);
     
@@ -75,6 +81,10 @@ class StartingFrame extends JFrame {
         System.out.println("tutorial");
         thisFrame.dispose();
         new TutorialFrame(); //create a new FunkyFrame (another file that extends JFrame)
+      }else if(command.equals("SHOP")){
+        System.out.println("shop");
+        thisFrame.dispose();
+        new ShopFrame(); //create a new FunkyFrame (another file that extends JFrame)
       }
       
     }
