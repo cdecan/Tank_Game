@@ -25,6 +25,7 @@ class GameFrame extends JFrame {
   //class variable (non-static)
   static double x, y;
   static double dx, dy;
+  static double targX, targY;
   
   boolean moveLeft;
   boolean moveRight;
@@ -86,6 +87,8 @@ class GameFrame extends JFrame {
     this.y = ((Math.random()*500)+100);
     this.dx = x;
     this.dy = y;
+    this.targX = (int)((Math.random()*1200)+100);
+    this.targY = (int)((Math.random()*500)+100);
     ballExists = false;
     faceUp = true;
 
@@ -95,10 +98,18 @@ class GameFrame extends JFrame {
       //System.out.println(timeLimit);
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
       //  square.add(label);
-      while((moveUp2 = false) && (moveDown2 = false) &&( moveLeft2 = false )&& (moveRight2 = false)){
-        dx = x;
+      if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
+        dx = x+12;
         dy = y-30;
-        //System.out.println("test");
+      }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceDown)){
+        dx = x+12;
+        dy = y+120;
+      }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceLeft)){
+        dx = x-40;
+        dy = y+10;
+      }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceRight)){
+        dx = x+120;
+        dy = y+10;
       }
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
       //  square.remove(label);
@@ -143,10 +154,25 @@ class GameFrame extends JFrame {
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
+      //TARGET//////////////////////////////////////////////////
+      g.setColor(Color.BLACK);
+      g.fillOval((int) targX, (int) targY, 60, 60);
+      g.setColor(Color.WHITE);
+      g.fillOval((int) targX+5, (int) targY+5, 50, 50);
+      g.setColor(Color.PINK);
+      g.fillOval((int) targX+10, (int) targY+10, 40, 40);
+      g.setColor(Color.YELLOW);
+      g.fillOval((int) targX+15, (int) targY+15, 30, 30);
+      g.setColor(Color.BLUE);
+      g.fillOval((int) targX+20, (int) targY+20, 20, 20);
+      g.setColor(Color.WHITE);
+      g.fillOval((int) targX+25, (int) targY+25, 10, 10);
+      ////////////////////////////////////////////////////////////
       
-      if (moveLeft == true){
+      //MOVEMENT////////////////////////////////////////////
+      if (moveLeft){
         x--;
-      } else if (moveRight == true){
+      } else if (moveRight){
         x++;
       }else if (moveUp){
         y--;
@@ -155,26 +181,41 @@ class GameFrame extends JFrame {
       }
       
       if ((moveLeft2) ){
+        moveRight2 = false;
+        moveUp2 = false;
+        moveDown2 = false;
         g.setColor(Color.BLACK);
         g.fillOval((int)dx,(int)dy,20,20);
         dx--;
         
       } else if ((moveRight2)){ //&& (ballExists = false)
+        moveLeft2 = false;
+        moveUp2 = false;
+        moveDown2 = false;
         g.setColor(Color.BLACK);
         g.fillOval((int)dx,(int)dy,20,20);
         dx++;
         
       }else if ((moveUp2)){
+        moveRight2 = false;
+        moveLeft2 = false;
+        moveDown2 = false;
         g.setColor(Color.BLACK);
         g.fillOval((int)dx,(int)dy,20,20);
         dy--;
         
       }else if((moveDown2)){
+        moveRight2 = false;
+        moveUp2 = false;
+        moveLeft2 = false;
         g.setColor(Color.BLACK);
         g.fillOval((int)dx,(int)dy,20,20);
         dy++;
-        
       }
+      /////////////////////////////////////////////////
+      
+      //PLAYER//////////////////////////////////////
+      //RED
      if(StartingFrame.redEquipped()){
       if(faceUp){
         g.setColor(Color.BLACK);
@@ -207,6 +248,7 @@ class GameFrame extends JFrame {
         g.setColor(Color.BLACK);
         g.fillRect((int)x+100,(int)y+22,29,5);
       }
+      //BLUE
      }else if(StartingFrame.blueEquipped()){
        if(faceUp){
         g.setColor(Color.BLACK);
@@ -239,6 +281,7 @@ class GameFrame extends JFrame {
         g.setColor(Color.BLACK);
         g.fillRect((int)x+100,(int)y+22,29,5);
       }
+      //GREEN
      }else if(StartingFrame.greenEquipped()){
        if(faceUp){
         g.setColor(Color.BLACK);
@@ -270,6 +313,8 @@ class GameFrame extends JFrame {
         g.fillOval((int)x+5,(int)y+5,90,40);
         g.setColor(Color.BLACK);
         g.fillRect((int)x+100,(int)y+22,29,5);
+        //YELLOW
+      }
       }else if(StartingFrame.yellowEquipped()){
        if(faceUp){
         g.setColor(Color.BLACK);
@@ -304,7 +349,7 @@ class GameFrame extends JFrame {
       }}
       
       
-    }
+    
   }
   }
   
@@ -362,18 +407,30 @@ class GameFrame extends JFrame {
       }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {  //If ESC is pressed
         //System.out.println("ESCAPE KEY!"); //close frame & quit
         System.exit(0);
-      }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("Q")){
+      }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("Q"))&&(moveUp2 == false) && (moveDown2 == false)&&(moveLeft2 == false)&&(moveRight2 ==false)){
         if(faceUp){
           moveUp2 = true;
+          moveDown2 = false;
+          moveRight2 = false;
+          moveLeft2 = false;
           ballExists = true;
         }else if(faceDown){
           moveDown2 = true;
+          moveUp2 = false;
+          moveRight2 = false;
+          moveLeft2 = false;
           ballExists = true;
         }else if(faceLeft){
           moveLeft2 = true;
+          moveDown2 = false;
+          moveRight2 = false;
+          moveUp2 = false;
           ballExists = true;
         }else if(faceRight){
           moveRight2 = true;
+          moveDown2 = false;
+          moveUp2 = false;
+          moveLeft2 = false;
           ballExists = true;
         }
       }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("E")){
