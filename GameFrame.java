@@ -177,9 +177,9 @@ class GameFrame extends JFrame {
         y--;
       }else if(moveDown){
         y++;
-      }
+      }//player
       
-      if ((moveLeft2) ){
+      if (moveLeft2){
         moveRight2 = false;
         moveUp2 = false;
         moveDown2 = false;
@@ -187,7 +187,7 @@ class GameFrame extends JFrame {
         g.fillOval((int)dx,(int)dy,20,20);
         dx--;
         
-      } else if ((moveRight2)){ //&& (ballExists = false)
+      } else if (moveRight2){
         moveLeft2 = false;
         moveUp2 = false;
         moveDown2 = false;
@@ -195,7 +195,7 @@ class GameFrame extends JFrame {
         g.fillOval((int)dx,(int)dy,20,20);
         dx++;
         
-      }else if ((moveUp2)){
+      }else if (moveUp2){
         moveRight2 = false;
         moveLeft2 = false;
         moveDown2 = false;
@@ -203,7 +203,7 @@ class GameFrame extends JFrame {
         g.fillOval((int)dx,(int)dy,20,20);
         dy--;
         
-      }else if((moveDown2)){
+      }else if(moveDown2){
         moveRight2 = false;
         moveUp2 = false;
         moveLeft2 = false;
@@ -345,7 +345,8 @@ class GameFrame extends JFrame {
         g.fillOval((int)x+5,(int)y+5,90,40);
         g.setColor(Color.BLACK);
         g.fillRect((int)x+100,(int)y+22,29,5);
-      }}
+      }
+      }//colors: all copy-pasted except with a change in color
       
       
     
@@ -503,4 +504,5 @@ class GameFrame extends JFrame {
 
 
    //end of mouselistener
+
 
