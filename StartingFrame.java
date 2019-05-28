@@ -18,6 +18,8 @@ import javax.swing.SwingUtilities;
 
 class StartingFrame extends JFrame { 
   
+  static boolean[] colorOwned = {true, false, false, false};
+  static boolean[] colorEquipped = {true, false, false, false};
   JFrame thisFrame;
   
   //Constructor - this runs first
@@ -91,6 +93,70 @@ class StartingFrame extends JFrame {
     
   }
   
+  public static void buyBlue(){
+      colorOwned[1] = true;
+      //System.out.println("test");
+    }
+  public static void buyGreen(){
+    colorOwned[2] = true;
+    //System.out.println("test");
+  }
+  public static void buyYellow(){
+    colorOwned[3] = true;
+    //System.out.println("test");
+  }
+  public static void equipRed(){
+    colorEquipped[0] = true;
+    colorEquipped[1] = false;
+    colorEquipped[2] = false;
+    colorEquipped[3] = false;
+  }
+  public static void equipBlue(){
+    colorEquipped[0] = false;
+    colorEquipped[1] = true;
+    colorEquipped[2] = false;
+    colorEquipped[3] = false;
+  }
+  public static void equipGreen(){
+    colorEquipped[0] = false;
+    colorEquipped[1] = false;
+    colorEquipped[2] = true;
+    colorEquipped[3] = false;
+  }
+  public static void equipYellow(){
+    colorEquipped[0] = false;
+    colorEquipped[1] = false;
+    colorEquipped[2] = false;
+    colorEquipped[3] = true;
+  }
+  public static boolean redEquipped(){
+    if(colorEquipped[0]){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public static boolean blueEquipped(){
+    if(colorEquipped[1]){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public static boolean greenEquipped(){
+    if(colorEquipped[2]){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public static boolean yellowEquipped(){
+    if(colorEquipped[3]){
+      return true;
+    }else{
+      return false;
+    }
+  }
   
   //Main method starts this application
   public static void main(String[] args) { 
