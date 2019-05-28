@@ -35,7 +35,7 @@ class GameFrame extends JFrame {
   int timeLimit = 0;
   Square square = new Square();
   Tank tank = new Tank();
-  boolean ballExists = false;
+  static boolean ballExists;
   
   
   //Constructor - this runs first
@@ -48,7 +48,6 @@ class GameFrame extends JFrame {
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
     // this.setUndecorated(true);  //Set to true to remove title bar
     //frame.setResizable(false);
-    
     moveLeft = false;
     moveRight = false;
     moveUp = false;
@@ -65,7 +64,7 @@ class GameFrame extends JFrame {
     this.add(square);
     
     
-    MyKeyListener keyListener = new MyKeyListener(); 
+  MyKeyListener keyListener = new MyKeyListener(); 
     this.addKeyListener(keyListener);
     
     MyMouseListener mouseListener = new MyMouseListener();
@@ -83,31 +82,35 @@ class GameFrame extends JFrame {
   
   //the main gameloop - this is where the game state is updated
   public void animate() { 
-    this.x = (100);  //update coords
-    this.y = (100);
-    this.dx = (x+15);
-    this.dy = (y);
+    this.x = ((Math.random()*1200)+100);  //update coords
+    this.y = ((Math.random()*500)+100);
+    this.dx = x;
+    this.dy = y;
     ballExists = false;
     faceUp = true;
-    // int timeLimit = 0;
+
+    int timeLimit = 0;
     while(true){
-      //    timeLimit++;
+      timeLimit++;
+      //System.out.println(timeLimit);
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
       //  square.add(label);
-      while(ballExists = false){
-        dx = x+15;
-        dy = y;
-        
+      while((moveUp2 = false) && (moveDown2 = false) &&( moveLeft2 = false )&& (moveRight2 = false)){
+        dx = x;
+        dy = y-30;
+        //System.out.println("test");
       }
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
       //  square.remove(label);
       this.repaint();
+      
       //square.repaint();
       
       
-      //    if(timeLimit == 10000){
-      //    dispose();
-      // }
+      if(timeLimit == 10000){
+      dispose();
+      new StartingFrame();
+       }
       
     }    
   }
@@ -140,38 +143,6 @@ class GameFrame extends JFrame {
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
-      if(faceUp){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y-25,5,29);
-      }else if(faceDown){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y+100,5,29);        
-        
-      }else if(faceLeft){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x-24,(int)y+20,29,5);
-        
-      }else if(faceRight){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+100,(int)y+22,29,5);
-      }
-      
       
       if (moveLeft == true){
         x--;
@@ -204,11 +175,140 @@ class GameFrame extends JFrame {
         dy++;
         
       }
+     if(StartingFrame.redEquipped()){
+      if(faceUp){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y-25,5,29);
+      }else if(faceDown){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y+100,5,29);        
+        
+      }else if(faceLeft){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x-24,(int)y+20,29,5);
+        
+      }else if(faceRight){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.RED);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+100,(int)y+22,29,5);
+      }
+     }else if(StartingFrame.blueEquipped()){
+       if(faceUp){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.BLUE);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y-25,5,29);
+      }else if(faceDown){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.BLUE);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y+100,5,29);        
+        
+      }else if(faceLeft){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.BLUE);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x-24,(int)y+20,29,5);
+        
+      }else if(faceRight){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.BLUE);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+100,(int)y+22,29,5);
+      }
+     }else if(StartingFrame.greenEquipped()){
+       if(faceUp){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.GREEN);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y-25,5,29);
+      }else if(faceDown){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.GREEN);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y+100,5,29);        
+        
+      }else if(faceLeft){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.GREEN);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x-24,(int)y+20,29,5);
+        
+      }else if(faceRight){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.GREEN);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+100,(int)y+22,29,5);
+      }else if(StartingFrame.yellowEquipped()){
+       if(faceUp){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.YELLOW);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y-25,5,29);
+      }else if(faceDown){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,50,100);
+        g.setColor(Color.YELLOW);
+        g.fillOval((int)x+5,(int)y+5,40,90);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+22,(int)y+100,5,29);        
+        
+      }else if(faceLeft){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.YELLOW);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x-24,(int)y+20,29,5);
+        
+      }else if(faceRight){
+        g.setColor(Color.BLACK);
+        g.fillOval((int)x,(int)y,100,50);
+        g.setColor(Color.YELLOW);
+        g.fillOval((int)x+5,(int)y+5,90,40);
+        g.setColor(Color.BLACK);
+        g.fillRect((int)x+100,(int)y+22,29,5);
+      }}
+      
       
     }
   }
+  }
   
-  
+    
   
   
   
@@ -223,18 +323,27 @@ class GameFrame extends JFrame {
       
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {  //If 'D' is pressed
         moveRight = true;
+        moveDown = false;
+        moveLeft = false;
+        moveUp = false;
         faceRight = true;
         faceLeft= false;
         faceUp = false;
         faceDown = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
         moveDown = true;
+        moveUp = false;
+        moveLeft = false;
+        moveRight = false;
         faceDown = true;
         faceLeft= false;
         faceUp = false;
         faceRight = false;
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
         moveLeft = true;
+        moveDown = false;
+        moveUp = false;
+        moveRight = false;
         faceLeft = true;
         faceRight= false;
         faceUp = false;
@@ -242,6 +351,9 @@ class GameFrame extends JFrame {
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
         //for(int i = 100; i>1; i--){
         moveUp = true;
+        moveDown = false;
+        moveLeft = false;
+        moveRight = false;
         faceRight = false;
         faceLeft= false;
         faceUp = true;
@@ -250,30 +362,49 @@ class GameFrame extends JFrame {
       }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {  //If ESC is pressed
         //System.out.println("ESCAPE KEY!"); //close frame & quit
         System.exit(0);
-      }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("F")){
-        // this.remove();
-      }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        //    if(ballExists = false){
+      }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("Q")){
+        if(faceUp){
+          moveUp2 = true;
+          ballExists = true;
+        }else if(faceDown){
+          moveDown2 = true;
+          ballExists = true;
+        }else if(faceLeft){
+          moveLeft2 = true;
+          ballExists = true;
+        }else if(faceRight){
+          moveRight2 = true;
+          ballExists = true;
+        }
+      }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("E")){
+        x = dx;
+        y = dy;
+        moveUp2 = false;
+        moveDown2 = false;
+        moveLeft2 = false;
+        moveRight2 = false;
+    }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+      //     if(ballExists = false){
         moveUp2 = true;
         ballExists = true;
-        //  }
+    //     }
         
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        //   if(ballExists = false){
+     //    if(ballExists = false){
         moveDown2 = true;
         ballExists = true;
-        //  }
+     //  }
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        //if(ballExists = false){
+      // if(ballExists = false){
         moveLeft2 = true;
         ballExists = true;
-        //}
+     // }
         
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        //  if(ballExists = false){
+      //  if(ballExists = false){
         moveRight2 = true;
         ballExists = true;
-        //}
+       //}
         
       }
     }   
@@ -330,5 +461,9 @@ class GameFrame extends JFrame {
     
     public void mouseExited(MouseEvent e) {
     }
-  } //end of mouselistener
-}
+  }
+  }
+
+
+   //end of mouselistener
+
