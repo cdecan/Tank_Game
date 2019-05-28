@@ -36,7 +36,7 @@ class GameFrame extends JFrame {
   int timeLimit = 0;
   Square square = new Square();
   Tank tank = new Tank();
-  static boolean ballExists;
+
   
   
   //Constructor - this runs first
@@ -89,7 +89,6 @@ class GameFrame extends JFrame {
     this.dy = y;
     this.targX = (int)((Math.random()*1200)+100);
     this.targY = (int)((Math.random()*500)+100);
-    ballExists = false;
     faceUp = true;
 
     int timeLimit = 0;
@@ -413,27 +412,27 @@ class GameFrame extends JFrame {
           moveDown2 = false;
           moveRight2 = false;
           moveLeft2 = false;
-          ballExists = true;
+
         }else if(faceDown){
           moveDown2 = true;
           moveUp2 = false;
           moveRight2 = false;
           moveLeft2 = false;
-          ballExists = true;
+
         }else if(faceLeft){
           moveLeft2 = true;
           moveDown2 = false;
           moveRight2 = false;
           moveUp2 = false;
-          ballExists = true;
+
         }else if(faceRight){
           moveRight2 = true;
           moveDown2 = false;
           moveUp2 = false;
           moveLeft2 = false;
-          ballExists = true;
+
         }
-      }else if(KeyEvent.getKeyText(e.getKeyCode()).equals("E")){
+      }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("E"))&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
         x = dx;
         y = dy;
         moveUp2 = false;
@@ -441,27 +440,16 @@ class GameFrame extends JFrame {
         moveLeft2 = false;
         moveRight2 = false;
     }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-      //     if(ballExists = false){
-        moveUp2 = true;
-        ballExists = true;
-    //     }
+
+   
         
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-     //    if(ballExists = false){
-        moveDown2 = true;
-        ballExists = true;
-     //  }
+  
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-      // if(ballExists = false){
-        moveLeft2 = true;
-        ballExists = true;
-     // }
+ 
         
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-      //  if(ballExists = false){
-        moveRight2 = true;
-        ballExists = true;
-       //}
+  
         
       }
     }   
@@ -480,21 +468,13 @@ class GameFrame extends JFrame {
         moveUp = false;
         // faceUp = false;
       }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        // moveUp2 = false;
-        // dy = (y);
-        // dx = x+15;
+
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        // moveDown2 = false;
-        // dy = y;
-        // dx = x+15;
+   
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        //moveLeft2 = false;
-        //dx = x+15;
-        //dy = y;
+   
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        //moveRight2 = false;
-        //dx = x+15;
-        //dy = y;
+  
       }
     }
   } //end of keyboard listener
