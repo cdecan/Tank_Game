@@ -42,7 +42,8 @@ class GameFrame extends JFrame {
   //Constructor - this runs first
   GameFrame() { 
     
-    super("My Game");  
+    super("My Game");
+    
     this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,6 +117,14 @@ class GameFrame extends JFrame {
       
       //square.repaint();
       
+      if(ballCollision()){
+        dispose();
+        moveUp2 = false;
+        moveDown2 = false;
+        moveLeft2 = false;
+        moveRight2 = false;
+        new WinFrame(true);
+      }
       
       if(timeLimit == 10000){
       dispose();
@@ -351,6 +360,8 @@ class GameFrame extends JFrame {
       
     
   }
+    
+    
   }
   
     
@@ -500,6 +511,22 @@ class GameFrame extends JFrame {
     public void mouseExited(MouseEvent e) {
     }
   }
+  public Rectangle getBoundsPlayer() {
+      if((faceUp)||(faceDown)){
+  return new Rectangle((int)x,(int) y, 50, 100);
+      }else{
+  return new Rectangle((int)x, (int)y, 100, 50);        
+      }
+ }
+    public Rectangle getBoundsBall() {
+  return new Rectangle((int)dx,(int) dy, 20, 20);
+ }
+    public Rectangle getBoundsTarget() {
+  return new Rectangle((int)targX,(int) targY, 60, 60);
+ }
+    public boolean ballCollision() {
+  return getBoundsBall().intersects(getBoundsTarget());
+ }
   }
 
 
