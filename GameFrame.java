@@ -445,12 +445,35 @@ class GameFrame extends JFrame {
 
         }
       }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("E"))&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
-        x = dx;
-        y = dy;
-        moveUp2 = false;
-        moveDown2 = false;
-        moveLeft2 = false;
-        moveRight2 = false;
+        if(moveUp2 == true){
+          x = dx-15;
+          y = dy-55;
+          moveUp2 = false;
+          moveDown2 = false;
+          moveLeft2 = false;
+          moveRight2 = false;
+        }else if(moveDown2 == true){
+          x = dx-15;
+          y = dy-55;
+          moveUp2 = false;
+          moveDown2 = false;
+          moveLeft2 = false;
+          moveRight2 = false;
+        }else if(moveLeft2 == true){
+          x = dx-55;
+          y = dy-15;
+          moveUp2 = false;
+          moveDown2 = false;
+          moveLeft2 = false;
+          moveRight2 = false;
+        }else if(moveRight2 == true){
+          x = dx-55;
+          y = dy-15;
+          moveUp2 = false;
+          moveDown2 = false;
+          moveLeft2 = false;
+          moveRight2 = false;
+        }
     }else if (e.getKeyCode() == KeyEvent.VK_UP) {
 
    
