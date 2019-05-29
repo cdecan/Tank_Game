@@ -20,6 +20,7 @@ class StartingFrame extends JFrame {
   
   static boolean[] colorOwned = {true, false, false, false};
   static boolean[] colorEquipped = {true, false, false, false};
+  static int points = 0;
   JFrame thisFrame;
   
   //Constructor - this runs first
@@ -156,6 +157,12 @@ class StartingFrame extends JFrame {
     }else{
       return false;
     }
+  }
+  public static int addPoints(int time, int health){
+    points += health;
+    points += 10000 - time;
+    points = points/1000;
+    return points;
   }
   
   //Main method starts this application
