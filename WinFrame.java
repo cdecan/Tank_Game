@@ -21,7 +21,7 @@ class WinFrame extends JFrame {
   JFrame thisFrame;
   
   //Constructor - this runs first
-  WinFrame(boolean won) { 
+  WinFrame(boolean won, int time, int health) { 
     super("Win Screen");
     this.thisFrame = this; //lol  
     
@@ -44,6 +44,9 @@ class WinFrame extends JFrame {
     
     //Create a tutorial label
     JLabel winLabel = new JLabel("YOU WIN!");
+    int pointsGained = StartingFrame.addPoints(time, health);
+    String pointString = Integer.toString(pointsGained);
+    JLabel points = new JLabel ("YOU EARNED " + pointString + " POINTS!");
     JLabel lossLabel = new JLabel("YOU LOSE!");
     if(won){
     mainPanel.add(winLabel);
@@ -51,6 +54,7 @@ class WinFrame extends JFrame {
     mainPanel.add(lossLabel);
     }
     mainPanel.add(returnButton);
+    mainPanel.add(points);
 
     
     //add the main panel to the frame
