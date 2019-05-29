@@ -94,16 +94,31 @@ class StartingFrame extends JFrame {
     
   }
   
-  public static void buyBlue(){
+public static void buyBlue(){
+    if(points - 20 >= 0){
       colorOwned[1] = true;
+      points -= 20;
+    }else{
+      System.out.println("YOU CAN'T AFFORD THAT!");//CHANGE THIS TO ADD TO FRAME INSTEAD
+    }
       //System.out.println("test");
     }
   public static void buyGreen(){
+    if(points - 30 >= 0){
     colorOwned[2] = true;
+    points -=30;
+    }else{
+      System.out.println("YOU CAN'T AFFORD THAT!");//CHANGE THIS TO ADD TO FRAME INSTEAD
+    }
     //System.out.println("test");
   }
   public static void buyYellow(){
+    if(points - 40 >= 0){
     colorOwned[3] = true;
+    points -= 40;
+    }else{
+      System.out.println("YOU CAN'T AFFORD THAT!");//CHANGE THIS TO ADD TO FRAME INSTEAD
+    }
     //System.out.println("test");
   }
   public static void equipRed(){
@@ -113,22 +128,34 @@ class StartingFrame extends JFrame {
     colorEquipped[3] = false;
   }
   public static void equipBlue(){
+    if(colorOwned[1]){
     colorEquipped[0] = false;
     colorEquipped[1] = true;
     colorEquipped[2] = false;
     colorEquipped[3] = false;
+    }else{
+      System.out.println("YOU DON'T OWN THAT!");
+    }
   }
   public static void equipGreen(){
+    if(colorOwned[2]){
     colorEquipped[0] = false;
     colorEquipped[1] = false;
     colorEquipped[2] = true;
     colorEquipped[3] = false;
+    }else{
+      System.out.println("YOU DON'T OWN THAT!");
+    }
   }
   public static void equipYellow(){
+    if(colorOwned[3]){
     colorEquipped[0] = false;
     colorEquipped[1] = false;
     colorEquipped[2] = false;
     colorEquipped[3] = true;
+    }else{
+      System.out.println("YOU DON'T OWN THAT!");
+    }
   }
   public static boolean redEquipped(){
     if(colorEquipped[0]){
