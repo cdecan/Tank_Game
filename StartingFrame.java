@@ -188,7 +188,9 @@ public static void buyBlue(){
   public static int addPoints(int time, int health){
     points += health;
     points += 10000 - time;
+        if(time != 10000){//if it is 10000, it was manually inputted by us and we don't want it to be /1000
     points = points/1000;
+        }
     return points;
   }
   
