@@ -20,12 +20,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-class GameFrame extends JFrame { 
+class GameFrameLevel1 extends JFrame { 
   
   //class variable (non-static)
   static double x, y;
   static double dx, dy;
   static double targX, targY;
+  static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
   
   boolean moveLeft;
   boolean moveRight;
@@ -36,11 +37,11 @@ class GameFrame extends JFrame {
   int timeLimit = 0;
   Square square = new Square();
   Tank tank = new Tank();
-
+  
   
   
   //Constructor - this runs first
-  GameFrame() { 
+  GameFrameLevel1() { 
     
     super("My Game");
     
@@ -66,7 +67,7 @@ class GameFrame extends JFrame {
     this.add(square);
     
     
-  MyKeyListener keyListener = new MyKeyListener(); 
+    MyKeyListener keyListener = new MyKeyListener(); 
     this.addKeyListener(keyListener);
     
     MyMouseListener mouseListener = new MyMouseListener();
@@ -84,14 +85,21 @@ class GameFrame extends JFrame {
   
   //the main gameloop - this is where the game state is updated
   public void animate() { 
-    this.x = ((Math.random()*1200)+100);  //update coords
-    this.y = ((Math.random()*500)+100);
+    this.x = (100);  //update coords
+    this.y = (100);
     this.dx = x;
     this.dy = y;
-    this.targX = (int)((Math.random()*1200)+100);
-    this.targY = (int)((Math.random()*500)+100);
+    this.targX = (int)(1000);
+    this.targY = (int)(300);
+    trapX = 300;
+    trapY = 300;
+    trapX2 = 500;
+    trapY2 = 400;
+    trapX3 = 700;
+    trapY3 = 200;
+      
     faceUp = true;
-
+    
     int timeLimit = 0;
     while(true){
       timeLimit++;
@@ -119,17 +127,68 @@ class GameFrame extends JFrame {
       
       if(ballCollision()){
         dispose();
-        moveUp2 = false;
-        moveDown2 = false;
-        moveLeft2 = false;
-        moveRight2 = false;
-        new WinFrame(true);
+        square.remove(tank);
+        x+=10000000;
+        y+=10000000;
+        dx-=1000000;
+        dy-=1000000;
+        new WinFrame(true, timeLimit, 3);
+      }
+      
+      if(roofCollision()){
+        y++;
+      }else if(floorCollision()){
+        y--;
+      }else if(rWallCollision()){
+        x--;
+      }else if(lWallCollision()){
+        x++;
+      }
+      
+      if((inWallCollision1()) && (faceUp)){
+        y++;
+      }else if((inWallCollision1()) && (faceLeft)){
+        x++;
+      }else if((inWallCollision1()) && (faceRight)){
+        x--;
+      }else if((inWallCollision1()) && (faceDown)){
+        y--;
+      }
+      
+      if((inWallCollision2()) && (faceUp)){
+        y++;
+      }else if((inWallCollision2()) && (faceLeft)){
+        x++;
+      }else if((inWallCollision2()) && (faceRight)){
+        x--;
+      }else if((inWallCollision2()) && (faceDown)){
+        y--;
+      }
+      
+      if((inWallCollision3()) && (faceUp)){
+        y++;
+      }else if((inWallCollision3()) && (faceLeft)){
+        x++;
+      }else if((inWallCollision3()) && (faceRight)){
+        x--;
+      }else if((inWallCollision3()) && (faceDown)){
+        y--;
+      }
+      
+      if((trapCollision())||(trapCollision2())||(trapCollision3())){
+        dispose();
+        square.remove(tank);
+        x+=10000000;
+        y+=10000000;
+        dx-=1000000;
+        dy-=1000000;
+        new WinFrame(false, timeLimit, 0);
       }
       
       if(timeLimit == 10000){
-      dispose();
-      new StartingFrame();
-       }
+        dispose();
+        new StartingFrame();
+      }
       
     }    
   }
@@ -157,11 +216,41 @@ class GameFrame extends JFrame {
     Tank(){
       //   x = 100;
       //   y = 100;
-      
     }
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
+      
+      //WALLS//////////////////////////////////////////////////
+      //border
+      g.setColor(Color.BLACK);
+      g.fillRect(0,0, 1366, 50);
+      g.fillRect(0,718,1368,50);
+      g.fillRect(0,0,50,768);
+      g.fillRect(1316,0,50,768);
+      
+      //inner
+      g.setColor(Color.BLACK);
+      g.fillRect(400,50,20,300);
+      g.fillRect(0,300, 300,20);
+      g.fillRect(700,250,20,518);
+      
+      //TRAP////////////////////////////////////////////////////
+      g.setColor(Color.RED);
+      g.fillOval((int)trapX,(int)trapY,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval((int)trapX+5,(int)trapY+5,20,20);
+      //2
+      g.setColor(Color.RED);
+      g.fillOval((int)trapX2,(int)trapY2,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval((int)trapX2+5,(int)trapY2+5,20,20);
+      //3
+      g.setColor(Color.RED);
+      g.fillOval((int)trapX3,(int)trapY3,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval((int)trapX3+5,(int)trapY3+5,20,20);
+      
       //TARGET//////////////////////////////////////////////////
       g.setColor(Color.BLACK);
       g.fillOval((int) targX, (int) targY, 60, 60);
@@ -224,147 +313,147 @@ class GameFrame extends JFrame {
       
       //PLAYER//////////////////////////////////////
       //RED
-     if(StartingFrame.redEquipped()){
-      if(faceUp){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y-25,5,29);
-      }else if(faceDown){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y+100,5,29);        
-        
-      }else if(faceLeft){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x-24,(int)y+20,29,5);
-        
-      }else if(faceRight){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.RED);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+100,(int)y+22,29,5);
-      }
-      //BLUE
-     }else if(StartingFrame.blueEquipped()){
-       if(faceUp){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.BLUE);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y-25,5,29);
-      }else if(faceDown){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.BLUE);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y+100,5,29);        
-        
-      }else if(faceLeft){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.BLUE);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x-24,(int)y+20,29,5);
-        
-      }else if(faceRight){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.BLUE);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+100,(int)y+22,29,5);
-      }
-      //GREEN
-     }else if(StartingFrame.greenEquipped()){
-       if(faceUp){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.GREEN);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y-25,5,29);
-      }else if(faceDown){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.GREEN);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y+100,5,29);        
-        
-      }else if(faceLeft){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.GREEN);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x-24,(int)y+20,29,5);
-        
-      }else if(faceRight){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.GREEN);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+100,(int)y+22,29,5);
-        //YELLOW
-      }
+      if(StartingFrame.redEquipped()){
+        if(faceUp){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.RED);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y-25,5,29);
+        }else if(faceDown){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.RED);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y+100,5,29);        
+          
+        }else if(faceLeft){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.RED);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x-24,(int)y+20,29,5);
+          
+        }else if(faceRight){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.RED);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+100,(int)y+22,29,5);
+        }
+        //BLUE
+      }else if(StartingFrame.blueEquipped()){
+        if(faceUp){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.BLUE);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y-25,5,29);
+        }else if(faceDown){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.BLUE);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y+100,5,29);        
+          
+        }else if(faceLeft){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.BLUE);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x-24,(int)y+20,29,5);
+          
+        }else if(faceRight){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.BLUE);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+100,(int)y+22,29,5);
+        }
+        //GREEN
+      }else if(StartingFrame.greenEquipped()){
+        if(faceUp){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.GREEN);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y-25,5,29);
+        }else if(faceDown){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.GREEN);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y+100,5,29);        
+          
+        }else if(faceLeft){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.GREEN);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x-24,(int)y+20,29,5);
+          
+        }else if(faceRight){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.GREEN);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+100,(int)y+22,29,5);
+          //YELLOW
+        }
       }else if(StartingFrame.yellowEquipped()){
-       if(faceUp){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.YELLOW);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y-25,5,29);
-      }else if(faceDown){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,50,100);
-        g.setColor(Color.YELLOW);
-        g.fillOval((int)x+5,(int)y+5,40,90);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+22,(int)y+100,5,29);        
-        
-      }else if(faceLeft){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.YELLOW);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x-24,(int)y+20,29,5);
-        
-      }else if(faceRight){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)x,(int)y,100,50);
-        g.setColor(Color.YELLOW);
-        g.fillOval((int)x+5,(int)y+5,90,40);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)x+100,(int)y+22,29,5);
-      }
+        if(faceUp){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.YELLOW);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y-25,5,29);
+        }else if(faceDown){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,50,100);
+          g.setColor(Color.YELLOW);
+          g.fillOval((int)x+5,(int)y+5,40,90);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+22,(int)y+100,5,29);        
+          
+        }else if(faceLeft){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.YELLOW);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x-24,(int)y+20,29,5);
+          
+        }else if(faceRight){
+          g.setColor(Color.BLACK);
+          g.fillOval((int)x,(int)y,100,50);
+          g.setColor(Color.YELLOW);
+          g.fillOval((int)x+5,(int)y+5,90,40);
+          g.setColor(Color.BLACK);
+          g.fillRect((int)x+100,(int)y+22,29,5);
+        }
       }//colors: all copy-pasted except with a change in color
       
       
-    
-  }
+      
+    }
     
     
   }
   
-    
+  
   
   
   
@@ -424,25 +513,25 @@ class GameFrame extends JFrame {
           moveDown2 = false;
           moveRight2 = false;
           moveLeft2 = false;
-
+          
         }else if(faceDown){
           moveDown2 = true;
           moveUp2 = false;
           moveRight2 = false;
           moveLeft2 = false;
-
+          
         }else if(faceLeft){
           moveLeft2 = true;
           moveDown2 = false;
           moveRight2 = false;
           moveUp2 = false;
-
+          
         }else if(faceRight){
           moveRight2 = true;
           moveDown2 = false;
           moveUp2 = false;
           moveLeft2 = false;
-
+          
         }
       }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("E"))&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
         if(moveUp2 == true){
@@ -474,17 +563,17 @@ class GameFrame extends JFrame {
           moveLeft2 = false;
           moveRight2 = false;
         }
-    }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-
-   
+      }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+        
+        
         
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-  
+        
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
- 
+        
         
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-  
+        
         
       }
     }   
@@ -503,13 +592,13 @@ class GameFrame extends JFrame {
         moveUp = false;
         // faceUp = false;
       }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-
+        
       }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-   
+        
       }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-   
+        
       }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-  
+        
       }
     }
   } //end of keyboard listener
@@ -535,24 +624,88 @@ class GameFrame extends JFrame {
     }
   }
   public Rectangle getBoundsPlayer() {
-      if((faceUp)||(faceDown)){
-  return new Rectangle((int)x,(int) y, 50, 100);
-      }else{
-  return new Rectangle((int)x, (int)y, 100, 50);        
-      }
- }
-    public Rectangle getBoundsBall() {
-  return new Rectangle((int)dx,(int) dy, 20, 20);
- }
-    public Rectangle getBoundsTarget() {
-  return new Rectangle((int)targX,(int) targY, 60, 60);
- }
-    public boolean ballCollision() {
-  return getBoundsBall().intersects(getBoundsTarget());
- }
+    if((faceUp)||(faceDown)){
+      return new Rectangle((int)x,(int) y, 50, 100);
+    }else{
+      return new Rectangle((int)x, (int)y, 100, 50);        
+    }
   }
+  public Rectangle getBoundsBall() {
+    return new Rectangle((int)dx,(int) dy, 20, 20);
+  }
+  public Rectangle getBoundsTarget() {
+    return new Rectangle((int)targX,(int) targY, 60, 60);
+  }
+  
+  public Rectangle getBoundsTrap() {
+    return new Rectangle((int)trapX, (int) trapY, 30, 30);
+  }
+  public Rectangle getBoundsTrap2() {
+    return new Rectangle((int)trapX2, (int) trapY2, 30, 30);
+  }
+  public Rectangle getBoundsTrap3() {
+    return new Rectangle((int)trapX3, (int) trapY3, 30, 30);
+  }
+  public Rectangle getBoundsRoof(){
+    return new Rectangle(0, 0, 1366, 50);
+  }
+  public Rectangle getBoundsFloor(){
+    return new Rectangle(0,718, 1366, 50);
+  }
+  public Rectangle getBoundsRWall(){
+    return new Rectangle(1316, 0, 50, 768);
+  }
+  public Rectangle getBoundsLWall(){
+    return new Rectangle(0, 0, 50,768);
+  }
+  public Rectangle getBoundsInWall1(){
+    return new Rectangle(400,50,20,300);
+  }
+  public Rectangle getBoundsInWall2(){
+    return new Rectangle(0, 300, 300,20);
+  }
+  public Rectangle getBoundsInWall3(){
+    return new Rectangle(700,250,20,518);
+  }
+  
+  //collision booleans
+  
+  public boolean ballCollision(){
+    return getBoundsBall().intersects(getBoundsTarget());
+  }
+  
+  public boolean trapCollision(){
+    return getBoundsTrap().intersects(getBoundsPlayer());
+  }
+  public boolean trapCollision2(){
+    return getBoundsTrap2().intersects(getBoundsPlayer());
+  }
+  public boolean trapCollision3(){
+    return getBoundsTrap3().intersects(getBoundsPlayer());
+  }
+  public boolean roofCollision(){
+    return getBoundsRoof().intersects(getBoundsPlayer());
+  }
+  public boolean floorCollision(){
+    return getBoundsFloor().intersects(getBoundsPlayer());
+  }
+  public boolean lWallCollision(){
+    return getBoundsLWall().intersects(getBoundsPlayer());
+  }
+  public boolean rWallCollision(){
+    return getBoundsRWall().intersects(getBoundsPlayer());
+  }
+  public boolean inWallCollision1(){
+    return getBoundsInWall1().intersects(getBoundsPlayer());
+  }
+  public boolean inWallCollision2(){
+    return getBoundsInWall2().intersects(getBoundsPlayer());
+  }
+  public boolean inWallCollision3(){
+    return getBoundsInWall3().intersects(getBoundsPlayer());
+  }
+  
+}
 
 
-   //end of mouselistener
-
-
+//end of mouselistener
