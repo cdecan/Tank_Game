@@ -34,6 +34,9 @@ class ShopFrame extends JFrame {
     this.setResizable (false);
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
+    int pointsOwned = StartingFrame.addPoints(10000,0);
+    JLabel pointsLabel = new JLabel("POINTS: ");
+    JLabel points = new JLabel(Integer.toString(pointsOwned));
     mainPanel.setBackground(Color.GREEN);
     
     mainPanel.setLayout(new GridLayout(4,1));
@@ -58,7 +61,7 @@ class ShopFrame extends JFrame {
     //JLabel helpLabel = new JLabel("THIS IS THE SHOP");
     
     //create buy buttons and equip buttons
-    JButton[] buyButton = {new JButton("BUY (10)"),new JButton("BUY (20)"),new JButton("BUY (30)"),new JButton("BUY (40)")};
+    JButton[] buyButton = {new JButton("DEFAULT"),new JButton("BUY (20)"),new JButton("BUY (30)"),new JButton("BUY (40)")};
     JButton[] equipButton = {new JButton("EQUIP (R)"),new JButton("EQUIP (B)"),new JButton("EQUIP (G)"),new JButton("EQUIP (Y)")};
     
     for(int addlisteners = 0; addlisteners < 4; addlisteners++){
@@ -86,9 +89,9 @@ class ShopFrame extends JFrame {
     //mainPanel.add(helpLabel);
     // mainPanel.add(returnButton);
     mainPanel.add(returnButton);
+    mainPanel.add(pointsLabel);
+    mainPanel.add(points);
     mainPanel.add(returnButton2);
-    mainPanel.add(returnButton3);
-    mainPanel.add(returnButton4);
     for(int i = 0;i<4;i++){
       mainPanel.add(buyButton[i]);
     }
