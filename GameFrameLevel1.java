@@ -97,11 +97,12 @@ class GameFrameLevel1 extends JFrame {
     trapY2 = 400;
     trapX3 = 700;
     trapY3 = 200;
-      
+    
     faceUp = true;
     
     int timeLimit = 0;
-    while(true){
+    boolean run = true;
+    while(run){
       timeLimit++;
       //System.out.println(timeLimit);
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
@@ -127,11 +128,7 @@ class GameFrameLevel1 extends JFrame {
       
       if(ballCollision()){
         dispose();
-        square.remove(tank);
-        x+=10000000;
-        y+=10000000;
-        dx-=1000000;
-        dy-=1000000;
+        run = false;
         new WinFrame(true, timeLimit, 3);
       }
       
@@ -153,6 +150,13 @@ class GameFrameLevel1 extends JFrame {
         x--;
       }else if((inWallCollision1()) && (faceDown)){
         y--;
+      }
+      
+      if((ballInWallCollision1())||(ballInWallCollision2())||(ballInWallCollision3())||(ballRoofCollision())||(ballFloorCollision())||(ballLWallCollision())||(ballRWallCollision())){
+        moveUp2 = false;
+        moveDown2 = false;
+        moveLeft2 = false;
+        moveRight2 = false;
       }
       
       if((inWallCollision2()) && (faceUp)){
@@ -177,16 +181,13 @@ class GameFrameLevel1 extends JFrame {
       
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
         dispose();
-        square.remove(tank);
-        x+=10000000;
-        y+=10000000;
-        dx-=1000000;
-        dy-=1000000;
+        run = false;
         new WinFrame(false, timeLimit, 0);
       }
       
       if(timeLimit == 10000){
         dispose();
+        run = false;
         new StartingFrame();
       }
       
@@ -703,6 +704,27 @@ class GameFrameLevel1 extends JFrame {
   }
   public boolean inWallCollision3(){
     return getBoundsInWall3().intersects(getBoundsPlayer());
+  }
+  public boolean ballInWallCollision1(){
+    return getBoundsInWall1().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision2(){
+    return getBoundsInWall2().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision3(){
+    return getBoundsInWall3().intersects(getBoundsBall());
+  }
+  public boolean ballRoofCollision(){
+    return getBoundsRoof().intersects(getBoundsBall());
+  }
+  public boolean ballFloorCollision(){
+    return getBoundsFloor().intersects(getBoundsBall());
+  }
+  public boolean ballLWallCollision(){
+    return getBoundsLWall().intersects(getBoundsBall());
+  }
+  public boolean ballRWallCollision(){
+    return getBoundsRWall().intersects(getBoundsBall());
   }
   
 }
