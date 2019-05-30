@@ -90,12 +90,12 @@ class GameFrameLevel2 extends JFrame {
     this.dx = x;
     this.dy = y;
     this.targX = (int)(1000);
-    this.targY = (int)(300);
-    trapX = 300;
+    this.targY = (int)(500);
+    trapX = 250;
     trapY = 300;
-    trapX2 = 500;
+    trapX2 = 450;
     trapY2 = 400;
-    trapX3 = 700;
+    trapX3 = 650;
     trapY3 = 200;
       
     faceUp = true;
@@ -175,6 +175,35 @@ class GameFrameLevel2 extends JFrame {
         y--;
       }
       
+      if((inWallCollision4()) && (faceUp)){
+        y++;
+      }else if((inWallCollision4()) && (faceLeft)){
+        x++;
+      }else if((inWallCollision4()) && (faceRight)){
+        x--;
+      }else if((inWallCollision4()) && (faceDown)){
+        y--;
+      }
+      
+      if((inWallCollision5()) && (faceUp)){
+        y++;
+      }else if((inWallCollision5()) && (faceLeft)){
+        x++;
+      }else if((inWallCollision5()) && (faceRight)){
+        x--;
+      }else if((inWallCollision5()) && (faceDown)){
+        y--;
+      }
+      
+      if((ballInWallCollision1())||(ballInWallCollision2())||(ballInWallCollision3())||(ballInWallCollision4())||(ballInWallCollision5())||(ballRoofCollision())||(ballFloorCollision())||(ballLWallCollision())||(ballRWallCollision())){
+        moveUp2 = false;
+        moveDown2 = false;
+        moveLeft2 = false;
+        moveRight2 = false;
+      }
+      
+      
+      
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
         dispose();
         square.remove(tank);
@@ -201,7 +230,6 @@ class GameFrameLevel2 extends JFrame {
     Tank tank = new Tank();
     
     Square(){
-      
       add(tank);
     }
   }
@@ -231,9 +259,13 @@ class GameFrameLevel2 extends JFrame {
       
       //inner
       g.setColor(Color.BLACK);
-      g.fillRect(400,50,20,300);
-      g.fillRect(0,300, 300,20);
-      g.fillRect(700,250,20,518);
+      g.fillRect(300,200,200,150);
+      g.fillRect(0,500, 500, 50);
+      g.fillRect(700,350,80,80);
+      g.fillRect(700,600,50,130);
+      g.fillRect(1000,350,300,50);
+      //g.fillRect(700,250,20,518);
+      //g.fillRect(700,250,20,518);
       
       //TRAP////////////////////////////////////////////////////
       g.setColor(Color.RED);
@@ -659,13 +691,19 @@ class GameFrameLevel2 extends JFrame {
     return new Rectangle(0, 0, 50,768);
   }
   public Rectangle getBoundsInWall1(){
-    return new Rectangle(400,50,20,300);
+    return new Rectangle(300,200,200,150);
   }
   public Rectangle getBoundsInWall2(){
-    return new Rectangle(0, 300, 300,20);
+    return new Rectangle(0, 500, 500,50);
   }
   public Rectangle getBoundsInWall3(){
-    return new Rectangle(700,250,20,518);
+    return new Rectangle(700,350,80,80);
+  }
+  public Rectangle getBoundsInWall4(){
+    return new Rectangle(700,600,50,130);
+  }
+  public Rectangle getBoundsInWall5(){
+    return new Rectangle(1000,350,300,50);
   }
   
   //collision booleans
@@ -704,7 +742,39 @@ class GameFrameLevel2 extends JFrame {
   public boolean inWallCollision3(){
     return getBoundsInWall3().intersects(getBoundsPlayer());
   }
-  
+  public boolean inWallCollision4(){
+    return getBoundsInWall4().intersects(getBoundsPlayer());
+  }
+  public boolean inWallCollision5(){
+    return getBoundsInWall5().intersects(getBoundsPlayer());
+  }
+  public boolean ballInWallCollision1(){
+    return getBoundsInWall1().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision2(){
+    return getBoundsInWall2().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision3(){
+    return getBoundsInWall3().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision4(){
+    return getBoundsInWall4().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision5(){
+    return getBoundsInWall5().intersects(getBoundsBall());
+  }
+  public boolean ballRoofCollision(){
+    return getBoundsRoof().intersects(getBoundsBall());
+  }
+  public boolean ballFloorCollision(){
+    return getBoundsFloor().intersects(getBoundsBall());
+  }
+  public boolean ballLWallCollision(){
+    return getBoundsLWall().intersects(getBoundsBall());
+  }
+  public boolean ballRWallCollision(){
+    return getBoundsRWall().intersects(getBoundsBall());
+  }
 }
 
 
