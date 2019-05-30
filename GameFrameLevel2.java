@@ -99,9 +99,10 @@ class GameFrameLevel2 extends JFrame {
     trapY3 = 200;
       
     faceUp = true;
+    boolean run = true;
     
     int timeLimit = 0;
-    while(true){
+    while(run){
       timeLimit++;
       //System.out.println(timeLimit);
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
@@ -127,11 +128,7 @@ class GameFrameLevel2 extends JFrame {
       
       if(ballCollision()){
         dispose();
-        square.remove(tank);
-        x+=10000000;
-        y+=10000000;
-        dx-=1000000;
-        dy-=1000000;
+        run = false;
         new WinFrame(true, timeLimit, 3);
       }
       
@@ -206,16 +203,13 @@ class GameFrameLevel2 extends JFrame {
       
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
         dispose();
-        square.remove(tank);
-        x+=10000000;
-        y+=10000000;
-        dx-=1000000;
-        dy-=1000000;
+        run = false;
         new WinFrame(false, timeLimit, 0);
       }
       
       if(timeLimit == 10000){
         dispose();
+        run = false;
         new StartingFrame();
       }
       
