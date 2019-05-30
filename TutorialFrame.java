@@ -33,9 +33,9 @@ class TutorialFrame extends JFrame {
     
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
-    mainPanel.setBackground(Color.GREEN);
+    mainPanel.setBackground(Color.GRAY);
     
-    mainPanel.setLayout(new GridLayout(3,0));
+    mainPanel.setLayout(new GridLayout(10,0));
     
     //Create a JButton for the centerPanel
     JButton returnButton = new JButton("RETURN");
@@ -43,11 +43,11 @@ class TutorialFrame extends JFrame {
     returnButton.setBackground(Color.WHITE);
     
     //Create a tutorial label
-    JLabel helpLabel = new JLabel("CONTROLS: \n W,A,S,D ARE TO MOVE YOUR TANK, \n Q IS TO SHOOT A BALL \n AND E IS TO TELEPORT");
-    JLabel helpLabel2 = new JLabel("THE OBJECTIVE OF THE GAME IS TO SHOOT THE BEACH BALL BEFORE TIME RUNS OUT. \n GETTING HIT BY A TRAP WILL CAUSE YOU TO LOSE A LIFE. \n YOUR SCORE IS DETERMINED BY THE TIME YOU TOOK AND THE HEALTH YOU HAVE REMAINING. \n THE MORE HEALTH YOU HAVE AND THE LESS TIME YOU TAKE, THE HIGHER SCORE YOU WILL RECIEVE.");
-    mainPanel.add(helpLabel);
+    JLabel[] help = {new JLabel("CONTROLS: "),new JLabel("W,A,S,D ARE TO MOVE YOUR TANK"),new JLabel("Q IS TO SHOOT A BALL"),new JLabel("E IS TO TELEPORT"),new JLabel("THE OBJECTIVE OF THE GAME IS TO SHOOT THE BEACH BALL BEFORE TIME RUNS OUT"),new JLabel("GETTING HIT BY A TRAP WILL CAUSE YOU TO LOSE A LIFE"),new JLabel("YOUR SCORE IS DETERMINED BY THE TIME YOU TOOK AND THE HEALTH YOU HAVE REMAINING"),new JLabel("THE MORE HEALTH YOU HAVE AND THE LESS TIME YOU TAKE, THE HIGHER SCORE YOU WILL RECIEVE"),new JLabel("THERE IS ALSO A SECRET VS MODE, WHICH WE WILL LET YOU FIGURE OUT ON YOUR OWN ;)")};
     mainPanel.add(returnButton);
-    mainPanel.add(helpLabel2);
+    for(int i = 0; i < help.length; i++){
+      mainPanel.add(help[i]);
+    }
     
     //add the main panel to the frame
     this.add(mainPanel);
