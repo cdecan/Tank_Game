@@ -79,7 +79,7 @@ class StartingFrame extends JFrame {
       if(command.equals("START")){
         System.out.println("Starting new Game");
         thisFrame.dispose();
-        new GameFrame(); //create a new FunkyFrame (another file that extends JFrame)
+        new LevelSelectFrame(); //create a new FunkyFrame (another file that extends JFrame)
       }else if(command.equals("CONTROLS")){
         System.out.println("tutorial");
         thisFrame.dispose();
