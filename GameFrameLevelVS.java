@@ -106,9 +106,10 @@ class GameFrameLevelVS extends JFrame {
     faceUp = true;
     
 
-    
+    int time = 9;
     int timeLimit = 0;
     boolean run = true;
+    System.out.println("10");
     while(run){
       timeLimit++;
       //System.out.println(timeLimit);
@@ -221,6 +222,11 @@ class GameFrameLevelVS extends JFrame {
         dispose();
         run = false;
         new WinFrame(false, timeLimit, 0);
+      }
+      
+      if(timeLimit%1000 == 0){
+        System.out.println(Integer.toString(time));
+        time-=1;
       }
       
       if(timeLimit == 10000){
