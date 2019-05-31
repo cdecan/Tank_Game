@@ -106,8 +106,9 @@ class GameFrameLevelVS extends JFrame {
     faceUp = true;
     
 
-    int time = 9;
+    
     int timeLimit = 0;
+    int time = 9;
     boolean run = true;
     System.out.println("10");
     while(run){
@@ -134,18 +135,18 @@ class GameFrameLevelVS extends JFrame {
       
       //square.repaint();
       
-      if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
-        dispose();
-        run = false;
-        new WinFrame(true, timeLimit, 3);
-      }
+      //if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
+       // dispose();
+       // run = false;
+       // new WinFrame(true, timeLimit, 3);
+      //}
       if(targCollision()){
         dispose();
         run = false;
         new WinFrame(false, timeLimit, 0);
       }
       
-
+      
       
       if(x > targX){
         targMoveRight = true;
@@ -232,7 +233,7 @@ class GameFrameLevelVS extends JFrame {
       if(timeLimit == 10000){
         dispose();
         run = false;
-        new StartingFrame();
+        new WinFrame(true, (timeLimit+10000), 3);
       }
       
     }    
