@@ -94,7 +94,7 @@ class StartingFrame extends JFrame {
     
   }
   
-public static void buyBlue(){
+  public static void buyBlue(){
     if(points - 20 >= 0){
       colorOwned[1] = true;
       points -= 20;
@@ -186,11 +186,10 @@ public static void buyBlue(){
     }
   }
   public static int addPoints(int time, int health){
-    points += health;
-    points += 10000 - time;
-        if(time != 10000){//if it is 10000, it was manually inputted by us and we don't want it to be /1000
-    points = points/1000;
-        }
+    points += ((health*(10000-time))/1000);
+    return ((health*(10000-time))/1000);
+  }
+  public static int showPoints(){
     return points;
   }
   
