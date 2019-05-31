@@ -91,6 +91,10 @@ class ShopFrame extends JFrame {
     mainPanel.add(returnButton2);
     for(int i = 0;i<4;i++){
       mainPanel.add(buyButton[i]);
+      if(StartingFrame.colorOwned(i)){
+        buyButton[i].setText("OWNED");
+        repaint();
+      }
     }
     
     mainPanel.add(red);
