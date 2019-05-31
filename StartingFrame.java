@@ -94,6 +94,14 @@ class StartingFrame extends JFrame {
     
   }
   
+  public static boolean colorOwned(int color){
+    if(colorOwned[color]){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
   public static void buyBlue(){
     if(points - 20 >= 0){
       colorOwned[1] = true;
