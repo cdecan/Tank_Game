@@ -48,7 +48,7 @@ class LevelSelectFrame extends JFrame {
     hardButton.setBackground(Color.RED);
     
     //vs
-    JButton vsButton = new JButton("VS");
+    JButton vsButton = new JButton("SURVIVAL");
     vsButton.addActionListener(new ButtonListener());
     vsButton.setBackground(Color.PINK);
     
@@ -78,7 +78,7 @@ class LevelSelectFrame extends JFrame {
         System.out.println("level 2");
         thisFrame.dispose();
         new GameFrameLevel2();
-      }else if(command.equals("VS")){
+      }else if(command.equals("SURVIVAL")){
         thisFrame.dispose();
         new GameFrameLevelVS();
       }
