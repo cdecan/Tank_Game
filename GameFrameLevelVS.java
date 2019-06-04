@@ -49,7 +49,7 @@ class GameFrameLevelVS extends JFrame {
     this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+    //this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
     // this.setUndecorated(true);  //Set to true to remove title bar
     //frame.setResizable(false);
     moveLeft = false;
@@ -108,9 +108,7 @@ class GameFrameLevelVS extends JFrame {
 
     
     int timeLimit = 0;
-    int time = 9;
     boolean run = true;
-    System.out.println("10");
     while(run){
       timeLimit++;
       //System.out.println(timeLimit);
@@ -135,18 +133,18 @@ class GameFrameLevelVS extends JFrame {
       
       //square.repaint();
       
-      //if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
-       // dispose();
-       // run = false;
-       // new WinFrame(true, timeLimit, 3);
-      //}
+      if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
+        dispose();
+        run = false;
+        new WinFrame(true, timeLimit, 3);
+      }
       if(targCollision()){
         dispose();
         run = false;
         new WinFrame(false, timeLimit, 0);
       }
       
-      
+
       
       if(x > targX){
         targMoveRight = true;
@@ -223,11 +221,6 @@ class GameFrameLevelVS extends JFrame {
         dispose();
         run = false;
         new WinFrame(false, timeLimit, 0);
-      }
-      
-      if(timeLimit%1000 == 0){
-        System.out.println(Integer.toString(time));
-        time-=1;
       }
       
       if(timeLimit == 10000){
@@ -372,13 +365,18 @@ class GameFrameLevelVS extends JFrame {
         if(faceUp){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.RED);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
           g.fillRect((int)x+22,(int)y-25,5,29);
+        
         }else if(faceDown){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.RED);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
@@ -387,6 +385,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceLeft){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.RED);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -395,6 +395,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceRight){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.RED);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -405,13 +407,18 @@ class GameFrameLevelVS extends JFrame {
         if(faceUp){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.BLUE);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
           g.fillRect((int)x+22,(int)y-25,5,29);
+        
         }else if(faceDown){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.BLUE);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
@@ -420,6 +427,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceLeft){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.BLUE);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -428,6 +437,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceRight){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.BLUE);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -438,13 +449,18 @@ class GameFrameLevelVS extends JFrame {
         if(faceUp){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.GREEN);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
           g.fillRect((int)x+22,(int)y-25,5,29);
+        
         }else if(faceDown){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.GREEN);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
@@ -453,6 +469,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceLeft){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.GREEN);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -461,6 +479,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceRight){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.GREEN);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -471,13 +491,18 @@ class GameFrameLevelVS extends JFrame {
         if(faceUp){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.YELLOW);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
           g.fillRect((int)x+22,(int)y-25,5,29);
+        
         }else if(faceDown){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,50,100);
+          g.fillRoundRect((int)x-15,(int)y,15,100,10,10);
+          g.fillRoundRect((int)x+50,(int)y,15,100,10,10);
           g.setColor(Color.YELLOW);
           g.fillOval((int)x+5,(int)y+5,40,90);
           g.setColor(Color.BLACK);
@@ -486,6 +511,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceLeft){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.YELLOW);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -494,6 +521,8 @@ class GameFrameLevelVS extends JFrame {
         }else if(faceRight){
           g.setColor(Color.BLACK);
           g.fillOval((int)x,(int)y,100,50);
+          g.fillRoundRect((int)x,(int)y-15,100,15,10,10);
+          g.fillRoundRect((int)x,(int)y+50,100,15,10,10);
           g.setColor(Color.YELLOW);
           g.fillOval((int)x+5,(int)y+5,90,40);
           g.setColor(Color.BLACK);
@@ -680,9 +709,9 @@ class GameFrameLevelVS extends JFrame {
   }
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
-      return new Rectangle((int)x,(int) y, 50, 100);
+      return new Rectangle((int)x-15,(int) y, 80, 100);
     }else{
-      return new Rectangle((int)x, (int)y, 100, 50);        
+      return new Rectangle((int)x, (int)y-15, 100, 80);        
     }
   }
   public Rectangle getBoundsBall() {
