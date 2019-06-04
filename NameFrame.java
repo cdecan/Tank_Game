@@ -23,7 +23,8 @@ import java.util.Scanner;
 class NameFrame extends JFrame { 
   
   JFrame thisFrame;
-  
+  String name;
+      JTextField nameField = new JTextField("Name", 20);
   //Constructor - this runs first
   NameFrame() { 
     super("Start Screen");
@@ -54,7 +55,7 @@ class NameFrame extends JFrame {
     nameLabel.setHorizontalAlignment(JLabel.CENTER);
     
     //Create a JTextField for the centerPanel
-    JTextField nameField = new JTextField("Name", 20);
+
     
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(hello);
@@ -75,6 +76,8 @@ class NameFrame extends JFrame {
       String command = event.getActionCommand();
       if(command.equals("START")){
         System.out.println("Starting new Game");
+        name = nameField.getText();
+        StartingFrame.storeName(name);
         thisFrame.dispose();
         new StartingFrame();
       }
