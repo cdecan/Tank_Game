@@ -24,6 +24,7 @@ class ShopFrame extends JFrame {
   int pointsOwned = StartingFrame.showPoints();
   JLabel points = new JLabel(Integer.toString(pointsOwned));
   JButton[] buyButton = {new JButton("OWNED"),new JButton("BUY (20)"),new JButton("BUY (30)"),new JButton("BUY (40)")};
+  JButton[] ownedButton = {new JButton("OWNED"),new JButton("OWNED"),new JButton("OWNED"),new JButton("OWNED")};
   //Constructor - this runs first
   ShopFrame() { 
     
@@ -52,7 +53,6 @@ class ShopFrame extends JFrame {
     JButton returnButton2 = new JButton("RETURN");
     returnButton2.addActionListener(listener);
     returnButton2.setBackground(Color.WHITE);
-    
     
     //Create a tutorial label
     //JLabel helpLabel = new JLabel("THIS IS THE SHOP");
@@ -147,13 +147,19 @@ class ShopFrame extends JFrame {
         System.out.println("EQUIPPED!");
       }else if(command.equals("EQUIP (B)")){
         StartingFrame.equipBlue();
+        if(StartingFrame.blueEquipped()){
         System.out.println("EQUIPPED!");
+        }
       }else if(command.equals("EQUIP (G)")){
         StartingFrame.equipGreen();
+        if(StartingFrame.greenEquipped()){
         System.out.println("EQUIPPED!");
+        }
       }else if(command.equals("EQUIP (Y)")){
         StartingFrame.equipYellow();
+        if(StartingFrame.yellowEquipped()){
         System.out.println("EQUIPPED!");
+        }
       }
     }
     
