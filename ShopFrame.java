@@ -128,19 +128,25 @@ class ShopFrame extends JFrame {
         StartingFrame.buyBlue();
         pointsOwned = StartingFrame.showPoints();
         points.setText(Integer.toString(pointsOwned));
+        if(StartingFrame.colorOwned(1)){
         buyButton[1].setText("OWNED");
+        }
         repaint();
       }else if(command.equals("BUY (30)")){
         StartingFrame.buyGreen();
         pointsOwned = StartingFrame.showPoints();
         points.setText(Integer.toString(pointsOwned));
+        if(StartingFrame.colorOwned(2)){
         buyButton[2].setText("OWNED");
+        }
         repaint();
       }else if(command.equals("BUY (40)")){
         StartingFrame.buyYellow();
         pointsOwned = StartingFrame.showPoints();
         points.setText(Integer.toString(pointsOwned));
+        if(StartingFrame.colorOwned(3)){
         buyButton[3].setText("OWNED");
+        }
         repaint();
       }else if(command.equals("EQUIP (R)")){
         StartingFrame.equipRed();
