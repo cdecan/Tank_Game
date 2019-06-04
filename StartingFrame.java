@@ -21,6 +21,7 @@ class StartingFrame extends JFrame {
   static boolean[] colorOwned = {true, false, false, false};
   static boolean[] colorEquipped = {true, false, false, false};
   static int points = 0;
+  static String name = "";
   JFrame thisFrame;
   
   //Constructor - this runs first
@@ -37,7 +38,7 @@ class StartingFrame extends JFrame {
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
     mainPanel.setBackground(Color.GREEN);
-    
+    System.out.println("Name: "+ name);
     mainPanel.setLayout(new GridLayout(4,0));
     
     //Create a JButton for the centerPanel
@@ -50,7 +51,7 @@ class StartingFrame extends JFrame {
     helpButton.addActionListener(new ButtonListener());
     helpButton.setBackground(Color.PINK);
     
-    //shop button
+    //shop buttones
     JButton shopButton = new JButton("SHOP");
     shopButton.addActionListener(new ButtonListener());
     shopButton.setBackground(Color.GREEN);
@@ -101,7 +102,6 @@ class StartingFrame extends JFrame {
       return false;
     }
   }
-  
   public static void buyBlue(){
     if(points - 20 >= 0){
       colorOwned[1] = true;
@@ -165,6 +165,11 @@ class StartingFrame extends JFrame {
       System.out.println("YOU DON'T OWN THAT!");
     }
   }
+  /**
+   * A method to check if red is equipped
+   * @return whether or not the color is equipped
+   * @Auth Connor
+   * */
   public static boolean redEquipped(){
     if(colorEquipped[0]){
       return true;
@@ -172,6 +177,11 @@ class StartingFrame extends JFrame {
       return false;
     }
   }
+  /**
+   * A method to check if blue is equipped
+   * @return whether or not the color is equipped
+   * @Auth Connor
+   * */
   public static boolean blueEquipped(){
     if(colorEquipped[1]){
       return true;
@@ -179,6 +189,11 @@ class StartingFrame extends JFrame {
       return false;
     }
   }
+  /**
+   * A method to check if green is equipped
+   * @return whether or not the color is equipped
+   * @Auth Connor
+   * */
   public static boolean greenEquipped(){
     if(colorEquipped[2]){
       return true;
@@ -186,6 +201,11 @@ class StartingFrame extends JFrame {
       return false;
     }
   }
+  /**
+   * A method to check if yellow is equipped
+   * @return whether or not the color is equipped
+   * @Auth Connor
+   * */
   public static boolean yellowEquipped(){
     if(colorEquipped[3]){
       return true;
@@ -193,12 +213,23 @@ class StartingFrame extends JFrame {
       return false;
     }
   }
+  /**
+   * a method to add points to the player's save
+   * @param time the time took to complete the level
+   * @param health the amount of health that the player finished off with
+   * @return the amount of points that the player earned
+   * @auth Connor
+   * */
   public static int addPoints(int time, int health){
     points += ((health*(10000-time))/1000);
     return ((health*(10000-time))/1000);
   }
   public static int showPoints(){
     return points;
+  }
+  
+  public static void storeName(String text){
+    name = text;
   }
   
   //Main method starts this application
