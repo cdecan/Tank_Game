@@ -210,7 +210,7 @@ class GameFrameLevel2 extends JFrame {
       if(timeLimit == 10000){
         dispose();
         run = false;
-        new StartingFrame();
+        new WinFrame(false, timeLimit, 0);
       }
       
     }    
