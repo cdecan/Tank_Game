@@ -16,6 +16,15 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+//sound imports
+import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.*;
+
 //Mouse imports
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -39,7 +48,7 @@ class GameFrameLevelVS extends JFrame {
   Square square = new Square();
   Tank tank = new Tank();
   
-  
+  Clip clip = StartingFrame.music(3);
   
   //Constructor - this runs first
   GameFrameLevelVS() { 
@@ -136,11 +145,13 @@ class GameFrameLevelVS extends JFrame {
       if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
         dispose();
         run = false;
+        clip.close();
         new WinFrame(true, timeLimit, 3);
       }
       if(targCollision()){
         dispose();
         run = false;
+        clip.close();
         new WinFrame(false, timeLimit, 0);
       }
       
