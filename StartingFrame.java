@@ -18,6 +18,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingUtilities;
 
+//sound imports
+import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.*;
+
 class StartingFrame extends JFrame { 
   
   static boolean[] colorOwned = {true, false, false, false};
@@ -25,7 +34,6 @@ class StartingFrame extends JFrame {
   static int points = 0;
   static String name = "";
   JFrame thisFrame;
-  
   //Constructor - this runs first
   StartingFrame() { 
     super("Start Screen");
@@ -37,13 +45,15 @@ class StartingFrame extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     this.setResizable (false);
     
-    
+    music(4);
     
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
     mainPanel.setBackground(Color.GREEN);
     System.out.println("Name: "+ name);
     mainPanel.setLayout(new GridLayout(6,0));
+    
+    
     
     //Create a JButton for the centerPanel
     JButton startButton = new JButton("START");
@@ -317,7 +327,27 @@ class StartingFrame extends JFrame {
   public static String showName(){
     return name;
   }
-  
+  public static Clip music(int choice){
+  try{
+      AudioInputStream audioIn1 = AudioSystem.getAudioInputStream(StartingFrame.class.getResource("Music/Easy.wav"));
+      AudioInputStream audioIn2 = AudioSystem.getAudioInputStream(StartingFrame.class.getResource("Music/Normal.wav"));
+      AudioInputStream audioIn3 = AudioSystem.getAudioInputStream(StartingFrame.class.getResource("Music/Hard.wav"));
+      Clip clip = AudioSystem.getClip();
+      if(choice == 1){
+      clip.open(audioIn1);
+      }else if(choice == 2){
+        clip.open(audioIn2);
+      }else if(choice == 3){
+        clip.open(audioIn3);
+      }
+      clip.start();
+      return clip;
+  }catch(javax.sound.sampled.UnsupportedAudioFileException ex){
+    }catch(java.io.IOException ex){
+    }catch(javax.sound.sampled.LineUnavailableException ex){
+    }
+    return null;
+  }
   //Main method starts this application
   public static void main(String[] args) { 
     new StartingFrame();
