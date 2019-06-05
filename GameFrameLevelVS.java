@@ -279,6 +279,11 @@ class GameFrameLevelVS extends JFrame {
       g.fillOval((int)trapX,(int)trapY,30,30);
       g.setColor(Color.GREEN);
       g.fillOval((int)trapX+5,(int)trapY+5,20,20);
+      //1.5
+      g.setColor(Color.RED);
+      g.fillOval((int)trapX+30,(int)trapY,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval((int)trapX+35,(int)trapY+5,20,20);
       //2
       g.setColor(Color.RED);
       g.fillOval((int)trapX2,(int)trapY2,30,30);
