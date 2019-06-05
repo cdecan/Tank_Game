@@ -37,12 +37,104 @@ class StartingFrame extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     this.setResizable (false);
     
-    //read in save data----------------------------------------------------------------
+    
+    
+    //Create a Panel for stuff
+    JPanel mainPanel = new JPanel();
+    mainPanel.setBackground(Color.GREEN);
+    System.out.println("Name: "+ name);
+    mainPanel.setLayout(new GridLayout(6,0));
+    
+    //Create a JButton for the centerPanel
+    JButton startButton = new JButton("START");
+    startButton.addActionListener(new ButtonListener());
+    startButton.setBackground(Color.WHITE);
+    
+    //Create a tutorial button
+    JButton helpButton = new JButton("CONTROLS");
+    helpButton.addActionListener(new ButtonListener());
+    helpButton.setBackground(Color.PINK);
+    
+    //shop buttones
+    JButton shopButton = new JButton("SHOP");
+    shopButton.addActionListener(new ButtonListener());
+    shopButton.setBackground(Color.GREEN);
+    
+    //Create a JButton for the centerPanel
+    JLabel startLabel = new JLabel("Welome to Tanks!");
+    startLabel.setHorizontalAlignment(JLabel.CENTER);
+    
+    JButton saveButton = new JButton("SAVE");
+    saveButton.addActionListener(new ButtonListener());
+    //
+    JButton loadButton = new JButton("LOAD");
+    loadButton.addActionListener(new ButtonListener());
+    
+    //Add all panels to the mainPanel according to border layout
+    mainPanel.add(startLabel);
+    mainPanel.add(shopButton);
+    mainPanel.add(startButton);
+    mainPanel.add(helpButton);
+    mainPanel.add(saveButton);
+    mainPanel.add(loadButton);
+    
+    //add the main panel to the frame
+    this.add(mainPanel);
+    
+    //Start the app
+    this.setVisible(true);
+  }
+  
+  //This is an inner class that is used to detect a button press
+  class ButtonListener implements ActionListener {  //this is the required class definition
+    public void actionPerformed(ActionEvent event)  {  
+      String command = event.getActionCommand();
+      if(command.equals("START")){
+        System.out.println("Starting new Game");
+        thisFrame.dispose();
+        new LevelSelectFrame(); //create a new FunkyFrame (another file that extends JFrame)
+      }else if(command.equals("CONTROLS")){
+        System.out.println("tutorial");
+        thisFrame.dispose();
+        new TutorialFrame(); //create a new FunkyFrame (another file that extends JFrame)
+      }else if(command.equals("SHOP")){
+        System.out.println("shop");
+        thisFrame.dispose();
+        new ShopFrame(); //create a new FunkyFrame (another file that extends JFrame)
+      }else if(command.equals("SAVE")){
+        System.out.println("SAVING");
+        try{
+        PrintWriter fileOut = new PrintWriter(new FileWriter("save.txt"));
+        //fileOut.println(name);
+        fileOut.println("POINTS:");
+        fileOut.println(Integer.toString(points));
+        System.out.println(Integer.toString(points));
+        fileOut.println("Colors:");
+        fileOut.println("RED:OWNED");
+        if(colorOwned(1)){
+          fileOut.println("BLUE:OWNED");
+        }else{
+          fileOut.println("BLUE:NOT-OWNED");  
+        }
+        if(colorOwned(2)){
+          fileOut.println("GREEN:OWNED");
+        }else{
+          fileOut.println("GREEN:NOT-OWNED");  
+        }
+        if(colorOwned(3)){
+          fileOut.println("YELLOW:OWNED");
+        }else{
+          fileOut.println("YELLOW:NOT-OWNED");
+        }
+        fileOut.close();
+        }catch(java.io.IOException e){System.out.println("oops");}
+      }else if(command.equals("LOAD")){
+       //read in save data----------------------------------------------------------------
     try{
       String txt = "";
     Scanner fileIn = new Scanner (new File ("save.txt"));
         fileIn.nextLine();
-        points += fileIn.nextInt();
+        points = fileIn.nextInt();
         do{
           txt += fileIn.nextLine();
           
@@ -79,91 +171,7 @@ class StartingFrame extends JFrame {
             
           }
     }catch(java.io.FileNotFoundException e){}
-    //------------------------------------------------------------------------
-    
-    //Create a Panel for stuff
-    JPanel mainPanel = new JPanel();
-    mainPanel.setBackground(Color.GREEN);
-    System.out.println("Name: "+ name);
-    mainPanel.setLayout(new GridLayout(5,0));
-    
-    //Create a JButton for the centerPanel
-    JButton startButton = new JButton("START");
-    startButton.addActionListener(new ButtonListener());
-    startButton.setBackground(Color.WHITE);
-    
-    //Create a tutorial button
-    JButton helpButton = new JButton("CONTROLS");
-    helpButton.addActionListener(new ButtonListener());
-    helpButton.setBackground(Color.PINK);
-    
-    //shop buttones
-    JButton shopButton = new JButton("SHOP");
-    shopButton.addActionListener(new ButtonListener());
-    shopButton.setBackground(Color.GREEN);
-    
-    //Create a JButton for the centerPanel
-    JLabel startLabel = new JLabel("Welome to Tanks!");
-    startLabel.setHorizontalAlignment(JLabel.CENTER);
-    
-    JButton saveButton = new JButton("SAVE");
-    saveButton.addActionListener(new ButtonListener());
-    
-    //Add all panels to the mainPanel according to border layout
-    mainPanel.add(startLabel);
-    mainPanel.add(shopButton);
-    mainPanel.add(startButton);
-    mainPanel.add(helpButton);
-    mainPanel.add(saveButton);
-    
-    //add the main panel to the frame
-    this.add(mainPanel);
-    
-    //Start the app
-    this.setVisible(true);
-  }
-  
-  //This is an inner class that is used to detect a button press
-  class ButtonListener implements ActionListener {  //this is the required class definition
-    public void actionPerformed(ActionEvent event)  {  
-      String command = event.getActionCommand();
-      if(command.equals("START")){
-        System.out.println("Starting new Game");
-        thisFrame.dispose();
-        new LevelSelectFrame(); //create a new FunkyFrame (another file that extends JFrame)
-      }else if(command.equals("CONTROLS")){
-        System.out.println("tutorial");
-        thisFrame.dispose();
-        new TutorialFrame(); //create a new FunkyFrame (another file that extends JFrame)
-      }else if(command.equals("SHOP")){
-        System.out.println("shop");
-        thisFrame.dispose();
-        new ShopFrame(); //create a new FunkyFrame (another file that extends JFrame)
-      }else if(command.equals("SAVE")){
-        try{
-        PrintWriter fileOut = new PrintWriter(new FileWriter("save.txt"));
-        //fileOut.println(name);
-        fileOut.println("POINTS:");
-        fileOut.println(Integer.toString(points));
-        fileOut.println("Colors:");
-        fileOut.println("RED:OWNED");
-        if(colorOwned(1)){
-          fileOut.println("BLUE:OWNED");
-        }else{
-          fileOut.println("BLUE:NOT-OWNED");  
-        }
-        if(colorOwned(2)){
-          fileOut.println("GREEN:OWNED");
-        }else{
-          fileOut.println("GREEN:NOT-OWNED");  
-        }
-        if(colorOwned(3)){
-          fileOut.println("YELLOW:OWNED");
-        }else{
-          fileOut.println("YELLOW:NOT-OWNED");
-        }
-        fileOut.close();
-        }catch(java.io.IOException e){System.out.println("oops");}
+    //------------------------------------------------------------------------ 
       }
       
     }
