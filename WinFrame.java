@@ -43,11 +43,11 @@ class WinFrame extends JFrame {
     returnButton.setBackground(Color.WHITE);
     
     //Create a tutorial label
-    JLabel winLabel = new JLabel("YOU WIN!");
+    JLabel winLabel = new JLabel(StartingFrame.showName()+", YOU WIN!");
     int pointsGained = StartingFrame.addPoints(time, health);
     String pointString = Integer.toString(pointsGained);
     JLabel points = new JLabel ("YOU EARNED " + pointString + " POINTS!");
-    JLabel lossLabel = new JLabel("YOU LOSE!");
+    JLabel lossLabel = new JLabel(StartingFrame.showName()+", YOU LOSE!");
     if(won){
     mainPanel.add(winLabel);
     }else{
