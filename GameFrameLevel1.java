@@ -12,6 +12,14 @@ import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Color;
 
+import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.*;
+
 //Keyboard imports
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -39,7 +47,7 @@ class GameFrameLevel1 extends JFrame {
   Tank tank = new Tank();
   
   
-  
+      Clip clip = StartingFrame.music(1);
   //Constructor - this runs first
   GameFrameLevel1() { 
     
@@ -51,6 +59,7 @@ class GameFrameLevel1 extends JFrame {
     //this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
     // this.setUndecorated(true);  //Set to true to remove title bar
     //frame.setResizable(false);
+
     moveLeft = false;
     moveRight = false;
     moveUp = false;
@@ -182,12 +191,14 @@ class GameFrameLevel1 extends JFrame {
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
         dispose();
         run = false;
+        clip.close();
         new WinFrame(false, timeLimit, 0);
       }
       
       if(timeLimit == 10000){
         dispose();
         run = false;
+        clip.close();
         new WinFrame(false, timeLimit, 0);
       }
       
