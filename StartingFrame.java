@@ -5,6 +5,8 @@
 
 
 //Imports
+import java.io.*;
+import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -35,11 +37,55 @@ class StartingFrame extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     this.setResizable (false);
     
+    //read in save data----------------------------------------------------------------
+    try{
+      String txt = "";
+    Scanner fileIn = new Scanner (new File ("save.txt"));
+        fileIn.nextLine();
+        points += fileIn.nextInt();
+        do{
+          txt += fileIn.nextLine();
+          
+        }while(fileIn.hasNextLine());//lines >= 0);
+        fileIn.close();
+        
+        
+          if(txt.toUpperCase().indexOf("RED:OWNED") >0){
+            colorOwned[0] = true;
+             
+          }else{
+            colorOwned[0] = false;
+       
+          }
+          if(txt.toUpperCase().indexOf("BLUE:OWNED") >0){
+            colorOwned[1] = true;
+           
+          }else{
+            colorOwned[1] = false;
+           
+          }
+          if(txt.toUpperCase().indexOf("GREEN:OWNED") >0){
+            colorOwned[2] = true;
+           
+          }else{
+            colorOwned[2] = false;
+           
+          }
+          if(txt.toUpperCase().indexOf("YELLOW:OWNED") >0){
+            colorOwned[3] = true;
+            
+          }else{
+            colorOwned[3] = false;
+            
+          }
+    }catch(java.io.FileNotFoundException e){}
+    //------------------------------------------------------------------------
+    
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
     mainPanel.setBackground(Color.GREEN);
     System.out.println("Name: "+ name);
-    mainPanel.setLayout(new GridLayout(4,0));
+    mainPanel.setLayout(new GridLayout(5,0));
     
     //Create a JButton for the centerPanel
     JButton startButton = new JButton("START");
@@ -60,11 +106,15 @@ class StartingFrame extends JFrame {
     JLabel startLabel = new JLabel("Welome to Tanks!");
     startLabel.setHorizontalAlignment(JLabel.CENTER);
     
+    JButton saveButton = new JButton("SAVE");
+    saveButton.addActionListener(new ButtonListener());
+    
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(startLabel);
     mainPanel.add(shopButton);
     mainPanel.add(startButton);
     mainPanel.add(helpButton);
+    mainPanel.add(saveButton);
     
     //add the main panel to the frame
     this.add(mainPanel);
@@ -89,6 +139,31 @@ class StartingFrame extends JFrame {
         System.out.println("shop");
         thisFrame.dispose();
         new ShopFrame(); //create a new FunkyFrame (another file that extends JFrame)
+      }else if(command.equals("SAVE")){
+        try{
+        PrintWriter fileOut = new PrintWriter(new FileWriter("save.txt"));
+        //fileOut.println(name);
+        fileOut.println("POINTS:");
+        fileOut.println(Integer.toString(points));
+        fileOut.println("Colors:");
+        fileOut.println("RED:OWNED");
+        if(colorOwned(1)){
+          fileOut.println("BLUE:OWNED");
+        }else{
+          fileOut.println("BLUE:NOT-OWNED");  
+        }
+        if(colorOwned(2)){
+          fileOut.println("GREEN:OWNED");
+        }else{
+          fileOut.println("GREEN:NOT-OWNED");  
+        }
+        if(colorOwned(3)){
+          fileOut.println("YELLOW:OWNED");
+        }else{
+          fileOut.println("YELLOW:NOT-OWNED");
+        }
+        fileOut.close();
+        }catch(java.io.IOException e){System.out.println("oops");}
       }
       
     }
@@ -109,12 +184,12 @@ class StartingFrame extends JFrame {
     }else{
       System.out.println("YOU CAN'T AFFORD THAT!");//CHANGE THIS TO ADD TO FRAME INSTEAD
     }
-      //System.out.println("test");
-    }
+    //System.out.println("test");
+  }
   public static void buyGreen(){
     if(points - 30 >= 0){
-    colorOwned[2] = true;
-    points -=30;
+      colorOwned[2] = true;
+      points -=30;
     }else{
       System.out.println("YOU CAN'T AFFORD THAT!");//CHANGE THIS TO ADD TO FRAME INSTEAD
     }
@@ -122,8 +197,8 @@ class StartingFrame extends JFrame {
   }
   public static void buyYellow(){
     if(points - 40 >= 0){
-    colorOwned[3] = true;
-    points -= 40;
+      colorOwned[3] = true;
+      points -= 40;
     }else{
       System.out.println("YOU CAN'T AFFORD THAT!");//CHANGE THIS TO ADD TO FRAME INSTEAD
     }
@@ -137,30 +212,30 @@ class StartingFrame extends JFrame {
   }
   public static void equipBlue(){
     if(colorOwned[1]){
-    colorEquipped[0] = false;
-    colorEquipped[1] = true;
-    colorEquipped[2] = false;
-    colorEquipped[3] = false;
+      colorEquipped[0] = false;
+      colorEquipped[1] = true;
+      colorEquipped[2] = false;
+      colorEquipped[3] = false;
     }else{
       System.out.println("YOU DON'T OWN THAT!");
     }
   }
   public static void equipGreen(){
     if(colorOwned[2]){
-    colorEquipped[0] = false;
-    colorEquipped[1] = false;
-    colorEquipped[2] = true;
-    colorEquipped[3] = false;
+      colorEquipped[0] = false;
+      colorEquipped[1] = false;
+      colorEquipped[2] = true;
+      colorEquipped[3] = false;
     }else{
       System.out.println("YOU DON'T OWN THAT!");
     }
   }
   public static void equipYellow(){
     if(colorOwned[3]){
-    colorEquipped[0] = false;
-    colorEquipped[1] = false;
-    colorEquipped[2] = false;
-    colorEquipped[3] = true;
+      colorEquipped[0] = false;
+      colorEquipped[1] = false;
+      colorEquipped[2] = false;
+      colorEquipped[3] = true;
     }else{
       System.out.println("YOU DON'T OWN THAT!");
     }
@@ -230,6 +305,9 @@ class StartingFrame extends JFrame {
   
   public static void storeName(String text){
     name = text;
+  }
+  public static String showName(){
+    return name;
   }
   
   //Main method starts this application
