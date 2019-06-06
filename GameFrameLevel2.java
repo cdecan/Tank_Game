@@ -39,7 +39,7 @@ class GameFrameLevel2 extends JFrame {
   static double dx, dy;
   static double targX, targY;
   static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
-  boolean dead = false;
+  boolean dead = false, ballKil = false;
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
@@ -50,6 +50,7 @@ class GameFrameLevel2 extends JFrame {
   Square square = new Square();
   Tank tank = new Tank();
     BufferedImage image;
+    BufferedImage ballDed;
   Clip clip = StartingFrame.music(2);
   
   //Constructor - this runs first
@@ -70,6 +71,7 @@ class GameFrameLevel2 extends JFrame {
     
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
+          ballDed = ImageIO.read(new File("Images/dab.png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -119,12 +121,13 @@ class GameFrameLevel2 extends JFrame {
     
     int timeLimit = 0;
     while(run){
-      
       timeLimit++;
-      if (timeLimit%1000 == 0) {
+            if (timeLimit%1000 == 0) {
         System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
       }
-      
+      //System.out.println(timeLimit);
+      //  JLabel label = new JLabel(Integer.toString(timeLimit));
+      //  square.add(label);
       if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
         dx = x+12;
         dy = y-30;
@@ -144,7 +147,11 @@ class GameFrameLevel2 extends JFrame {
       
       //square.repaint();
       
-      if(ballCollision()){
+      if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
+        ballKil = true;
+        try{
+        Thread.sleep(1000);
+        }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
         new WinFrame(true, timeLimit, 3);
@@ -322,6 +329,9 @@ class GameFrameLevel2 extends JFrame {
       ///dead
       if(dead){
         g.drawImage(image, (int)x-300, (int)y-300, this);
+      }
+      if(ballKil){
+        g.drawImage(ballDed, (int)dx-500, (int)dy-300, this);
       }
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
