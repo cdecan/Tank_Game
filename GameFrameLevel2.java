@@ -2,7 +2,10 @@
  * 
  * @author C&J
  **/
-
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.File;
+import java.awt.image.*;
 //Graphics & GUI imports
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +39,7 @@ class GameFrameLevel2 extends JFrame {
   static double dx, dy;
   static double targX, targY;
   static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
-  
+  boolean dead = false;
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
@@ -46,7 +49,7 @@ class GameFrameLevel2 extends JFrame {
   int timeLimit = 0;
   Square square = new Square();
   Tank tank = new Tank();
-  
+    BufferedImage image;
   Clip clip = StartingFrame.music(2);
   
   //Constructor - this runs first
@@ -65,7 +68,11 @@ class GameFrameLevel2 extends JFrame {
     moveUp = false;
     moveDown = false;
     
-    
+    try {                
+          image = ImageIO.read(new File("Images/explode.png"));
+       } catch (IOException ex) {
+            // handle exception...
+       }
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
     //Set up the game panel (where we put our graphics)
@@ -211,6 +218,10 @@ class GameFrameLevel2 extends JFrame {
       
       
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
+        dead = true;
+        try{
+        Thread.sleep(1000);
+        }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
         clip.close();
@@ -218,6 +229,10 @@ class GameFrameLevel2 extends JFrame {
       }
       
       if(timeLimit == 10000){
+        dead = true;
+        try{
+        Thread.sleep(1000);
+        }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
         clip.close();
@@ -302,7 +317,10 @@ class GameFrameLevel2 extends JFrame {
       g.setColor(Color.WHITE);
       g.fillOval((int) targX+25, (int) targY+25, 10, 10);
       ////////////////////////////////////////////////////////////
-      
+      ///dead
+      if(dead){
+        g.drawImage(image, (int)x-300, (int)y-300, this);
+      }
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
         x--;
