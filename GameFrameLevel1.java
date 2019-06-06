@@ -119,10 +119,12 @@ class GameFrameLevel1 extends JFrame {
     int timeLimit = 0;
     boolean run = true;
     while(run){
+      
       timeLimit++;
-      //System.out.println(timeLimit);
-      //  JLabel label = new JLabel(Integer.toString(timeLimit));
-      //  square.add(label);
+      if (timeLimit%1000 == 0) {
+        System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
+      }
+      
       if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
         dx = x+12;
         dy = y-30;
