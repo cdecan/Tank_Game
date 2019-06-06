@@ -171,31 +171,31 @@ class GameFrameLevelVS extends JFrame {
       }
       
 
-      
-      if(x > targX){
-        targMoveRight = true;
-        targMoveLeft= false;
-        targMoveDown = false;
-        targMoveUp = false;
-      }else if(x < targX){
-        targMoveRight = false;
-        targMoveLeft= true;
-        targMoveDown = false;
-        targMoveUp = false;
-      }
-      if(y > targY){
-        targMoveRight = false;
-        targMoveLeft= false;
-        targMoveDown = true;
-        targMoveUp = false;
-      }else if(y < targY){
-        targMoveRight = false;
-        targMoveLeft= false;
-        targMoveDown = false;
-        targMoveUp = true;
-      }
-      
-      
+      if ((int)(Math.random()*2) == 0){
+        if(x > targX){
+          targMoveRight = true;
+          targMoveLeft= false;
+          targMoveDown = false;
+          targMoveUp = false;
+        }else if(x < targX){
+          targMoveRight = false;
+          targMoveLeft= true;
+          targMoveDown = false;
+          targMoveUp = false;
+        }
+      } else {
+        if(y > targY){
+          targMoveRight = false;
+          targMoveLeft= false;
+          targMoveDown = true;
+          targMoveUp = false;
+        }else if(y < targY){
+          targMoveRight = false;
+          targMoveLeft= false;
+          targMoveDown = false;
+          targMoveUp = true;
+        }
+      }      
       if(roofCollision()){
         y++;
       }else if(floorCollision()){
