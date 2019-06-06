@@ -2,15 +2,19 @@
  * 
  * @author C&J
  **/
-
+import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+import java.io.File;
 //Graphics & GUI imports
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Color;
+import javax.imageio.ImageIO;
 
 //Keyboard imports
 import java.awt.event.KeyEvent;
@@ -37,6 +41,8 @@ class GameFrameLevelVS extends JFrame {
   static double targX, targY;
   static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
   
+  boolean dead = false;
+  
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
@@ -48,6 +54,9 @@ class GameFrameLevelVS extends JFrame {
   Square square = new Square();
   Tank tank = new Tank();
   
+  
+  BufferedImage image;
+
   Clip clip = StartingFrame.music(3);
   
   //Constructor - this runs first
@@ -70,6 +79,11 @@ class GameFrameLevelVS extends JFrame {
     targMoveUp = false;
     targMoveDown = false;
     
+    try {                
+          image = ImageIO.read(new File("Images/explode.png"));
+       } catch (IOException ex) {
+            // handle exception...
+       }
     
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
@@ -149,6 +163,10 @@ class GameFrameLevelVS extends JFrame {
         new WinFrame(true, timeLimit, 3);
       }
       if(targCollision()){
+        dead = true;
+        try{
+        Thread.sleep(1000);
+        }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
         clip.close();
@@ -229,12 +247,20 @@ class GameFrameLevelVS extends JFrame {
       }
       
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
+        dead = true;
+        try{
+        Thread.sleep(1000);
+        }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
         new WinFrame(false, timeLimit, 0);
       }
       
       if(timeLimit == 10000){
+        dead = true;
+        try{
+        Thread.sleep(1000);
+        }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
         new WinFrame(true, (timeLimit-10000), 3);
@@ -244,6 +270,8 @@ class GameFrameLevelVS extends JFrame {
   }
   
   /** --------- INNER CLASSES ------------- **/
+  
+  
   
   // Inner class for the the game area - This is where all the drawing of the screen occurs
   
@@ -329,6 +357,11 @@ class GameFrameLevelVS extends JFrame {
         targX++;
       }
       ////////////////////////////////////////////////////////////
+      
+      ///dead
+      if(dead){
+        g.drawImage(image, (int)x-300, (int)y-300, this);
+      }
       
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
