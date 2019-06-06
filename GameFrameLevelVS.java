@@ -158,12 +158,7 @@ class GameFrameLevelVS extends JFrame {
       
       //square.repaint();
       
-      if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
-        dispose();
-        run = false;
-        clip.close();
-        new WinFrame(true, timeLimit, 3);
-      }
+      
       if(targCollision()){
         dead = true;
         try{
