@@ -51,11 +51,13 @@ class GameFrameLevelVS extends JFrame {
   boolean moveUp2, moveDown2, moveLeft2, moveRight2;
   boolean targMoveUp, targMoveDown,targMoveLeft,targMoveRight;
   int timeLimit = 0;
+  int countDown = 1;
   Square square = new Square();
   Tank tank = new Tank();
   
   
   BufferedImage image;
+  BufferedImage timerImage;
 
   Clip clip = StartingFrame.music(3);
   
@@ -81,6 +83,7 @@ class GameFrameLevelVS extends JFrame {
     
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
+          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -136,6 +139,13 @@ class GameFrameLevelVS extends JFrame {
       
       timeLimit++;
       if (timeLimit%1000 == 0) {
+        countDown++;
+              try {                
+          
+          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+       } catch (IOException ex) {
+            // handle exception...
+       }
         System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
       }
       
@@ -295,7 +305,8 @@ class GameFrameLevelVS extends JFrame {
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
-      
+      //timer
+      g.drawImage(timerImage, 651, 100, this);
       //WALLS//////////////////////////////////////////////////
       //border
       g.setColor(Color.BLACK);
