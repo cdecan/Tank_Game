@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Color;
-
+//sound imports
 import javax.sound.sampled.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -47,10 +47,12 @@ class GameFrameLevel1 extends JFrame {
   boolean faceUp = true, faceDown = false, faceLeft = false, faceRight = false;
   boolean moveUp2, moveDown2, moveLeft2, moveRight2;
   int timeLimit = 0;
+  int countDown = 1;
   Square square = new Square();
   Tank tank = new Tank();
     BufferedImage image;
     BufferedImage ballDed;
+    BufferedImage timerImage;
   
       Clip clip = StartingFrame.music(1);
   //Constructor - this runs first
@@ -72,6 +74,7 @@ class GameFrameLevel1 extends JFrame {
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
           ballDed = ImageIO.read(new File("Images/pop.png"));
+          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -124,6 +127,13 @@ class GameFrameLevel1 extends JFrame {
     while(run){
       timeLimit++;
             if (timeLimit%1000 == 0) {
+              countDown++;
+              try {                
+          
+          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+       } catch (IOException ex) {
+            // handle exception...
+       }
         System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
       }
       //System.out.println(timeLimit);
@@ -257,6 +267,8 @@ class GameFrameLevel1 extends JFrame {
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
+      //timer
+      g.drawImage(timerImage, 651, 100, this);
       
       //WALLS//////////////////////////////////////////////////
       //border
