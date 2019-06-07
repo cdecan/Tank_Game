@@ -71,7 +71,7 @@ class GameFrameLevel1 extends JFrame {
     moveDown = false;
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
-          ballDed = ImageIO.read(new File("Images/dab.png"));
+          ballDed = ImageIO.read(new File("Images/pop.png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -312,7 +312,7 @@ class GameFrameLevel1 extends JFrame {
         g.drawImage(image, (int)x-300, (int)y-300, this);
       }
       if(ballKil){
-        g.drawImage(ballDed, (int)dx-500, (int)dy-300, this);
+        g.drawImage(ballDed, (int)dx-300, (int)dy-100, this);
       }
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
