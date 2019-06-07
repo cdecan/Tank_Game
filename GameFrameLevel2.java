@@ -71,7 +71,7 @@ class GameFrameLevel2 extends JFrame {
     
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
-          ballDed = ImageIO.read(new File("Images/dab.png"));
+          ballDed = ImageIO.read(new File("Images/pop.png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -107,8 +107,8 @@ class GameFrameLevel2 extends JFrame {
     this.y = (100);
     this.dx = x;
     this.dy = y;
-    this.targX = (int)(1000);
-    this.targY = (int)(500);
+    this.targX = (int)(1100);
+    this.targY = (int)(200);
     trapX = 250;
     trapY = 300;
     trapX2 = 450;
@@ -216,7 +216,15 @@ class GameFrameLevel2 extends JFrame {
       }else if((inWallCollision5()) && (faceDown)){
         y--;
       }
-      
+      if((inWallCollision6()) && (faceUp)){
+        y++;
+      }else if((inWallCollision6()) && (faceLeft)){
+        x++;
+      }else if((inWallCollision6()) && (faceRight)){
+        x--;
+      }else if((inWallCollision6()) && (faceDown)){
+        y--;
+      }
       if((ballInWallCollision1())||(ballInWallCollision2())||(ballInWallCollision3())||(ballInWallCollision4())||(ballInWallCollision5())||(ballRoofCollision())||(ballFloorCollision())||(ballLWallCollision())||(ballRWallCollision())){
         moveUp2 = false;
         moveDown2 = false;
@@ -226,7 +234,7 @@ class GameFrameLevel2 extends JFrame {
       
       
       
-      if((trapCollision())||(trapCollision2())||(trapCollision3())){
+      if((trapCollision())||(trapCollision2())||(trapCollision3())||(trapCollision4())||(trapCollision5())||(trapCollision6())){
         dead = true;
         try{
         Thread.sleep(1000);
@@ -293,6 +301,7 @@ class GameFrameLevel2 extends JFrame {
       g.fillRect(700,350,80,80);
       g.fillRect(700,600,50,130);
       g.fillRect(1000,350,300,50);
+      g.fillRect(700,0, 50, 300);
       //g.fillRect(700,250,20,518);
       //g.fillRect(700,250,20,518);
       
@@ -311,7 +320,21 @@ class GameFrameLevel2 extends JFrame {
       g.fillOval((int)trapX3,(int)trapY3,30,30);
       g.setColor(Color.GREEN);
       g.fillOval((int)trapX3+5,(int)trapY3+5,20,20);
-      
+      //4
+      g.setColor(Color.RED);
+      g.fillOval(1000,500,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval(1005,505,20,20);
+      //5
+      g.setColor(Color.RED);
+      g.fillOval(800,500,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval(805,505,20,20);
+      //6
+      g.setColor(Color.RED);
+      g.fillOval(800,400,30,30);
+      g.setColor(Color.GREEN);
+      g.fillOval(805,405,20,20);
       //TARGET//////////////////////////////////////////////////
       g.setColor(Color.BLACK);
       g.fillOval((int) targX, (int) targY, 60, 60);
@@ -331,7 +354,7 @@ class GameFrameLevel2 extends JFrame {
         g.drawImage(image, (int)x-300, (int)y-300, this);
       }
       if(ballKil){
-        g.drawImage(ballDed, (int)dx-500, (int)dy-300, this);
+        g.drawImage(ballDed, (int)dx-300, (int)dy-100, this);
       }
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
@@ -749,6 +772,15 @@ class GameFrameLevel2 extends JFrame {
   public Rectangle getBoundsTrap3() {
     return new Rectangle((int)trapX3, (int) trapY3, 30, 30);
   }
+  public Rectangle getBoundsTrap4(){
+    return new Rectangle(1000,500,30,30);
+  }
+  public Rectangle getBoundsTrap5(){
+    return new Rectangle(800,500,30,30);
+  }
+  public Rectangle getBoundsTrap6(){
+    return new Rectangle(800,400,30,30);
+  }
   public Rectangle getBoundsRoof(){
     return new Rectangle(0, 0, 1366, 50);
   }
@@ -776,6 +808,9 @@ class GameFrameLevel2 extends JFrame {
   public Rectangle getBoundsInWall5(){
     return new Rectangle(1000,350,300,50);
   }
+  public Rectangle getBoundsInWall6(){
+    return new Rectangle(700,0, 50, 300);
+  }
   
   //collision booleans
   
@@ -791,6 +826,15 @@ class GameFrameLevel2 extends JFrame {
   }
   public boolean trapCollision3(){
     return getBoundsTrap3().intersects(getBoundsPlayer());
+  }
+  public boolean trapCollision4(){
+    return getBoundsTrap4().intersects(getBoundsPlayer());
+  }
+  public boolean trapCollision5(){
+    return getBoundsTrap5().intersects(getBoundsPlayer());
+  }
+  public boolean trapCollision6(){
+    return getBoundsTrap6().intersects(getBoundsPlayer());
   }
   public boolean roofCollision(){
     return getBoundsRoof().intersects(getBoundsPlayer());
@@ -818,6 +862,9 @@ class GameFrameLevel2 extends JFrame {
   }
   public boolean inWallCollision5(){
     return getBoundsInWall5().intersects(getBoundsPlayer());
+  }
+  public boolean inWallCollision6(){
+    return getBoundsInWall6().intersects(getBoundsPlayer());
   }
   public boolean ballInWallCollision1(){
     return getBoundsInWall1().intersects(getBoundsBall());
