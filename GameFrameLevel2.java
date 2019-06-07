@@ -47,10 +47,12 @@ class GameFrameLevel2 extends JFrame {
   boolean faceUp = true, faceDown = false, faceLeft = false, faceRight = false;
   boolean moveUp2, moveDown2, moveLeft2, moveRight2;
   int timeLimit = 0;
+  int countDown = 1;
   Square square = new Square();
   Tank tank = new Tank();
     BufferedImage image;
     BufferedImage ballDed;
+    BufferedImage timerImage;
   Clip clip = StartingFrame.music(2);
   
   //Constructor - this runs first
@@ -72,6 +74,7 @@ class GameFrameLevel2 extends JFrame {
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
           ballDed = ImageIO.read(new File("Images/pop.png"));
+          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -123,6 +126,13 @@ class GameFrameLevel2 extends JFrame {
     while(run){
       timeLimit++;
             if (timeLimit%1000 == 0) {
+              countDown++;
+              try {                
+          
+          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+       } catch (IOException ex) {
+            // handle exception...
+       }
         System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
       }
       //System.out.println(timeLimit);
@@ -225,7 +235,7 @@ class GameFrameLevel2 extends JFrame {
       }else if((inWallCollision6()) && (faceDown)){
         y--;
       }
-      if((ballInWallCollision1())||(ballInWallCollision2())||(ballInWallCollision3())||(ballInWallCollision4())||(ballInWallCollision5())||(ballRoofCollision())||(ballFloorCollision())||(ballLWallCollision())||(ballRWallCollision())){
+      if((ballInWallCollision1())||(ballInWallCollision2())||(ballInWallCollision3())||(ballInWallCollision4())||(ballInWallCollision5())||(ballInWallCollision6())||(ballRoofCollision())||(ballFloorCollision())||(ballLWallCollision())||(ballRWallCollision())){
         moveUp2 = false;
         moveDown2 = false;
         moveLeft2 = false;
@@ -285,6 +295,8 @@ class GameFrameLevel2 extends JFrame {
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
+      //timer
+      g.drawImage(timerImage, 651, 100, this);
       
       //WALLS//////////////////////////////////////////////////
       //border
@@ -880,6 +892,9 @@ class GameFrameLevel2 extends JFrame {
   }
   public boolean ballInWallCollision5(){
     return getBoundsInWall5().intersects(getBoundsBall());
+  }
+  public boolean ballInWallCollision6(){
+    return getBoundsInWall6().intersects(getBoundsBall());
   }
   public boolean ballRoofCollision(){
     return getBoundsRoof().intersects(getBoundsBall());
