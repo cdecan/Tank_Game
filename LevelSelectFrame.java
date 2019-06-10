@@ -1,6 +1,8 @@
 /** 
- * this template can be used for a start menu
- * for your final project
+ * LevelSelectFrame.java
+ * A program to launch a level select screen
+ * Jayden and Connor
+ * May 30, 2019
  **/
 
 
