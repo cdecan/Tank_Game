@@ -50,9 +50,9 @@ class GameFrameLevel2 extends JFrame {
   int countDown = 1;
   Square square = new Square();
   Tank tank = new Tank();
-    BufferedImage image;
-    BufferedImage ballDead;
-    BufferedImage timerImage;
+  BufferedImage image;
+  BufferedImage ballDead;
+  BufferedImage timerImage;
   Clip clip = StartingFrame.music(2);
   
   //Constructor - this runs first
@@ -72,12 +72,12 @@ class GameFrameLevel2 extends JFrame {
     moveDown = false;
     
     try {                
-          image = ImageIO.read(new File("Images/explode.png"));
-          ballDead = ImageIO.read(new File("Images/pop.png"));
-          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
-       } catch (IOException ex) {
-            // handle exception...
-       }
+      image = ImageIO.read(new File("Images/explode.png"));
+      ballDead = ImageIO.read(new File("Images/pop.png"));
+      timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+    } catch (IOException ex) {
+      System.out.println("Error: Image(s) not found");
+    }
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
     //Set up the game panel (where we put our graphics)
@@ -125,19 +125,16 @@ class GameFrameLevel2 extends JFrame {
     int timeLimit = 0;
     while(run){
       timeLimit++;
-            if (timeLimit%1000 == 0) {
-              countDown++;
-              try {                
+      if (timeLimit%1000 == 0) {
+        countDown++;
+        try {                
           
           timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
-       } catch (IOException ex) {
-            // handle exception...
-       }
-        System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
+        } catch (IOException ex) {
+          System.out.println("Error: Image(s) not found");
+        }
       }
-      //System.out.println(timeLimit);
-      //  JLabel label = new JLabel(Integer.toString(timeLimit));
-      //  square.add(label);
+      
       if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
         ballX = x+12;
         ballY = y-30;
@@ -160,7 +157,7 @@ class GameFrameLevel2 extends JFrame {
       if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
         targDestroyed = true;
         try{
-        Thread.sleep(1000);
+          Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
@@ -247,7 +244,7 @@ class GameFrameLevel2 extends JFrame {
       if((trapCollision())||(trapCollision2())||(trapCollision3())||(trapCollision4())||(trapCollision5())||(trapCollision6())){
         dead = true;
         try{
-        Thread.sleep(1000);
+          Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
@@ -258,7 +255,7 @@ class GameFrameLevel2 extends JFrame {
       if(timeLimit == 10000){
         dead = true;
         try{
-        Thread.sleep(1000);
+          Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
@@ -383,7 +380,7 @@ class GameFrameLevel2 extends JFrame {
         moveRight2 = false;
         moveUp2 = false;
         moveDown2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballX--;
         
@@ -391,7 +388,7 @@ class GameFrameLevel2 extends JFrame {
         moveLeft2 = false;
         moveUp2 = false;
         moveDown2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballX++;
         
@@ -399,7 +396,7 @@ class GameFrameLevel2 extends JFrame {
         moveRight2 = false;
         moveLeft2 = false;
         moveDown2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballY--;
         
@@ -407,7 +404,7 @@ class GameFrameLevel2 extends JFrame {
         moveRight2 = false;
         moveUp2 = false;
         moveLeft2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballY++;
       }
