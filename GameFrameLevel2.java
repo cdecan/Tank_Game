@@ -36,7 +36,7 @@ class GameFrameLevel2 extends JFrame {
   
   //class variable (non-static)
   static double x, y;
-  static double dx, dy;
+  static double ballX, ballY;
   static double targX, targY;
   static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
   boolean dead = false, ballKil = false;
@@ -108,8 +108,8 @@ class GameFrameLevel2 extends JFrame {
   public void animate() { 
     this.x = (100);  //update coords
     this.y = (100);
-    this.dx = x;
-    this.dy = y;
+    this.ballX = x;
+    this.ballY = y;
     this.targX = (int)(1100);
     this.targY = (int)(200);
     trapX = 250;
@@ -139,17 +139,17 @@ class GameFrameLevel2 extends JFrame {
       //  JLabel label = new JLabel(Integer.toString(timeLimit));
       //  square.add(label);
       if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
-        dx = x+12;
-        dy = y-30;
+        ballX = x+12;
+        ballY = y-30;
       }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceDown)){
-        dx = x+12;
-        dy = y+120;
+        ballX = x+12;
+        ballY = y+120;
       }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceLeft)){
-        dx = x-40;
-        dy = y+10;
+        ballX = x-40;
+        ballY = y+10;
       }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceRight)){
-        dx = x+120;
-        dy = y+10;
+        ballX = x+120;
+        ballY = y+10;
       }
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
       //  square.remove(label);
@@ -296,7 +296,7 @@ class GameFrameLevel2 extends JFrame {
       super.paintComponent(g);
       setDoubleBuffered(true);
       //timer
-      g.drawImage(timerImage, 651, 100, this);
+      g.drawImage(timerImage, 851, 100, this);
       
       //WALLS//////////////////////////////////////////////////
       //border
@@ -366,7 +366,7 @@ class GameFrameLevel2 extends JFrame {
         g.drawImage(image, (int)x-300, (int)y-300, this);
       }
       if(ballKil){
-        g.drawImage(ballDed, (int)dx-300, (int)dy-100, this);
+        g.drawImage(ballDed, (int)ballX-300, (int)ballY-100, this);
       }
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
@@ -384,32 +384,32 @@ class GameFrameLevel2 extends JFrame {
         moveUp2 = false;
         moveDown2 = false;
         g.setColor(Color.BLACK);
-        g.fillOval((int)dx,(int)dy,20,20);
-        dx--;
+        g.fillOval((int)ballX,(int)ballY,20,20);
+        ballX--;
         
       } else if (moveRight2){
         moveLeft2 = false;
         moveUp2 = false;
         moveDown2 = false;
         g.setColor(Color.BLACK);
-        g.fillOval((int)dx,(int)dy,20,20);
-        dx++;
+        g.fillOval((int)ballX,(int)ballY,20,20);
+        ballX++;
         
       }else if (moveUp2){
         moveRight2 = false;
         moveLeft2 = false;
         moveDown2 = false;
         g.setColor(Color.BLACK);
-        g.fillOval((int)dx,(int)dy,20,20);
-        dy--;
+        g.fillOval((int)ballX,(int)ballY,20,20);
+        ballY--;
         
       }else if(moveDown2){
         moveRight2 = false;
         moveUp2 = false;
         moveLeft2 = false;
         g.setColor(Color.BLACK);
-        g.fillOval((int)dx,(int)dy,20,20);
-        dy++;
+        g.fillOval((int)ballX,(int)ballY,20,20);
+        ballY++;
       }
       /////////////////////////////////////////////////
       
@@ -673,29 +673,29 @@ class GameFrameLevel2 extends JFrame {
         }
       }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("E"))&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
         if(moveUp2 == true){
-          x = dx-15;
-          y = dy-55;
+          x = ballX-15;
+          y = ballY-55;
           moveUp2 = false;
           moveDown2 = false;
           moveLeft2 = false;
           moveRight2 = false;
         }else if(moveDown2 == true){
-          x = dx-15;
-          y = dy-55;
+          x = ballX-15;
+          y = ballY-55;
           moveUp2 = false;
           moveDown2 = false;
           moveLeft2 = false;
           moveRight2 = false;
         }else if(moveLeft2 == true){
-          x = dx-55;
-          y = dy-15;
+          x = ballX-55;
+          y = ballY-15;
           moveUp2 = false;
           moveDown2 = false;
           moveLeft2 = false;
           moveRight2 = false;
         }else if(moveRight2 == true){
-          x = dx-55;
-          y = dy-15;
+          x = ballX-55;
+          y = ballY-15;
           moveUp2 = false;
           moveDown2 = false;
           moveLeft2 = false;
@@ -769,7 +769,7 @@ class GameFrameLevel2 extends JFrame {
     }
   }
   public Rectangle getBoundsBall() {
-    return new Rectangle((int)dx,(int) dy, 20, 20);
+    return new Rectangle((int)ballX,(int) ballY, 20, 20);
   }
   public Rectangle getBoundsTarget() {
     return new Rectangle((int)targX,(int) targY, 60, 60);
