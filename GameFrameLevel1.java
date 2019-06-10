@@ -1,6 +1,8 @@
-/**
- * 
- * @author C&J
+/** 
+ * GameFrameLevel1.java
+ * A program to launch a Level 1 screen
+ * Jayden and Connor
+ * May 27, 2019
  **/
 import javax.imageio.ImageIO;
 import java.io.IOException;
