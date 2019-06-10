@@ -2,7 +2,7 @@
  * StartingFrame.java
  * A program to launch a main menu screen
  * Jayden and Connor
- * May 21, 2019
+ * May 26, 2019
  **/
 
 
