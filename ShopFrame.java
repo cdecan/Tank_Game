@@ -1,6 +1,8 @@
 /** 
- * this template can be used for a start menu
- * for your final project
+ * ShopFrame.java
+ * A program to launch a shop screen
+ * Jayden and Connor
+ * May 28, 2019
  **/
 
 
@@ -13,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingUtilities;
 
@@ -114,9 +118,41 @@ class ShopFrame extends JFrame {
     
     
   }
-  
+  private class MyKeyListener implements KeyListener {
+    
+    public void keyTyped(KeyEvent e) {  
+    }
+    
+    public void keyPressed(KeyEvent e) {
+      //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+      
+      if (KeyEvent.getKeyText(e.getKeyCode()).equals("B")) {  //If 'B' is pressed
+         StartingFrame.equipBlue();
+        if(StartingFrame.blueEquipped()){
+        System.out.println("EQUIPPED!");
+        }
+      }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("G")) {  //If 'G' is pressed
+         StartingFrame.equipGreen();
+        if(StartingFrame.greenEquipped()){
+        System.out.println("EQUIPPED!");
+        }
+      }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("Y")) {  //If 'Y' is pressed
+         StartingFrame.equipYellow();
+        if(StartingFrame.yellowEquipped()){
+        System.out.println("EQUIPPED!");
+        }
+      }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("R")) {  //If 'R' is pressed
+         StartingFrame.equipRed();
+        if(StartingFrame.redEquipped()){
+        System.out.println("EQUIPPED!");
+        }
+      }
+      }
+    public void keyReleased(KeyEvent e) {
+    }
+  }
   //This is an inner class that is used to detect a button press
-  class ButtonListener implements ActionListener {//this is the required class definition
+  class ButtonListener implements ActionListener{//this is the required class definition
     public void actionPerformed(ActionEvent event)  {  
       String command = event.getActionCommand();
       if(command.equals("RETURN")){
