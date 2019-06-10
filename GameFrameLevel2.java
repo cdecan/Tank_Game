@@ -161,6 +161,7 @@ class GameFrameLevel2 extends JFrame {
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
+        clip.close();
         new WinFrame(true, timeLimit, 3);
       }
       
