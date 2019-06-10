@@ -1,6 +1,8 @@
 /** 
- * this template can be used for a start menu
- * for your final project
+ * StartingFrame.java
+ * A program to launch a main menu screen
+ * Jayden and Connor
+ * May 21, 2019
  **/
 
 
@@ -187,7 +189,11 @@ class StartingFrame extends JFrame {
     }
     
   }
-  
+  /**
+   * a method to check if a color is owned
+   * @param color the number of the color to check is owned
+   * @return a boolean whether or not the color is owned
+   * */
   public static boolean colorOwned(int color){
     if(colorOwned[color]){
       return true;
@@ -195,6 +201,9 @@ class StartingFrame extends JFrame {
       return false;
     }
   }
+  /**
+   * A method to buy a blue tank
+   * */
   public static void buyBlue(){
     if(points - 20 >= 0){
       colorOwned[1] = true;
@@ -204,6 +213,9 @@ class StartingFrame extends JFrame {
     }
     //System.out.println("test");
   }
+  /**
+   * A method to buy a green tank
+   * */
   public static void buyGreen(){
     if(points - 30 >= 0){
       colorOwned[2] = true;
@@ -213,6 +225,9 @@ class StartingFrame extends JFrame {
     }
     //System.out.println("test");
   }
+   /**
+   * A method to buy a yellow tank
+   * */
   public static void buyYellow(){
     if(points - 40 >= 0){
       colorOwned[3] = true;
@@ -222,12 +237,18 @@ class StartingFrame extends JFrame {
     }
     //System.out.println("test");
   }
+   /**
+   * A method to equip a red tank
+   * */
   public static void equipRed(){
     colorEquipped[0] = true;
     colorEquipped[1] = false;
     colorEquipped[2] = false;
     colorEquipped[3] = false;
   }
+   /**
+   * A method to equip a blue tank
+   * */
   public static void equipBlue(){
     if(colorOwned[1]){
       colorEquipped[0] = false;
@@ -238,6 +259,9 @@ class StartingFrame extends JFrame {
       System.out.println("YOU DON'T OWN THAT!");
     }
   }
+   /**
+   * A method to equip a green tank
+   * */
   public static void equipGreen(){
     if(colorOwned[2]){
       colorEquipped[0] = false;
@@ -248,6 +272,9 @@ class StartingFrame extends JFrame {
       System.out.println("YOU DON'T OWN THAT!");
     }
   }
+  /**
+   * A method to equip a yellow tank
+   * */
   public static void equipYellow(){
     if(colorOwned[3]){
       colorEquipped[0] = false;
@@ -261,7 +288,6 @@ class StartingFrame extends JFrame {
   /**
    * A method to check if red is equipped
    * @return whether or not the color is equipped
-   * @Auth Connor
    * */
   public static boolean redEquipped(){
     if(colorEquipped[0]){
@@ -273,7 +299,6 @@ class StartingFrame extends JFrame {
   /**
    * A method to check if blue is equipped
    * @return whether or not the color is equipped
-   * @Auth Connor
    * */
   public static boolean blueEquipped(){
     if(colorEquipped[1]){
@@ -285,7 +310,6 @@ class StartingFrame extends JFrame {
   /**
    * A method to check if green is equipped
    * @return whether or not the color is equipped
-   * @Auth Connor
    * */
   public static boolean greenEquipped(){
     if(colorEquipped[2]){
@@ -297,7 +321,6 @@ class StartingFrame extends JFrame {
   /**
    * A method to check if yellow is equipped
    * @return whether or not the color is equipped
-   * @Auth Connor
    * */
   public static boolean yellowEquipped(){
     if(colorEquipped[3]){
@@ -311,22 +334,42 @@ class StartingFrame extends JFrame {
    * @param time the time took to complete the level
    * @param health the amount of health that the player finished off with
    * @return the amount of points that the player earned
-   * @auth Connor
    * */
   public static int addPoints(int time, int health){
     points += ((health*(10000-time))/1000);
     return ((health*(10000-time))/1000);
   }
+  
+  /**
+   * a method to access the amount of points the player has
+   * @return the amount of points the player has
+   */
   public static int showPoints(){
     return points;
   }
   
+  /**
+   * a method to get the user's name
+   * @param text, a piece of text to become the name
+   * */
   public static void storeName(String text){
     name = text;
   }
+  
+  /**
+   * a method to access "name" from other files
+   * @return the name of the player
+   * 
+   * */
   public static String showName(){
     return name;
   }
+  
+  /**
+   * a method to activate music on certain panels
+   * @param choice the choice of music the level wants to access
+   * @return the music clip that was opened
+   * */
   public static Clip music(int choice){
   try{
       AudioInputStream audioIn1 = AudioSystem.getAudioInputStream(StartingFrame.class.getResource("Music/Easy.wav"));
