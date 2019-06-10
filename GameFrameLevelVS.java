@@ -1,6 +1,8 @@
-/**
- * 
- * @author C&J
+/** 
+ * GameFrameLevelVS.java
+ * A program to launch a VS mode screen
+ * Jayden and Connor
+ * May 30, 2019
  **/
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
