@@ -1,6 +1,8 @@
-/**
- * 
- * @author C&J
+/** 
+ * GameFrameLevel2.java
+ * A program to launch a VS mode screen
+ * Jayden and Connor
+ * May 27, 2019
  **/
 import javax.imageio.ImageIO;
 import java.io.IOException;
