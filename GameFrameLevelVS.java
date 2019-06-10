@@ -59,7 +59,7 @@ class GameFrameLevelVS extends JFrame {
   BufferedImage image;
   BufferedImage timerImage;
 
-  //Clip clip = StartingFrame.music(3);
+  Clip clip = StartingFrame.music(3);
   
   //Constructor - this runs first
   GameFrameLevelVS() { 
