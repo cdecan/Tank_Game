@@ -39,7 +39,7 @@ class GameFrameLevel2 extends JFrame {
   static double ballX, ballY;
   static double targX, targY;
   static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
-  boolean dead = false, ballKil = false;
+  boolean dead = false, targDestroyed = false;
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
@@ -51,7 +51,7 @@ class GameFrameLevel2 extends JFrame {
   Square square = new Square();
   Tank tank = new Tank();
     BufferedImage image;
-    BufferedImage ballDed;
+    BufferedImage ballDead;
     BufferedImage timerImage;
   Clip clip = StartingFrame.music(2);
   
@@ -73,7 +73,7 @@ class GameFrameLevel2 extends JFrame {
     
     try {                
           image = ImageIO.read(new File("Images/explode.png"));
-          ballDed = ImageIO.read(new File("Images/pop.png"));
+          ballDead = ImageIO.read(new File("Images/pop.png"));
           timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
        } catch (IOException ex) {
             // handle exception...
@@ -158,7 +158,7 @@ class GameFrameLevel2 extends JFrame {
       //square.repaint();
       
       if((ballCollision())&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
-        ballKil = true;
+        targDestroyed = true;
         try{
         Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
@@ -365,8 +365,8 @@ class GameFrameLevel2 extends JFrame {
       if(dead){
         g.drawImage(image, (int)x-300, (int)y-300, this);
       }
-      if(ballKil){
-        g.drawImage(ballDed, (int)ballX-300, (int)ballY-100, this);
+      if(targDestroyed){
+        g.drawImage(ballDead, (int)ballX-300, (int)ballY-100, this);
       }
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
