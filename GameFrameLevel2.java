@@ -1,6 +1,6 @@
 /** 
  * GameFrameLevel2.java
- * A program to launch a level 2 screen
+ * A program to launch a VS mode screen
  * Jayden and Connor
  * May 27, 2019
  **/
@@ -825,86 +825,192 @@ class GameFrameLevel2 extends JFrame {
   }
   
   //collision booleans
-  
+  /**
+   * A method to check collision between ball and the target
+   * @return whether or not they collide
+   * */
   public boolean ballCollision(){
     return getBoundsBall().intersects(getBoundsTarget());
   }
-  
+  /**
+   * A method to check collision between player and the first trap
+   * @return whether or not they collide
+   * */
   public boolean trapCollision(){
     return getBoundsTrap().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the second trap
+   * @return whether or not they collide
+   * */
   public boolean trapCollision2(){
     return getBoundsTrap2().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the third trap
+   * @return whether or not they collide
+   * */
   public boolean trapCollision3(){
     return getBoundsTrap3().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the fourth trap
+   * @return whether or not they collide
+   * */
   public boolean trapCollision4(){
     return getBoundsTrap4().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the fifth trap
+   * @return whether or not they collide
+   * */
   public boolean trapCollision5(){
     return getBoundsTrap5().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the sixth trap
+   * @return whether or not they collide
+   * */
   public boolean trapCollision6(){
     return getBoundsTrap6().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the top outer wall
+   * @return whether or not they collide
+   * */
   public boolean roofCollision(){
     return getBoundsRoof().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the bottom outer wall
+   * @return whether or not they collide
+   * */
   public boolean floorCollision(){
     return getBoundsFloor().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the left outer wall
+   * @return whether or not they collide
+   * */
   public boolean lWallCollision(){
     return getBoundsLWall().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the right outer wall
+   * @return whether or not they collide
+   * */
   public boolean rWallCollision(){
     return getBoundsRWall().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the first inner wall
+   * @return whether or not they collide
+   * */
   public boolean inWallCollision1(){
     return getBoundsInWall1().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the second inner wall
+   * @return whether or not they collide
+   * */
   public boolean inWallCollision2(){
     return getBoundsInWall2().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the third inner wall
+   * @return whether or not they collide
+   * */
   public boolean inWallCollision3(){
     return getBoundsInWall3().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the fourth inner wall
+   * @return whether or not they collide
+   * */
   public boolean inWallCollision4(){
     return getBoundsInWall4().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the fifth inner wall
+   * @return whether or not they collide
+   * */
   public boolean inWallCollision5(){
     return getBoundsInWall5().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between player and the sixth inner wall
+   * @return whether or not they collide
+   * */
   public boolean inWallCollision6(){
     return getBoundsInWall6().intersects(getBoundsPlayer());
   }
+  /**
+   * A method to check collision between ball and the first inner wall
+   * @return whether or not they collide
+   * */
   public boolean ballInWallCollision1(){
     return getBoundsInWall1().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the second inner wall
+   * @return whether or not they collide
+   * */
   public boolean ballInWallCollision2(){
     return getBoundsInWall2().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the third inner wall
+   * @return whether or not they collide
+   * */
   public boolean ballInWallCollision3(){
     return getBoundsInWall3().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the fourth inner wall
+   * @return whether or not they collide
+   * */
   public boolean ballInWallCollision4(){
     return getBoundsInWall4().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the fifth inner wall
+   * @return whether or not they collide
+   * */
   public boolean ballInWallCollision5(){
     return getBoundsInWall5().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the sixth inner wall
+   * @return whether or not they collide
+   * */
   public boolean ballInWallCollision6(){
     return getBoundsInWall6().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the top outer wall
+   * @return whether or not they collide
+   * */
   public boolean ballRoofCollision(){
     return getBoundsRoof().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the bottom outer wall
+   * @return whether or not they collide
+   * */
   public boolean ballFloorCollision(){
     return getBoundsFloor().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the left outer wall
+   * @return whether or not they collide
+   * */
   public boolean ballLWallCollision(){
     return getBoundsLWall().intersects(getBoundsBall());
   }
+  /**
+   * A method to check collision between ball and the right outer wall
+   * @return whether or not they collide
+   * */
   public boolean ballRWallCollision(){
     return getBoundsRWall().intersects(getBoundsBall());
   }
