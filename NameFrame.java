@@ -1,6 +1,8 @@
 /** 
- * this template can be used for a start menu
- * for your final project
+ * NameFrame.java
+ * A program to launch a name select screen
+ * Jayden and Connor
+ * June 3, 2019
  **/
 
 
