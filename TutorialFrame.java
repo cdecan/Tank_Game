@@ -1,6 +1,8 @@
 /** 
- * this template can be used for a start menu
- * for your final project
+ * TutorialFrame.java
+ * A program to launch a tutorial screen
+ * Jayden and Connor
+ * May 26, 2019
  **/
 
 
