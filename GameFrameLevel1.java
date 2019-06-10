@@ -72,12 +72,12 @@ class GameFrameLevel1 extends JFrame {
     moveUp = false;
     moveDown = false;
     try {                
-          image = ImageIO.read(new File("Images/explode.png"));
-          ballDead = ImageIO.read(new File("Images/pop.png"));
-          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
-       } catch (IOException ex) {
-            System.out.println("Error: Image(s) not found");
-       }
+      image = ImageIO.read(new File("Images/explode.png"));
+      ballDead = ImageIO.read(new File("Images/pop.png"));
+      timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+    } catch (IOException ex) {
+      System.out.println("Error: Image(s) not found");
+    }
     
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
