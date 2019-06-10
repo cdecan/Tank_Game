@@ -1,6 +1,6 @@
 /** 
  * GameFrameLevel2.java
- * A program to launch a VS mode screen
+ * A program to launch a level 2 screen
  * Jayden and Connor
  * May 27, 2019
  **/
