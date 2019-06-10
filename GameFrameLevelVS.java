@@ -1,8 +1,6 @@
-/** 
- * GameFrameLevelVS.java
- * A program to launch a VS mode screen
- * Jayden and Connor
- * May 30, 2019
+/**
+ * 
+ * @author C&J
  **/
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
@@ -61,7 +59,7 @@ class GameFrameLevelVS extends JFrame {
   BufferedImage image;
   BufferedImage timerImage;
 
-  Clip clip = StartingFrame.music(3);
+  //Clip clip = StartingFrame.music(3);
   
   //Constructor - this runs first
   GameFrameLevelVS() { 
@@ -84,11 +82,11 @@ class GameFrameLevelVS extends JFrame {
     targMoveDown = false;
     
     try {                
-          image = ImageIO.read(new File("Images/explode.png"));
-          timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
-       } catch (IOException ex) {
-            // handle exception...
-       }
+      image = ImageIO.read(new File("Images/explode.png"));
+      timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+    } catch (IOException ex) {
+      System.out.println("Error: Image(s) not found");
+    }
     
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
@@ -142,13 +140,12 @@ class GameFrameLevelVS extends JFrame {
       timeLimit++;
       if (timeLimit%1000 == 0) {
         countDown++;
-              try {                
+        try {                
           
           timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
-       } catch (IOException ex) {
-            // handle exception...
-       }
-        System.out.println("TIME LEFT: " + (10-(timeLimit/1000)));
+        } catch (IOException ex) {
+          System.out.println("Error: Image(s) not found");
+        }
       }
       
       if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
@@ -174,7 +171,7 @@ class GameFrameLevelVS extends JFrame {
       if(targCollision()){
         dead = true;
         try{
-        Thread.sleep(1000);
+          Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
@@ -258,7 +255,7 @@ class GameFrameLevelVS extends JFrame {
       if((trapCollision())||(trapCollision2())||(trapCollision3())){
         dead = true;
         try{
-        Thread.sleep(1000);
+          Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
@@ -268,7 +265,7 @@ class GameFrameLevelVS extends JFrame {
       if(timeLimit == 10000){
         dead = true;
         try{
-        Thread.sleep(1000);
+          Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
         run = false;
@@ -388,7 +385,7 @@ class GameFrameLevelVS extends JFrame {
         moveRight2 = false;
         moveUp2 = false;
         moveDown2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballX--;
         
@@ -396,7 +393,7 @@ class GameFrameLevelVS extends JFrame {
         moveLeft2 = false;
         moveUp2 = false;
         moveDown2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballX++;
         
@@ -404,7 +401,7 @@ class GameFrameLevelVS extends JFrame {
         moveRight2 = false;
         moveLeft2 = false;
         moveDown2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballY--;
         
@@ -412,7 +409,7 @@ class GameFrameLevelVS extends JFrame {
         moveRight2 = false;
         moveUp2 = false;
         moveLeft2 = false;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballY++;
       }
