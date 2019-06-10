@@ -161,6 +161,7 @@ class GameFrameLevel1 extends JFrame {
           Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
         dispose();
+        clip.close();
         run = false;
         new WinFrame(true, timeLimit, 3);
       }
