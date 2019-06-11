@@ -705,18 +705,6 @@ class GameFrameLevelVS extends JFrame {
           moveLeft2 = false;
           moveRight2 = false;
         }
-      }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        
-        
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        
-        
       }
     }   
     
