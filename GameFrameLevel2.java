@@ -748,19 +748,8 @@ class GameFrameLevel2 extends JFrame {
       System.out.println("Mouse Clicked");
       System.out.println("X:"+e.getX() + " y:"+e.getY());
     }
-    
-    public void mousePressed(MouseEvent e) {
-    }
-    
-    public void mouseReleased(MouseEvent e) {
-    }
-    
-    public void mouseEntered(MouseEvent e) {
-    }
-    
-    public void mouseExited(MouseEvent e) {
-    }
-  }
+  } //end of mouse listener
+  
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
       return new Rectangle((int)x-15,(int) y, 80, 100);
