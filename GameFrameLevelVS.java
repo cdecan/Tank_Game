@@ -853,5 +853,3 @@ class GameFrameLevelVS extends JFrame {
   
 }
 
-
-//end of mouselistener
