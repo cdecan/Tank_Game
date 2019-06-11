@@ -701,18 +701,6 @@ class GameFrameLevel2 extends JFrame {
           moveLeft2 = false;
           moveRight2 = false;
         }
-      }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        
-        
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        
-        
       }
     }   
     
@@ -729,14 +717,6 @@ class GameFrameLevel2 extends JFrame {
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
         moveUp = false;
         // faceUp = false;
-      }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        
       }
     }
   } //end of keyboard listener
@@ -1005,5 +985,3 @@ class GameFrameLevel2 extends JFrame {
   }
 }
 
-
-//end of mouselistener
