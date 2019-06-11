@@ -103,8 +103,6 @@ class GameFrameLevelVS extends JFrame {
     MyKeyListener keyListener = new MyKeyListener(); 
     this.addKeyListener(keyListener);
     
-    MyMouseListener mouseListener = new MyMouseListener();
-    this.addMouseListener(mouseListener);
     
     this.requestFocusInWindow(); //make sure the frame has focus   
     
@@ -170,7 +168,7 @@ class GameFrameLevelVS extends JFrame {
       //square.repaint();
       
       
-      if(targCollision()){
+      if(collision(getBoundsPlayer(),getBoundsTarget())){
         dead = true;
         try{
           Thread.sleep(1000);
@@ -207,54 +205,54 @@ class GameFrameLevelVS extends JFrame {
           targMoveUp = true;
         }
       }      
-      if(roofCollision()){
+      if(collision(getBoundsPlayer(),getBoundsRoof())){
         y++;
-      }else if(floorCollision()){
+      }else if(collision(getBoundsPlayer(),getBoundsFloor())){
         y--;
-      }else if(rWallCollision()){
+      }else if(collision(getBoundsPlayer(),getBoundsRWall())){
         x--;
-      }else if(lWallCollision()){
+      }else if(collision(getBoundsPlayer(),getBoundsLWall())){
         x++;
       }
       
-      if((inWallCollision1()) && (faceUp)){
+      if(collision(getBoundsPlayer(),getBoundsInWall1()) && (faceUp)){
         y++;
-      }else if((inWallCollision1()) && (faceLeft)){
+      }else if(collision(getBoundsPlayer(),getBoundsInWall1()) && (faceLeft)){
         x++;
-      }else if((inWallCollision1()) && (faceRight)){
+      }else if(collision(getBoundsPlayer(),getBoundsInWall1()) && (faceRight)){
         x--;
-      }else if((inWallCollision1()) && (faceDown)){
+      }else if(collision(getBoundsPlayer(),getBoundsInWall1()) && (faceDown)){
         y--;
       }
       
-      if((ballInWallCollision1())||(ballInWallCollision2())||(ballInWallCollision3())||(ballRoofCollision())||(ballFloorCollision())||(ballLWallCollision())||(ballRWallCollision())){
+      if((collision(getBoundsBall(),getBoundsInWall1()))||(collision(getBoundsPlayer(),getBoundsInWall2()))||(collision(getBoundsPlayer(),getBoundsInWall3()))||(collision(getBoundsPlayer(),getBoundsRoof()))||(collision(getBoundsPlayer(),getBoundsFloor()))||(collision(getBoundsPlayer(),getBoundsLWall()))||(collision(getBoundsPlayer(),getBoundsRWall()))){
         moveUp2 = false;
         moveDown2 = false;
         moveLeft2 = false;
         moveRight2 = false;
       }
       
-      if((inWallCollision2()) && (faceUp)){
+      if((collision(getBoundsPlayer(),getBoundsInWall2())) && (faceUp)){
         y++;
-      }else if((inWallCollision2()) && (faceLeft)){
+      }else if((collision(getBoundsPlayer(),getBoundsInWall2())) && (faceLeft)){
         x++;
-      }else if((inWallCollision2()) && (faceRight)){
+      }else if((collision(getBoundsPlayer(),getBoundsInWall2())) && (faceRight)){
         x--;
-      }else if((inWallCollision2()) && (faceDown)){
+      }else if((collision(getBoundsPlayer(),getBoundsInWall2())) && (faceDown)){
         y--;
       }
       
-      if((inWallCollision3()) && (faceUp)){
+      if((collision(getBoundsPlayer(),getBoundsInWall3())) && (faceUp)){
         y++;
-      }else if((inWallCollision3()) && (faceLeft)){
+      }else if((collision(getBoundsPlayer(),getBoundsInWall3())) && (faceLeft)){
         x++;
-      }else if((inWallCollision3()) && (faceRight)){
+      }else if((collision(getBoundsPlayer(),getBoundsInWall3())) && (faceRight)){
         x--;
-      }else if((inWallCollision3()) && (faceDown)){
+      }else if((collision(getBoundsPlayer(),getBoundsInWall3())) && (faceDown)){
         y--;
       }
       
-      if((trapCollision())||(trapCollision2())||(trapCollision3())){
+      if((collision(getBoundsPlayer(),getBoundsTrap()))||(collision(getBoundsPlayer(),getBoundsTrap2()))||(collision(getBoundsPlayer(),getBoundsTrap3()))){
         dead = true;
         try{
           Thread.sleep(1000);
@@ -726,13 +724,7 @@ class GameFrameLevelVS extends JFrame {
   } //end of keyboard listener
   
   // -----------  Inner class for the keyboard listener - This detects mouse movement & clicks and runs the corresponding methods 
-  private class MyMouseListener implements MouseListener {
-    
-    public void mouseClicked(MouseEvent e) {
-      System.out.println("Mouse Clicked");
-      System.out.println("X:"+e.getX() + " y:"+e.getY());
-    }
-  } //end of mouse listener
+
   
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
@@ -780,63 +772,14 @@ class GameFrameLevelVS extends JFrame {
   }
   
   //collision booleans
-  
-  public boolean ballCollision(){
-    return getBoundsBall().intersects(getBoundsTarget());
-  }
-  public boolean targCollision(){
-    return getBoundsTarget().intersects(getBoundsPlayer());
-  }
-  public boolean trapCollision(){
-    return getBoundsTrap().intersects(getBoundsPlayer());
-  }
-  public boolean trapCollision2(){
-    return getBoundsTrap2().intersects(getBoundsPlayer());
-  }
-  public boolean trapCollision3(){
-    return getBoundsTrap3().intersects(getBoundsPlayer());
-  }
-  public boolean roofCollision(){
-    return getBoundsRoof().intersects(getBoundsPlayer());
-  }
-  public boolean floorCollision(){
-    return getBoundsFloor().intersects(getBoundsPlayer());
-  }
-  public boolean lWallCollision(){
-    return getBoundsLWall().intersects(getBoundsPlayer());
-  }
-  public boolean rWallCollision(){
-    return getBoundsRWall().intersects(getBoundsPlayer());
-  }
-  public boolean inWallCollision1(){
-    return getBoundsInWall1().intersects(getBoundsPlayer());
-  }
-  public boolean inWallCollision2(){
-    return getBoundsInWall2().intersects(getBoundsPlayer());
-  }
-  public boolean inWallCollision3(){
-    return getBoundsInWall3().intersects(getBoundsPlayer());
-  }
-  public boolean ballInWallCollision1(){
-    return getBoundsInWall1().intersects(getBoundsBall());
-  }
-  public boolean ballInWallCollision2(){
-    return getBoundsInWall2().intersects(getBoundsBall());
-  }
-  public boolean ballInWallCollision3(){
-    return getBoundsInWall3().intersects(getBoundsBall());
-  }
-  public boolean ballRoofCollision(){
-    return getBoundsRoof().intersects(getBoundsBall());
-  }
-  public boolean ballFloorCollision(){
-    return getBoundsFloor().intersects(getBoundsBall());
-  }
-  public boolean ballLWallCollision(){
-    return getBoundsLWall().intersects(getBoundsBall());
-  }
-  public boolean ballRWallCollision(){
-    return getBoundsRWall().intersects(getBoundsBall());
+  /**
+   * a method to check for collision between 2 rectangles
+   * @param obj1 the first object to be checked
+   * @param obj2 the second object to be checked
+   * @return whether or not the objects intersect
+   * */
+  public boolean collision(Rectangle obj1, Rectangle obj2){
+    return obj1.intersects(obj2);
   }
   
 }
