@@ -733,14 +733,6 @@ class GameFrameLevelVS extends JFrame {
       }else if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
         moveUp = false;
         // faceUp = false;
-      }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        
-      }else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        
       }
     }
   } //end of keyboard listener
@@ -752,19 +744,8 @@ class GameFrameLevelVS extends JFrame {
       System.out.println("Mouse Clicked");
       System.out.println("X:"+e.getX() + " y:"+e.getY());
     }
-    
-    public void mousePressed(MouseEvent e) {
-    }
-    
-    public void mouseReleased(MouseEvent e) {
-    }
-    
-    public void mouseEntered(MouseEvent e) {
-    }
-    
-    public void mouseExited(MouseEvent e) {
-    }
-  }
+  } //end of mouse listener
+  
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
       return new Rectangle((int)x-15,(int) y, 80, 100);
