@@ -585,11 +585,11 @@ class GameFrameLevel2 extends JFrame {
   }
   
   
-  
-  
-  
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
   private class MyKeyListener implements KeyListener {
+    
+    public void keyTyped(KeyEvent e) {  
+    }
     
     public void keyPressed(KeyEvent e) {
       //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
