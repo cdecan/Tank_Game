@@ -29,10 +29,6 @@ import javafx.scene.media.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-//Mouse imports
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-
 class GameFrameLevel1 extends JFrame { 
   
   //class variable (non-static)
@@ -93,9 +89,6 @@ class GameFrameLevel1 extends JFrame {
     
     MyKeyListener keyListener = new MyKeyListener(); 
     this.addKeyListener(keyListener);
-    
-    MyMouseListener mouseListener = new MyMouseListener();
-    this.addMouseListener(mouseListener);
     
     this.requestFocusInWindow(); //make sure the frame has focus   
     
@@ -551,15 +544,10 @@ class GameFrameLevel1 extends JFrame {
     
   }
   
-  
-  
-  
+
   
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
   private class MyKeyListener implements KeyListener {
-    
-    public void keyTyped(KeyEvent e) {  
-    }
     
     public void keyPressed(KeyEvent e) {
       //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
@@ -683,13 +671,6 @@ class GameFrameLevel1 extends JFrame {
   
   // -----------  Inner class for the keyboard listener - This detects mouse movement & clicks and runs the corresponding methods 
   private class MyMouseListener implements MouseListener {
-    
-    public void mouseClicked(MouseEvent e) {
-      System.out.println("Mouse Clicked");
-      System.out.println("X:"+e.getX() + " y:"+e.getY());
-    }
-  } //end of mouse listener
-  
   
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
