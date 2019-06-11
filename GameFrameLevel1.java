@@ -670,7 +670,6 @@ class GameFrameLevel1 extends JFrame {
   } //end of keyboard listener
   
   // -----------  Inner class for the keyboard listener - This detects mouse movement & clicks and runs the corresponding methods 
-  private class MyMouseListener implements MouseListener {
   
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
