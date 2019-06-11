@@ -61,9 +61,9 @@ class GameFrameLevel1 extends JFrame {
     this.setSize(1366, 768);
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-    // this.setUndecorated(true);  //Set to true to remove title bar
-    //frame.setResizable(false);
+    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+    this.setUndecorated(true);  //Set to true to remove title bar
+    this.setResizable(false);
 
     moveLeft = false;
     moveRight = false;
