@@ -70,7 +70,7 @@ class GameFrameLevelVS extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
     this.setUndecorated(true);  //Set to true to remove title bar
-    frame.setResizable(false);
+    this.setResizable(false);
     moveLeft = false;
     moveRight = false;
     moveUp = false;
