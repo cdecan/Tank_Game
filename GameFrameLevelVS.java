@@ -40,6 +40,7 @@ class GameFrameLevelVS extends JFrame {
   static double trapX, trapY, trapX2, trapY2, trapX3, trapY3;
   
   boolean dead = false;
+  boolean targDead = false;
   
   boolean moveLeft;
   boolean moveRight;
@@ -256,7 +257,7 @@ class GameFrameLevelVS extends JFrame {
       }
       
       if(timeLimit == 10000){
-        dead = true;
+        targDead = true;
         try{
           Thread.sleep(1000);
         }catch(java.lang.InterruptedException e){}
@@ -361,6 +362,8 @@ class GameFrameLevelVS extends JFrame {
       ///dead
       if(dead){
         g.drawImage(image, (int)x-300, (int)y-300, this);
+      }else if(targDead){
+        g.drawImage(image,(int)targX-300,(int)targY-300,this);
       }
       
       //MOVEMENT////////////////////////////////////////////
