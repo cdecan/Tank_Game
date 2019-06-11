@@ -31,10 +31,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.*;
 
-//Mouse imports
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-
 class GameFrameLevelVS extends JFrame { 
   
   //class variable (non-static)
@@ -99,10 +95,8 @@ class GameFrameLevelVS extends JFrame {
     
     this.add(square);
     
-    
     MyKeyListener keyListener = new MyKeyListener(); 
     this.addKeyListener(keyListener);
-    
     
     this.requestFocusInWindow(); //make sure the frame has focus   
     
@@ -130,7 +124,6 @@ class GameFrameLevelVS extends JFrame {
     trapY3 = 200;
     
     faceUp = true;
-    
 
     
     int timeLimit = 0;
@@ -594,14 +587,8 @@ class GameFrameLevelVS extends JFrame {
   }
   
   
-  
-  
-  
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
   private class MyKeyListener implements KeyListener {
-    
-    public void keyTyped(KeyEvent e) {  
-    }
     
     public void keyPressed(KeyEvent e) {
       //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
@@ -725,7 +712,6 @@ class GameFrameLevelVS extends JFrame {
   
   // -----------  Inner class for the keyboard listener - This detects mouse movement & clicks and runs the corresponding methods 
 
-  
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
       return new Rectangle((int)x-15,(int) y, 80, 100);
