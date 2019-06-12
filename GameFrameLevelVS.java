@@ -1,4 +1,4 @@
-/** 
+/**
  * GameFrameLevelVS.java
  * A program to launch a VS mode screen
  * Jayden and Connor
@@ -57,6 +57,7 @@ class GameFrameLevelVS extends JFrame {
   
   BufferedImage image;
   BufferedImage timerImage;
+  BufferedImage ballDead;
 
   Clip clip = StartingFrame.music(3);
   /**
@@ -84,6 +85,7 @@ class GameFrameLevelVS extends JFrame {
     try {                
       image = ImageIO.read(new File("Images/explode.png"));
       timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
+      ballDead = ImageIO.read(new File("Images/pop.png"));
     } catch (IOException ex) {
       System.out.println("Error: Image(s) not found");
     }
@@ -103,7 +105,6 @@ class GameFrameLevelVS extends JFrame {
     this.requestFocusInWindow(); //make sure the frame has focus   
     
     this.setVisible(true);
-    
     //Start the game loop in a separate thread
     Thread t = new Thread(new Runnable() { public void run() { animate(); }}); //start the gameLoop 
     t.start();
@@ -221,7 +222,7 @@ class GameFrameLevelVS extends JFrame {
         y--;
       }
       
-      if((collision(getBoundsBall(),getBoundsInWall1()))||(collision(getBoundsPlayer(),getBoundsInWall2()))||(collision(getBoundsPlayer(),getBoundsInWall3()))||(collision(getBoundsPlayer(),getBoundsRoof()))||(collision(getBoundsPlayer(),getBoundsFloor()))||(collision(getBoundsPlayer(),getBoundsLWall()))||(collision(getBoundsPlayer(),getBoundsRWall()))){
+      if((collision(getBoundsBall(),getBoundsInWall1()))||(collision(getBoundsBall(),getBoundsInWall2()))||(collision(getBoundsBall(),getBoundsInWall3()))||(collision(getBoundsBall(),getBoundsRoof()))||(collision(getBoundsBall(),getBoundsFloor()))||(collision(getBoundsBall(),getBoundsLWall()))||(collision(getBoundsBall(),getBoundsRWall()))){
         moveUp2 = false;
         moveDown2 = false;
         moveLeft2 = false;
@@ -370,7 +371,7 @@ class GameFrameLevelVS extends JFrame {
       if(dead){
         g.drawImage(image, (int)x-300, (int)y-300, this);
       }else if(targDead){
-        g.drawImage(image,(int)targX-300,(int)targY-300,this);
+        g.drawImage(ballDead,(int)targX-300,(int)targY-300,this);
       }
       
       //MOVEMENT////////////////////////////////////////////
@@ -839,4 +840,3 @@ class GameFrameLevelVS extends JFrame {
   }
   
 }
-
