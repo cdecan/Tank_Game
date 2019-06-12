@@ -36,6 +36,7 @@ class StartingFrame extends JFrame {
   static int points = 0;
   static String name = "";
   JFrame thisFrame;
+  Font font = new Font("Comic Sans MS", Font.PLAIN, 16);
   //Constructor - this runs first
   StartingFrame() { 
     super("Start Screen");
@@ -61,27 +62,31 @@ class StartingFrame extends JFrame {
     JButton startButton = new JButton("START");
     startButton.addActionListener(new ButtonListener());
     startButton.setBackground(Color.WHITE);
+    startButton.setFont(font);
     
     //Create a tutorial button
     JButton helpButton = new JButton("CONTROLS");
     helpButton.addActionListener(new ButtonListener());
     helpButton.setBackground(Color.PINK);
+    helpButton.setFont(font);
     
     //shop buttones
     JButton shopButton = new JButton("SHOP");
     shopButton.addActionListener(new ButtonListener());
     shopButton.setBackground(Color.GREEN);
+    shopButton.setFont(font);
     
     //Create a JButton for the centerPanel
     JLabel startLabel = new JLabel("Welome to Tanks!");
     startLabel.setHorizontalAlignment(JLabel.CENTER);
+    startLabel.setFont(font);
     
     JButton saveButton = new JButton("SAVE");
     saveButton.addActionListener(new ButtonListener());
     //
     JButton loadButton = new JButton("LOAD");
     loadButton.addActionListener(new ButtonListener());
-    
+    loadLabel.setFont(font);
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(startLabel);
     mainPanel.add(shopButton);
