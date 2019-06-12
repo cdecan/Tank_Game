@@ -21,8 +21,7 @@ import javax.swing.SwingUtilities;
 class TutorialFrame extends JFrame { 
   
   JFrame thisFrame;
-  Font smallFont = new Font("Comic Sans MS", Font.PLAIN, 11);
-  Font bigFont = new Font("Comic Sans MS", Font.PLAIN, 14);
+  Font font = new Font("Comic Sans MS", Font.PLAIN, 13);
   
   //Constructor - this runs first
   TutorialFrame() { 
@@ -43,7 +42,7 @@ class TutorialFrame extends JFrame {
     
     //Create a JButton for the centerPanel
     JButton returnButton = new JButton("RETURN");
-    returnButton.setFont(bigFont);
+    returnButton.setFont(font);
     returnButton.addActionListener(new ButtonListener());
     returnButton.setBackground(Color.WHITE);
     
@@ -59,7 +58,7 @@ class TutorialFrame extends JFrame {
       new JLabel("THERE IS ALSO A SECRET VS MODE, WHICH WE WILL LET YOU FIGURE OUT ON YOUR OWN ;)")};
     mainPanel.add(returnButton);
     for(int i = 0; i < help.length; i++){
-      help[i].setFont(smallFont);
+      help[i].setFont(font);
       help[i].setHorizontalAlignment(JLabel.CENTER);
       mainPanel.add(help[i]);
     }
