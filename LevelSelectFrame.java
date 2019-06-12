@@ -62,7 +62,7 @@ class LevelSelectFrame extends JFrame {
     JButton returnButton = new JButton("RETURN");
     returnButton.setFont(font);
     returnButton.addActionListener(new ButtonListener());
-    returnButton.setBackground(Color.PINK);
+    returnButton.setBackground(Color.CYAN);
     //Create a tutorial label
     
     mainPanel.add(easyButton);
@@ -75,7 +75,7 @@ class LevelSelectFrame extends JFrame {
     
     //Start the app
     this.setVisible(true);
-  }
+  }//constructor
   
   //This is an inner class that is used to detect a button press
   class ButtonListener implements ActionListener {  //this is the required class definition
@@ -96,10 +96,10 @@ class LevelSelectFrame extends JFrame {
         thisFrame.dispose();
         new StartingFrame();
       }
-    }
+    }//actionperformed
     
-  }
+  }//actionlistener
   
   
   
-}
+}//class
