@@ -29,7 +29,7 @@ class LevelSelectFrame extends JFrame {
     this.thisFrame = this; //lol  
     
     //configure the window
-    this.setSize(400,700);    
+    this.setSize(800,700);    
     this.setLocationRelativeTo(null); //start the frame in the center of the screen
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     //this.setResizable (false);
@@ -38,7 +38,7 @@ class LevelSelectFrame extends JFrame {
     JPanel mainPanel = new JPanel();
     mainPanel.setBackground(Color.GREEN);
     
-    mainPanel.setLayout(new GridLayout(0,3));
+    mainPanel.setLayout(new GridLayout(0,4));
     
     //Create a JButton for the centerPanel
     JButton easyButton = new JButton("EASY");
@@ -58,12 +58,17 @@ class LevelSelectFrame extends JFrame {
     vsButton.addActionListener(new ButtonListener());
     vsButton.setBackground(Color.PINK);
     
+    //return
+    JButton returnButton = new JButton("RETURN");
+    returnButton.setFont(font);
+    returnButton.addActionListener(new ButtonListener());
+    returnButton.setBackground(Color.PINK);
     //Create a tutorial label
     
     mainPanel.add(easyButton);
     mainPanel.add(hardButton);
     mainPanel.add(vsButton);
-
+    mainPanel.add(returnButton);
     
     //add the main panel to the frame
     this.add(mainPanel);
@@ -87,6 +92,9 @@ class LevelSelectFrame extends JFrame {
       }else if(command.equals("SURVIVAL")){
         thisFrame.dispose();
         new GameFrameLevelVS();
+      }else if(command.equals("RETURN")){
+        thisFrame.dispose();
+        new StartingFrame();
       }
     }
     
