@@ -15,48 +15,60 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingUtilities;
+import java.io.*;
+import java.util.Scanner;
 
-class TutorialFrame extends JFrame { 
+
+
+class NameFrame extends JFrame { 
   
   JFrame thisFrame;
-  
+  String name;
+  JTextField nameField = new JTextField("Name", 20);
+  Font smallFont = new Font("Comic Sans MS", Font.PLAIN, 14);
+  Font bigFont = new Font("Comic Sans MS", Font.PLAIN, 24);
   //Constructor - this runs first
-  TutorialFrame() { 
+  NameFrame() { 
     super("Start Screen");
     this.thisFrame = this; //lol  
     
     //configure the window
-    this.setSize(800,700);    
+    this.setSize(400,700);    
     this.setLocationRelativeTo(null); //start the frame in the center of the screen
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-    //this.setResizable (false);
+    this.setResizable (false);
     
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
-    mainPanel.setBackground(Color.GRAY);
+    mainPanel.setBackground(Color.GREEN);
     
-    mainPanel.setLayout(new GridLayout(10,0));
+    mainPanel.setLayout(new GridLayout(4,0));
+    
+    //Create a JLabel for the centerPanel
+    JLabel hello = new JLabel("Before you play, we're gonna need your name :)))");
+    hello.setFont(smallFont);
+    hello.setHorizontalAlignment(JLabel.CENTER);
     
     //Create a JButton for the centerPanel
-    JButton returnButton = new JButton("RETURN");
-    returnButton.addActionListener(new ButtonListener());
-    returnButton.setBackground(Color.WHITE);
+    JButton startButton = new JButton("START");
+    startButton.setFont(bigFont);
+    startButton.addActionListener(new StartButtonListener());
+    startButton.setBackground(Color.WHITE);
     
-    //Create a tutorial label
-    JLabel[] help = {new JLabel("CONTROLS: "),
-      new JLabel("W,A,S,D ARE TO MOVE YOUR TANK"),
-      new JLabel("J IS TO SHOOT A BALL"),
-      new JLabel("K IS TO TELEPORT"),
-      new JLabel("THE OBJECTIVE OF THE GAME IS TO SHOOT THE BEACH BALL BEFORE TIME RUNS OUT"),
-      new JLabel("GETTING HIT BY A TRAP WILL CAUSE YOU TO LOSE A LIFE"),
-      new JLabel("YOUR SCORE IS DETERMINED BY THE TIME YOU TOOK AND THE HEALTH YOU HAVE REMAINING"),
-      new JLabel("THE MORE HEALTH YOU HAVE AND THE LESS TIME YOU TAKE, THE HIGHER SCORE YOU WILL RECIEVE"),
-      new JLabel("THERE IS ALSO A SECRET VS MODE, WHICH WE WILL LET YOU FIGURE OUT ON YOUR OWN ;)")};
-    mainPanel.add(returnButton);
-    for(int i = 0; i < help.length; i++){
-      help[i].setHorizontalAlignment(JLabel.CENTER);
-      mainPanel.add(help[i]);
-    }
+    //Create a JLabel for the centerPanel
+    JLabel nameLabel = new JLabel("Enter your name here:");
+    nameLabel.setFont(bigFont);
+    nameLabel.setHorizontalAlignment(JLabel.CENTER);
+    
+    //Create a JTextField for the centerPanel
+    nameField.setFont(bigFont);
+    nameField.setHorizontalAlignment(JTextField.CENTER);
+    
+    //Add all panels to the mainPanel according to border layout
+    mainPanel.add(hello);
+    mainPanel.add(startButton);
+    mainPanel.add(nameLabel);
+    mainPanel.add(nameField);
     
     //add the main panel to the frame
     this.add(mainPanel);
@@ -66,14 +78,25 @@ class TutorialFrame extends JFrame {
   }
   
   //This is an inner class that is used to detect a button press
-  class ButtonListener implements ActionListener {  //this is the required class definition
+ class StartButtonListener implements ActionListener {  //this is the required class definition
     public void actionPerformed(ActionEvent event)  {  
-      System.out.println("returning to thing");
+      String command = event.getActionCommand();
+      if(command.equals("START")){
+        System.out.println("Starting new Game");
+        name = nameField.getText();
+        StartingFrame.storeName(name);
         thisFrame.dispose();
-        new StartingFrame(); //create a new FunkyFrame (another file that extends JFrame)
-      
+        new StartingFrame();
+      }
     }
-    
+
+  }
+  
+  
+  //Main method starts this application
+  public static void main(String[] args) { 
+    new NameFrame();
+
   }
   
 }
