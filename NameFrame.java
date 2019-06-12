@@ -1,6 +1,8 @@
 /** 
- * this template can be used for a start menu
- * for your final project
+ * NameFrame.java
+ * A program to launch a name select screen
+ * Jayden and Connor
+ * May 30, 2019
  **/
 
 
@@ -75,7 +77,7 @@ class NameFrame extends JFrame {
     
     //Start the app
     this.setVisible(true);
-  }
+  }//constructor
   
   //This is an inner class that is used to detect a button press
  class StartButtonListener implements ActionListener {  //this is the required class definition
@@ -87,16 +89,16 @@ class NameFrame extends JFrame {
         StartingFrame.storeName(name);
         thisFrame.dispose();
         new StartingFrame();
-      }
-    }
+      }//check command
+    }//actionperformed
 
-  }
+  }//actionlistener
   
   
   //Main method starts this application
   public static void main(String[] args) { 
     new NameFrame();
 
-  }
+  }//main
   
-}
+}//class
