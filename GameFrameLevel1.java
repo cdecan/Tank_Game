@@ -31,7 +31,7 @@ import java.awt.event.KeyListener;
 
 class GameFrameLevel1 extends JFrame { 
   
-  //class variable (non-static)
+  //class variable
   static double x, y;
   static double ballX, ballY;
   static double targX, targY;
@@ -77,7 +77,7 @@ class GameFrameLevel1 extends JFrame {
       timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
     } catch (IOException ex) {
       System.out.println("Error: Image(s) not found");
-    }
+    }//catch
     
     //Tank tank = new Tank();
     //tank.setPreferredSize(new Dimension(100, 100));
@@ -132,8 +132,8 @@ class GameFrameLevel1 extends JFrame {
           timerImage = ImageIO.read(new File("Images/time"+Integer.toString(countDown)+ ".png"));
         } catch (IOException ex) {
           System.out.println("Error: Image(s) not found");
-        }
-      }
+        }//catch
+      }//if a second passes
       
       if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceUp)){
         ballX = x+12;
@@ -147,7 +147,7 @@ class GameFrameLevel1 extends JFrame {
       }else if((moveUp2 == false) && (moveDown2 == false) &&( moveLeft2 == false )&& (moveRight2 == false)&&(faceRight)){
         ballX = x+120;
         ballY = y+10;
-      }
+      }//ball movement
       try{ Thread.sleep(1);} catch (Exception exc){}  //delay
       //  square.remove(label);
       this.repaint();
@@ -163,7 +163,7 @@ class GameFrameLevel1 extends JFrame {
         clip.close();
         run = false;
         new WinFrame(true, timeLimit, 3);
-      }
+      }//if target is destroyed
       
       if(collision(getBoundsPlayer(),getBoundsRoof())){
         y++;
@@ -173,7 +173,7 @@ class GameFrameLevel1 extends JFrame {
         x--;
       }else if(collision(getBoundsPlayer(),getBoundsLWall())){
         x++;
-      }
+      }//if player hits an outer wall
       
       if(collision(getBoundsPlayer(),getBoundsInWall1()) && (faceUp)){
         y++;
@@ -183,7 +183,7 @@ class GameFrameLevel1 extends JFrame {
         x--;
       }else if(collision(getBoundsPlayer(),getBoundsInWall1()) && (faceDown)){
         y--;
-      }
+      }//if player hits an inner wall
       
       
       
@@ -195,7 +195,7 @@ class GameFrameLevel1 extends JFrame {
         x--;
       }else if(collision(getBoundsPlayer(),getBoundsInWall2()) && (faceDown)){
         y--;
-      }
+      }//if player hits an inner wall
       
       if((collision(getBoundsPlayer(),getBoundsInWall3())) && (faceUp)){
         y++;
@@ -205,14 +205,14 @@ class GameFrameLevel1 extends JFrame {
         x--;
       }else if(collision(getBoundsPlayer(),getBoundsInWall3()) && (faceDown)){
         y--;
-      }
+      }//if player hits an inner wall
       
       if((collision(getBoundsBall(),getBoundsInWall1()))||(collision(getBoundsBall(),getBoundsInWall2()))||(collision(getBoundsBall(),getBoundsInWall3()))||(collision(getBoundsBall(),getBoundsRoof()))||(collision(getBoundsBall(),getBoundsFloor()))||(collision(getBoundsBall(),getBoundsLWall()))||(collision(getBoundsBall(),getBoundsRWall()))){
         moveUp2 = false;
         moveDown2 = false;
         moveLeft2 = false;
         moveRight2 = false;
-      }
+      }//if player hits an inner wall
       
       if((collision(getBoundsTrap(),getBoundsPlayer()))||(collision(getBoundsTrap2(),getBoundsPlayer()))||(collision(getBoundsTrap3(),getBoundsPlayer()))){
         dead = true;
@@ -223,7 +223,7 @@ class GameFrameLevel1 extends JFrame {
         run = false;
         clip.close();
         new WinFrame(false, timeLimit, 0);
-      }
+      }//if player hits a trap
       
       if(timeLimit == 10000){
         dead = true;
@@ -234,10 +234,10 @@ class GameFrameLevel1 extends JFrame {
         run = false;
         clip.close();
         new WinFrame(false, timeLimit, 0);
-      }
+      }//if time runs out
       
-    }    
-  }
+    }//while the game runs    
+  }//animate
   
   /** --------- INNER CLASSES ------------- **/
   
@@ -251,8 +251,8 @@ class GameFrameLevel1 extends JFrame {
     Square(){
       
       add(tank);
-    }
-  }
+    }//constructor
+  }//square
   
   
   
@@ -267,7 +267,7 @@ class GameFrameLevel1 extends JFrame {
     Tank(){
       //   x = 100;
       //   y = 100;
-    }
+    }//constructor
     /**
      * a method to draw the graphics on the jpanel
      * */
@@ -329,10 +329,10 @@ class GameFrameLevel1 extends JFrame {
       ///dead
       if(dead){
         g.drawImage(image, (int)x-300, (int)y-300, this);
-      }
+      }//player dies
       if(targDestroyed){
         g.drawImage(ballDead, (int)ballX-300, (int)ballY-100, this);
-      }
+      }//target dies
       //MOVEMENT////////////////////////////////////////////
       if (moveLeft){
         x--;
@@ -375,7 +375,7 @@ class GameFrameLevel1 extends JFrame {
         g.setColor(Color.CYAN);
         g.fillOval((int)ballX,(int)ballY,20,20);
         ballY++;
-      }
+      }//ball
       /////////////////////////////////////////////////
       
       //PLAYER//////////////////////////////////////
@@ -551,10 +551,10 @@ class GameFrameLevel1 extends JFrame {
       
       
       
-    }
+    }//paintcomponent
     
     
-  }
+  }//tank
   
 
   
@@ -668,8 +668,8 @@ class GameFrameLevel1 extends JFrame {
           moveLeft2 = false;
           moveRight2 = false;
         }
-      }
-    }   
+      }//ball shot
+    }//keypressed  
     /**
      * A method to check what to do when a particular key is released
      * */
@@ -798,5 +798,5 @@ class GameFrameLevel1 extends JFrame {
     return obj1.intersects(obj2);
   }
   
-}
+}//class
 
