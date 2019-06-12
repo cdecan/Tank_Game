@@ -57,7 +57,7 @@ class NameFrame extends JFrame {
     nameLabel.setHorizontalAlignment(JLabel.CENTER);
     
     //Create a JTextField for the centerPanel
-
+    nameField.setHorizontalAlignment(JTextField.CENTER);
     
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(hello);
