@@ -650,7 +650,7 @@ class GameFrameLevel2 extends JFrame {
       }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {  //If ESC is pressed
         //System.out.println("ESCAPE KEY!"); //close frame & quit
         System.exit(0);
-      }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("Q"))&&(moveUp2 == false) && (moveDown2 == false)&&(moveLeft2 == false)&&(moveRight2 ==false)){
+      }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("J"))&&(moveUp2 == false) && (moveDown2 == false)&&(moveLeft2 == false)&&(moveRight2 ==false)){
         if(faceUp){
           moveUp2 = true;
           moveDown2 = false;
@@ -676,7 +676,7 @@ class GameFrameLevel2 extends JFrame {
           moveLeft2 = false;
           
         }
-      }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("E"))&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
+      }else if((KeyEvent.getKeyText(e.getKeyCode()).equals("K"))&&((moveUp2)||(moveDown2)||(moveLeft2)||(moveRight2))){
         if(moveUp2 == true){
           x = ballX-15;
           y = ballY-55;
