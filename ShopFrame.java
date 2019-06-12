@@ -27,8 +27,16 @@ class ShopFrame extends JFrame {
   JFrame thisFrame;
   int pointsOwned = StartingFrame.showPoints();
   JLabel points = new JLabel(Integer.toString(pointsOwned));
-  JButton[] buyButton = {new JButton("OWNED"),new JButton("BUY (20)"),new JButton("BUY (30)"),new JButton("BUY (40)")};
-  JButton[] ownedButton = {new JButton("OWNED"),new JButton("OWNED"),new JButton("OWNED"),new JButton("OWNED")};
+  JButton[] buyButton = {new JButton("OWNED"),
+    new JButton("BUY (20)"),
+    new JButton("BUY (30)"),
+    new JButton("BUY (40)")};
+  JButton[] ownedButton = {new JButton("OWNED"),
+    new JButton("OWNED"),
+    new JButton("OWNED"),
+    new JButton("OWNED")};
+  Font font = new Font("Comic Sans MS", Font.PLAIN, 12);
+  
   //Constructor - this runs first
   ShopFrame() { 
     
@@ -43,6 +51,7 @@ class ShopFrame extends JFrame {
     JPanel mainPanel = new JPanel();
     
     JLabel pointsLabel = new JLabel("POINTS: ");
+    pointsLabel.setFont(font);
     
     mainPanel.setBackground(Color.GREEN);
     
@@ -52,9 +61,11 @@ class ShopFrame extends JFrame {
     
     //Create a JButton for the centerPanel
     JButton returnButton = new JButton("RETURN");
+    returnButton.setFont(font);
     returnButton.addActionListener(listener);
     returnButton.setBackground(Color.WHITE);
     JButton returnButton2 = new JButton("RETURN");
+    returnButton2.setFont(font);
     returnButton2.addActionListener(listener);
     returnButton2.setBackground(Color.WHITE);
     
@@ -66,8 +77,10 @@ class ShopFrame extends JFrame {
     JButton[] equipButton = {new JButton("EQUIP (R)"),new JButton("EQUIP (B)"),new JButton("EQUIP (G)"),new JButton("EQUIP (Y)")};
     
     for(int addlisteners = 0; addlisteners < 4; addlisteners++){
+      buyButton[addlisteners].setFont(font);
       buyButton[addlisteners].addActionListener(listener);
       buyButton[addlisteners].setBackground(Color.PINK);
+      equipButton[addlisteners].setFont(font);
       equipButton[addlisteners].addActionListener(listener);
       equipButton[addlisteners].setBackground(Color.GRAY);
     }
@@ -96,6 +109,7 @@ class ShopFrame extends JFrame {
     for(int i = 0;i<4;i++){
       mainPanel.add(buyButton[i]);
       if(StartingFrame.colorOwned(i)){
+        buyButton[i].setFont(font);
         buyButton[i].setText("OWNED");
         repaint();
       }
