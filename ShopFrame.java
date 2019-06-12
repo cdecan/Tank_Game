@@ -83,7 +83,7 @@ class ShopFrame extends JFrame {
       equipButton[addlisteners].setFont(font);
       equipButton[addlisteners].addActionListener(listener);
       equipButton[addlisteners].setBackground(Color.GRAY);
-    }
+    }//add listeners
     
     String[] color = new String[4];
     color[0] = "RED";
@@ -113,7 +113,7 @@ class ShopFrame extends JFrame {
         buyButton[i].setText("OWNED");
         repaint();
       }
-    }
+    }//add buttons to panels
     
     mainPanel.add(red);
     mainPanel.add(blue);
@@ -121,7 +121,7 @@ class ShopFrame extends JFrame {
     mainPanel.add(yellow);
     for(int o = 0;o<4;o++){
       mainPanel.add(equipButton[o]);
-    }    
+    }//add equip buttons    
     
     
     //add the main panel to the frame
@@ -164,7 +164,7 @@ class ShopFrame extends JFrame {
       }
     public void keyReleased(KeyEvent e) {
     }
-  }
+  }//keylistener
   //This is an inner class that is used to detect a button press
   class ButtonListener implements ActionListener{//this is the required class definition
     public void actionPerformed(ActionEvent event)  {  
@@ -219,10 +219,10 @@ class ShopFrame extends JFrame {
       }
     }
     
-  }
+  }//buttonlistener
   class RedTank extends JComponent{
     RedTank(){
-    }
+    }//constructor
     public void paintComponent(Graphics g){
       super.paintComponent(g);
       setDoubleBuffered(true);
@@ -231,8 +231,8 @@ class ShopFrame extends JFrame {
       g.setColor(Color.RED);
       g.fillOval(15,15,40,90);
       
-    }
-  }
+    }//paintcomponent
+  }//redtank
   class GreenTank extends JComponent{
     public void paintComponent(Graphics g){
       super.paintComponent(g);
@@ -241,8 +241,8 @@ class ShopFrame extends JFrame {
       g.fillOval(10,10,50,100);
       g.setColor(Color.GREEN);
       g.fillOval(15,15,40,90);      
-    }
-  }
+    }//paint
+  }//greentank
   class BlueTank extends JComponent{
     public void paintComponent(Graphics g){
       super.paintComponent(g);
@@ -251,8 +251,8 @@ class ShopFrame extends JFrame {
       g.fillOval(10,10,50,100);
       g.setColor(Color.BLUE);
       g.fillOval(15,15,40,90);      
-    }
-  }
+    }//paint
+  }//bluetank
   class YellowTank extends JComponent{
     public void paintComponent(Graphics g){
       super.paintComponent(g);
@@ -261,8 +261,8 @@ class ShopFrame extends JFrame {
       g.fillOval(10,10,50,100);
       g.setColor(Color.YELLOW);
       g.fillOval(15,15,40,90);      
-    }
-  }
+    }//paint
+  }//yellowtank
   
   
-}
+}//shopframe
