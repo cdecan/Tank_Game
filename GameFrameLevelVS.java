@@ -59,8 +59,9 @@ class GameFrameLevelVS extends JFrame {
   BufferedImage timerImage;
 
   Clip clip = StartingFrame.music(3);
-  
-  //Constructor - this runs first
+  /**
+  * Constructor - this runs first
+  */
   GameFrameLevelVS() { 
     
     super("My Game");
@@ -108,8 +109,9 @@ class GameFrameLevelVS extends JFrame {
     t.start();
     
   } //End of Constructor
-  
-  //the main gameloop - this is where the game state is updated
+  /**
+  * the main gameloop - this is where the game state is updated
+  */
   public void animate() { 
     this.x = (100);  //update coords
     this.y = (100);
@@ -277,7 +279,9 @@ class GameFrameLevelVS extends JFrame {
   
   private class Square extends JPanel{
     Tank tank = new Tank();
-    
+    /**
+     * the constructor for the custom jpanel that has the game on it
+     * */
     Square(){
       
       add(tank);
@@ -291,6 +295,9 @@ class GameFrameLevelVS extends JFrame {
   private class Tank extends JComponent{
     //double x,y;
     // boolean moveLeft, moveRight,moveUp,moveDown;
+    /**
+     * the constructor for the main jcomponent of the game
+     * */
     Tank(){
       //   x = 100;
       //   y = 100;
@@ -593,9 +600,14 @@ class GameFrameLevelVS extends JFrame {
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
   private class MyKeyListener implements KeyListener {
     
+    /**
+     * a method to check what to do when a key is typed
+     * */
     public void keyTyped(KeyEvent e) {  
     }
-    
+    /**
+     * a method to check what to do when a key is pressed
+     * */
     public void keyPressed(KeyEvent e) {
       //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
       
@@ -698,7 +710,9 @@ class GameFrameLevelVS extends JFrame {
         }
       }
     }   
-    
+    /**
+     * a method to check what to do when a key is released
+     * */
     public void keyReleased(KeyEvent e) {
       if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
         moveLeft = false;
@@ -717,7 +731,10 @@ class GameFrameLevelVS extends JFrame {
   } //end of keyboard listener
   
   // -----------  Inner class for the keyboard listener - This detects mouse movement & clicks and runs the corresponding methods 
-
+/**
+   * a method to create a hitbox for the player
+   * @return the rectangle enclosing the player
+   * */
   public Rectangle getBoundsPlayer() {
     if((faceUp)||(faceDown)){
       return new Rectangle((int)x-15,(int) y, 80, 100);
@@ -725,40 +742,87 @@ class GameFrameLevelVS extends JFrame {
       return new Rectangle((int)x, (int)y-15, 100, 80);        
     }
   }
+  /**
+   * a method to create a hitbox for the ball
+   * @return the rectangle enclosing the ball
+   * */
   public Rectangle getBoundsBall() {
     return new Rectangle((int)ballX,(int) ballY, 20, 20);
   }
+  /**
+   * a method to create a hitbox for the target
+   * @return the rectangle enclosing the target
+   * */
   public Rectangle getBoundsTarget() {
     return new Rectangle((int)targX,(int) targY, 60, 60);
   }
-  
+  /**
+   * a method to create a hitbox for the first trap
+   * @return the rectangle enclosing the first trap
+   * */
   public Rectangle getBoundsTrap() {
     return new Rectangle((int)trapX, (int) trapY, 30, 30);
   }
+  /**
+   * a method to create a hitbox for the second trap
+   * @return the rectangle enclosing the second trap
+   * */
   public Rectangle getBoundsTrap2() {
     return new Rectangle((int)trapX2, (int) trapY2, 30, 30);
   }
+  /**
+   * a method to create a hitbox for the third trap
+   * @return the rectangle enclosing the third trap
+   * */
   public Rectangle getBoundsTrap3() {
     return new Rectangle((int)trapX3, (int) trapY3, 30, 30);
   }
+  /**
+   * a method to create a hitbox for the top border wall
+   * @return the rectangle enclosing the top border wall
+   * */
   public Rectangle getBoundsRoof(){
     return new Rectangle(0, 0, 1366, 50);
   }
+  /**
+   * a method to create a hitbox for the bottom border wall
+   * @return the rectangle enclosing the bottom border wall
+   * */
   public Rectangle getBoundsFloor(){
     return new Rectangle(0,718, 1366, 50);
   }
+  /**
+   * a method to create a hitbox for the right border wall
+   * @return the rectangle enclosing the right border wall
+   * */
   public Rectangle getBoundsRWall(){
     return new Rectangle(1316, 0, 50, 768);
   }
+  /**
+   * a method to create a hitbox for the left border wall
+   * @return the rectangle enclosing the left border wall
+   * */
   public Rectangle getBoundsLWall(){
     return new Rectangle(0, 0, 50,768);
   }
+  /**
+   * a method to create a hitbox for the first inner wall
+   * @return the rectangle enclosing the first inner wall
+   * */
   public Rectangle getBoundsInWall1(){
     return new Rectangle(400,50,20,300);
   }
+  /**
+   * a method to create a hitbox for the second inner wall
+   * @return the rectangle enclosing the second inner wall
+   * */
   public Rectangle getBoundsInWall2(){
     return new Rectangle(0, 300, 300,20);
   }
+  /**
+   * a method to create a hitbox for the third inner wall
+   * @return the rectangle enclosing the third inner wall
+   * */
   public Rectangle getBoundsInWall3(){
     return new Rectangle(700,250,20,518);
   }
