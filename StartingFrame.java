@@ -395,7 +395,7 @@ class StartingFrame extends JFrame {
     }catch(javax.sound.sampled.LineUnavailableException ex){
     }
     return null;
-  }
+  }//music
   
   
-}
+}//class
