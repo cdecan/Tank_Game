@@ -1,8 +1,6 @@
 /** 
- * NameFrame.java
- * A program to launch a name select screen
- * Jayden and Connor
- * June 3, 2019
+ * this template can be used for a start menu
+ * for your final project
  **/
 
 
@@ -17,53 +15,46 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingUtilities;
-import java.io.*;
-import java.util.Scanner;
 
-
-
-class NameFrame extends JFrame { 
+class TutorialFrame extends JFrame { 
   
   JFrame thisFrame;
-  String name;
-      JTextField nameField = new JTextField("Name", 20);
+  
   //Constructor - this runs first
-  NameFrame() { 
+  TutorialFrame() { 
     super("Start Screen");
     this.thisFrame = this; //lol  
     
     //configure the window
-    this.setSize(400,700);    
+    this.setSize(800,700);    
     this.setLocationRelativeTo(null); //start the frame in the center of the screen
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-    this.setResizable (false);
+    //this.setResizable (false);
     
     //Create a Panel for stuff
     JPanel mainPanel = new JPanel();
-    mainPanel.setBackground(Color.GREEN);
+    mainPanel.setBackground(Color.GRAY);
     
-    mainPanel.setLayout(new GridLayout(4,0));
-    
-    //Create a JLabel for the centerPanel
-    JLabel hello = new JLabel("Before you play, we're gonna need your name :)))");
+    mainPanel.setLayout(new GridLayout(10,0));
     
     //Create a JButton for the centerPanel
-    JButton startButton = new JButton("START");
-    startButton.addActionListener(new StartButtonListener());
-    startButton.setBackground(Color.WHITE);
+    JButton returnButton = new JButton("RETURN");
+    returnButton.addActionListener(new ButtonListener());
+    returnButton.setBackground(Color.WHITE);
     
-    //Create a JLabel for the centerPanel
-    JLabel nameLabel = new JLabel("Enter your name here:");
-    nameLabel.setHorizontalAlignment(JLabel.CENTER);
-    
-    //Create a JTextField for the centerPanel
-    nameField.setHorizontalAlignment(JTextField.CENTER);
-    
-    //Add all panels to the mainPanel according to border layout
-    mainPanel.add(hello);
-    mainPanel.add(startButton);
-    mainPanel.add(nameLabel);
-    mainPanel.add(nameField);
+    //Create a tutorial label
+    JLabel[] help = {new JLabel("CONTROLS: "),new JLabel("W,A,S,D ARE TO MOVE YOUR TANK"),
+      new JLabel("J IS TO SHOOT A BALL"),
+      new JLabel("K IS TO TELEPORT"),
+      new JLabel("THE OBJECTIVE OF THE GAME IS TO SHOOT THE BEACH BALL BEFORE TIME RUNS OUT"),
+      new JLabel("GETTING HIT BY A TRAP WILL CAUSE YOU TO LOSE A LIFE"),
+      new JLabel("YOUR SCORE IS DETERMINED BY THE TIME YOU TOOK AND THE HEALTH YOU HAVE REMAINING"),
+      new JLabel("THE MORE HEALTH YOU HAVE AND THE LESS TIME YOU TAKE, THE HIGHER SCORE YOU WILL RECIEVE"),
+      new JLabel("THERE IS ALSO A SECRET VS MODE, WHICH WE WILL LET YOU FIGURE OUT ON YOUR OWN ;)")};
+    mainPanel.add(returnButton);
+    for(int i = 0; i < help.length; i++){
+      mainPanel.add(help[i]);
+    }
     
     //add the main panel to the frame
     this.add(mainPanel);
@@ -73,25 +64,14 @@ class NameFrame extends JFrame {
   }
   
   //This is an inner class that is used to detect a button press
- class StartButtonListener implements ActionListener {  //this is the required class definition
+  class ButtonListener implements ActionListener {  //this is the required class definition
     public void actionPerformed(ActionEvent event)  {  
-      String command = event.getActionCommand();
-      if(command.equals("START")){
-        System.out.println("Starting new Game");
-        name = nameField.getText();
-        StartingFrame.storeName(name);
+      System.out.println("returning to thing");
         thisFrame.dispose();
-        new StartingFrame();
-      }
+        new StartingFrame(); //create a new FunkyFrame (another file that extends JFrame)
+      
     }
-
-  }
-  
-  
-  //Main method starts this application
-  public static void main(String[] args) { 
-    new NameFrame();
-
+    
   }
   
 }
