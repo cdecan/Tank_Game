@@ -43,7 +43,8 @@ class TutorialFrame extends JFrame {
     returnButton.setBackground(Color.WHITE);
     
     //Create a tutorial label
-    JLabel[] help = {new JLabel("CONTROLS: "),new JLabel("W,A,S,D ARE TO MOVE YOUR TANK"),
+    JLabel[] help = {new JLabel("CONTROLS: "),
+      new JLabel("W,A,S,D ARE TO MOVE YOUR TANK"),
       new JLabel("J IS TO SHOOT A BALL"),
       new JLabel("K IS TO TELEPORT"),
       new JLabel("THE OBJECTIVE OF THE GAME IS TO SHOOT THE BEACH BALL BEFORE TIME RUNS OUT"),
