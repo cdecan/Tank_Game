@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 class LevelSelectFrame extends JFrame { 
   
   JFrame thisFrame;
+  Font smallFont = new Font("Comic Sans MS", Font.PLAIN, 14);
+  Font bigFont = new Font("Comic Sans MS", Font.PLAIN, 24);
   
   //Constructor - this runs first
   LevelSelectFrame() { 
@@ -41,16 +43,19 @@ class LevelSelectFrame extends JFrame {
     
     //Create a JButton for the centerPanel
     JButton easyButton = new JButton("EASY");
+    easyButton.setFont(bigFont);
     easyButton.addActionListener(new ButtonListener());
     easyButton.setBackground(Color.GREEN);
     
     //hard
     JButton hardButton = new JButton("HARD");
+    hardButton.setFont(bigFont);
     hardButton.addActionListener(new ButtonListener());
     hardButton.setBackground(Color.RED);
     
     //vs
     JButton vsButton = new JButton("SURVIVAL");
+    vsButton.setFont(bigFont);
     vsButton.addActionListener(new ButtonListener());
     vsButton.setBackground(Color.PINK);
     
