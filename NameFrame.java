@@ -54,6 +54,7 @@ class TutorialFrame extends JFrame {
       new JLabel("THERE IS ALSO A SECRET VS MODE, WHICH WE WILL LET YOU FIGURE OUT ON YOUR OWN ;)")};
     mainPanel.add(returnButton);
     for(int i = 0; i < help.length; i++){
+      help[i].setHorizontalAlignment(JLabel.CENTER);
       mainPanel.add(help[i]);
     }
     
