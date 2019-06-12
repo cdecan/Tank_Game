@@ -86,7 +86,7 @@ class StartingFrame extends JFrame {
     //
     JButton loadButton = new JButton("LOAD");
     loadButton.addActionListener(new ButtonListener());
-    loadLabel.setFont(font);
+    loadButton.setFont(font);
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(startLabel);
     mainPanel.add(shopButton);
