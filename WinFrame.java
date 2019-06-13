@@ -1,8 +1,8 @@
 /** 
  * WinFrame.java
- * A program to launch a win/lose (game over) screen
+ * A program to launch a win screen
  * Jayden and Connor
- * May 29, 2019
+ * May 26, 2019
  **/
 
 
@@ -21,7 +21,6 @@ import javax.swing.SwingUtilities;
 class WinFrame extends JFrame { 
   
   JFrame thisFrame;
-  Font font = new Font("Comic Sans MS", Font.PLAIN, 16);
   
   //Constructor - this runs first
   WinFrame(boolean won, int time, int health) { 
@@ -42,31 +41,22 @@ class WinFrame extends JFrame {
     
     //Create a JButton for the centerPanel
     JButton returnButton = new JButton("RETURN");
-    returnButton.setFont(font);
     returnButton.addActionListener(new ButtonListener());
     returnButton.setBackground(Color.WHITE);
     
-    //Create a win statement label
+    //Create a tutorial label
     JLabel winLabel = new JLabel(StartingFrame.showName()+", YOU WIN!");
-    winLabel.setFont(font);
-    
-    //Create a points gained label
     int pointsGained = StartingFrame.addPoints(time, health);
     String pointString = Integer.toString(pointsGained);
-    JLabel pointsLabel = new JLabel ("YOU EARNED " + pointString + " POINTS!");
-    pointsLabel.setFont(font);
-    
-    //Create a loss statement label
+    JLabel points = new JLabel ("YOU EARNED " + pointString + " POINTS!");
     JLabel lossLabel = new JLabel(StartingFrame.showName()+", YOU LOSE!");
-    lossLabel.setFont(font);
-    
     if(won){
     mainPanel.add(winLabel);
     }else{
     mainPanel.add(lossLabel);
     }
     mainPanel.add(returnButton);
-    mainPanel.add(pointsLabel);
+    mainPanel.add(points);
 
     
     //add the main panel to the frame
@@ -74,7 +64,7 @@ class WinFrame extends JFrame {
     
     //Start the app
     this.setVisible(true);
-  }
+  }//constructor
   
   //This is an inner class that is used to detect a button press
   class ButtonListener implements ActionListener {  //this is the required class definition
@@ -83,8 +73,10 @@ class WinFrame extends JFrame {
         thisFrame.dispose();
         new StartingFrame(); //create a new FunkyFrame (another file that extends JFrame)
       
-    }
+    }//action event
     
-  }
+  }//actionlistener
   
-}
+  
+  
+}//winframe
