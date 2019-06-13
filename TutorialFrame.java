@@ -77,10 +77,10 @@ class TutorialFrame extends JFrame {
         thisFrame.dispose();
         new StartingFrame(); //create a new FunkyFrame (another file that extends JFrame)
       
-    }
+    }//action event
     
-  }
+  }//actionlistener
   
   
   
-}
+}//tutorialframe
