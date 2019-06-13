@@ -81,12 +81,16 @@ class StartingFrame extends JFrame {
     startLabel.setHorizontalAlignment(JLabel.CENTER);
     startLabel.setFont(font);
     
+    //Create a JButton to save
     JButton saveButton = new JButton("SAVE");
     saveButton.addActionListener(new ButtonListener());
-    //
+    saveButton.setFont(font);
+    
+    //Create a JButton to load
     JButton loadButton = new JButton("LOAD");
     loadButton.addActionListener(new ButtonListener());
     loadButton.setFont(font);
+    
     //Add all panels to the mainPanel according to border layout
     mainPanel.add(startLabel);
     mainPanel.add(shopButton);
