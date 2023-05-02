@@ -23,13 +23,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 //sound imports
-import javax.sound.sampled.*;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.*;
 
 class GameFrameLevelVS extends JFrame { 
   

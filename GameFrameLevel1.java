@@ -17,13 +17,7 @@ import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Color;
 //sound imports
-import javax.sound.sampled.*;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.*;
 
 //Keyboard imports
 import java.awt.event.KeyEvent;

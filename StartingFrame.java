@@ -9,7 +9,6 @@
 //Imports
 import java.io.*;
 import java.util.Scanner;
-import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -18,16 +17,11 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingUtilities;
 
 //sound imports
-import javax.sound.sampled.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.*;
 
 class StartingFrame extends JFrame { 
   
